@@ -265,12 +265,13 @@ class DrapoEventHandler {
     }
 
     private async ExecuteEvent(sector: string, contextItem: DrapoContextItem, element: HTMLElement, event: Event, functionsValue: string, isSectorDynamic: boolean = false): Promise<void> {
+        let isEventSingle: boolean = false;
+        let eventSingleClass: string = null;
         try {
             //Single
-            const isEventSingle: boolean = element.getAttribute('d-event-single') === 'true';
+            isEventSingle = element.getAttribute('d-event-single') === 'true';
             if ((isEventSingle) && (this.IsEventRunning(element)))
                 return;
-            let eventSingleClass: string = null;
             if (isEventSingle) {
                 this.AddEventRunning(element);
                 eventSingleClass = element.getAttribute('d-event-single-class');
@@ -281,14 +282,15 @@ class DrapoEventHandler {
             const sectorEvent: string = isSectorDynamic ? await this.Application.Document.GetSectorResolved(element) : sector;
             //Event
             await this.Application.FunctionHandler.ResolveFunction(sectorEvent, contextItem, element, event, functionsValue);
+        } catch (e) {
+            await this.Application.ExceptionHandler.Handle(e, 'DrapoEventHandler - ExecuteEvent');
+        } finally {
             //Remove Event Running
             if (isEventSingle) {
                 this.RemoveEventRunning(element);
                 if (eventSingleClass != null)
                     element.classList.remove(eventSingleClass);
             }
-        } catch (e) {
-            await this.Application.ExceptionHandler.Handle(e, 'DrapoEventHandler - ExecuteEvent');
         }
     }
 

@@ -9148,43 +9148,48 @@ var DrapoEventHandler = (function () {
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
-                        _b.trys.push([0, 5, , 7]);
+                        isEventSingle = false;
+                        eventSingleClass = null;
+                        _b.label = 1;
+                    case 1:
+                        _b.trys.push([1, 6, 8, 9]);
                         isEventSingle = element.getAttribute('d-event-single') === 'true';
                         if ((isEventSingle) && (this.IsEventRunning(element)))
                             return [2];
-                        eventSingleClass = null;
                         if (isEventSingle) {
                             this.AddEventRunning(element);
                             eventSingleClass = element.getAttribute('d-event-single-class');
                             if (eventSingleClass != null)
                                 element.classList.add(eventSingleClass);
                         }
-                        if (!isSectorDynamic) return [3, 2];
+                        if (!isSectorDynamic) return [3, 3];
                         return [4, this.Application.Document.GetSectorResolved(element)];
-                    case 1:
-                        _a = _b.sent();
-                        return [3, 3];
                     case 2:
-                        _a = sector;
-                        _b.label = 3;
+                        _a = _b.sent();
+                        return [3, 4];
                     case 3:
+                        _a = sector;
+                        _b.label = 4;
+                    case 4:
                         sectorEvent = _a;
                         return [4, this.Application.FunctionHandler.ResolveFunction(sectorEvent, contextItem, element, event, functionsValue)];
-                    case 4:
+                    case 5:
                         _b.sent();
+                        return [3, 9];
+                    case 6:
+                        e_1 = _b.sent();
+                        return [4, this.Application.ExceptionHandler.Handle(e_1, 'DrapoEventHandler - ExecuteEvent')];
+                    case 7:
+                        _b.sent();
+                        return [3, 9];
+                    case 8:
                         if (isEventSingle) {
                             this.RemoveEventRunning(element);
                             if (eventSingleClass != null)
                                 element.classList.remove(eventSingleClass);
                         }
-                        return [3, 7];
-                    case 5:
-                        e_1 = _b.sent();
-                        return [4, this.Application.ExceptionHandler.Handle(e_1, 'DrapoEventHandler - ExecuteEvent')];
-                    case 6:
-                        _b.sent();
-                        return [3, 7];
-                    case 7: return [2];
+                        return [7];
+                    case 9: return [2];
                 }
             });
         });

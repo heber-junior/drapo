@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <script src="/drapo.js"></script>
+    <title>Resolve mustache of context</title>
+</head>
+<body>
+    <div d-dataKey="kItems" d-dataType="array" d-dataLoadType="startup" d-dataValue='[{"key":"k1","value":"20"},{"key":"k2","value":"40"},{"key":"k3","value":"80"},{"key":"k4","value":"160"}]'></div>
+    <div d-dataKey="vItems" d-dataType="array" d-dataLoadType="startup" d-dataValue='[{"key":"v1","value":"30"},{"key":"v2","value":"60"},{"key":"v3","value":"120"},{"key":"v4","value":"240"}]'></div>
+    <div d-datakey="myObject" d-dataType="object"></div>
+
+    <div d-for="kItem in kItems">
+        <span d-model="{{kItem.key}}"></span>
+        <div>
+            <div d-for="vItem in vItems">
+                <span d-model="{{vItem.key}}"></span>
+                <d-Labelmodeldatakey dc-model="{{vItem.value}}" dc-datakey="{{kItem.value}}"></d-Labelmodeldatakey><br />
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1498,6 +1498,7 @@ class DrapoStorage {
             if (storageItem.Sector !== sector)
                 continue;
             this._cacheItems.splice(i, 1);
+            //this.Application.Observer.Unsubscribe(storageItem.DataKey);
         }
         this.ReleaseLock();
         this.Application.Worker.Check();

@@ -401,6 +401,8 @@ class DrapoFunctionHandler {
             return (await this.ExecuteFunctionUnlockData(sector, contextItem, element, event, functionParsed, executionContext));
         if (functionParsed.Name === 'clearplumber')
             return (await this.ExecuteFunctionClearPlumber(sector, contextItem, element, event, functionParsed, executionContext));
+        if (functionParsed.Name === 'clearsubscriptions')
+            return (await this.ExecuteFunctionClearSubscriptions(sector, contextItem, element, event, functionParsed, executionContext));
         if (functionParsed.Name === 'debugger')
             return (await this.ExecuteFunctionDebugger(sector, contextItem, element, event, functionParsed, executionContext));
         if (!checkInvalidFunction)
@@ -1557,6 +1559,12 @@ class DrapoFunctionHandler {
 
     private async ExecuteFunctionClearPlumber(sector: string, contextItem: DrapoContextItem, element: Element, event: Event, functionParsed: DrapoFunction, executionContext: DrapoExecutionContext<any>): Promise<string> {
         await this.Application.Plumber.Clear();
+        return ('');
+    }
+
+    private async ExecuteFunctionClearSubscriptions(sector: string, contextItem: DrapoContextItem, element: HTMLElement, event: Event, functionParsed: DrapoFunction, executionContext: DrapoExecutionContext<any>): Promise<string> {
+        const dataKey: string = await this.ResolveFunctionParameter(sector, contextItem, element, executionContext, functionParsed.Parameters[0]);
+        this.Application.Observer.Unsubscribe(dataKey);
         return ('');
     }
 

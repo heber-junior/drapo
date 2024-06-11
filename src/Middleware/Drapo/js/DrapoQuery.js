@@ -1,6 +1,6 @@
 "use strict";
-var DrapoQuery = (function () {
-    function DrapoQuery() {
+class DrapoQuery {
+    constructor() {
         this._error = null;
         this._projections = [];
         this._sources = [];
@@ -9,75 +9,47 @@ var DrapoQuery = (function () {
         this._outputArray = null;
         this._options = null;
     }
-    Object.defineProperty(DrapoQuery.prototype, "Error", {
-        get: function () {
-            return (this._error);
-        },
-        set: function (value) {
-            this._error = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoQuery.prototype, "Projections", {
-        get: function () {
-            return (this._projections);
-        },
-        set: function (value) {
-            this._projections = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoQuery.prototype, "Sources", {
-        get: function () {
-            return (this._sources);
-        },
-        set: function (value) {
-            this._sources = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoQuery.prototype, "Filter", {
-        get: function () {
-            return (this._filter);
-        },
-        set: function (value) {
-            this._filter = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoQuery.prototype, "Sorts", {
-        get: function () {
-            return (this._sorts);
-        },
-        set: function (value) {
-            this._sorts = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoQuery.prototype, "OutputArray", {
-        get: function () {
-            return (this._outputArray);
-        },
-        set: function (value) {
-            this._outputArray = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoQuery.prototype, "Options", {
-        get: function () {
-            return (this._options);
-        },
-        set: function (value) {
-            this._options = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    return DrapoQuery;
-}());
+    get Error() {
+        return (this._error);
+    }
+    set Error(value) {
+        this._error = value;
+    }
+    get Projections() {
+        return (this._projections);
+    }
+    set Projections(value) {
+        this._projections = value;
+    }
+    get Sources() {
+        return (this._sources);
+    }
+    set Sources(value) {
+        this._sources = value;
+    }
+    get Filter() {
+        return (this._filter);
+    }
+    set Filter(value) {
+        this._filter = value;
+    }
+    get Sorts() {
+        return (this._sorts);
+    }
+    set Sorts(value) {
+        this._sorts = value;
+    }
+    get OutputArray() {
+        return (this._outputArray);
+    }
+    set OutputArray(value) {
+        this._outputArray = value;
+    }
+    get Options() {
+        return (this._options);
+    }
+    set Options(value) {
+        this._options = value;
+    }
+}
+//# sourceMappingURL=DrapoQuery.js.map

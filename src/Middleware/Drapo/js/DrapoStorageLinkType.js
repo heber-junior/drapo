@@ -6,3 +6,4 @@ var DrapoStorageLinkType;
     DrapoStorageLinkType[DrapoStorageLinkType["Reload"] = 2] = "Reload";
     DrapoStorageLinkType[DrapoStorageLinkType["Pointer"] = 3] = "Pointer";
 })(DrapoStorageLinkType || (DrapoStorageLinkType = {}));
+//# sourceMappingURL=DrapoStorageLinkType.js.map

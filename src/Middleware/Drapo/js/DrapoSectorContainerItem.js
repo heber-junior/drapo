@@ -1,6 +1,39 @@
 "use strict";
-var DrapoSectorContainerItem = (function () {
-    function DrapoSectorContainerItem(sector, containerCode, storageItems, sectorHierarchys, sectorFriends, componentSectors, componentTags, componentElements, componentInstances, element, canDetachElement) {
+class DrapoSectorContainerItem {
+    get Sector() {
+        return (this._sector);
+    }
+    get ContainerCode() {
+        return (this._containerCode);
+    }
+    get StorageItems() {
+        return (this._storageItems);
+    }
+    get SectorHierarchys() {
+        return this._sectorHierarchys;
+    }
+    get SectorFriends() {
+        return this._sectorFriends;
+    }
+    get ComponentSectors() {
+        return (this._componentSectors);
+    }
+    get ComponentTags() {
+        return (this._componentTags);
+    }
+    get ComponentElements() {
+        return (this._componentElements);
+    }
+    get ComponentInstances() {
+        return (this._componentInstances);
+    }
+    get Element() {
+        return this._element;
+    }
+    get CanDetachElement() {
+        return this._canDetachElement;
+    }
+    constructor(sector, containerCode, storageItems, sectorHierarchys, sectorFriends, componentSectors, componentTags, componentElements, componentInstances, element, canDetachElement) {
         this._sector = null;
         this._containerCode = null;
         this._storageItems = [];
@@ -24,82 +57,5 @@ var DrapoSectorContainerItem = (function () {
         this._element = element;
         this._canDetachElement = canDetachElement;
     }
-    Object.defineProperty(DrapoSectorContainerItem.prototype, "Sector", {
-        get: function () {
-            return (this._sector);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoSectorContainerItem.prototype, "ContainerCode", {
-        get: function () {
-            return (this._containerCode);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoSectorContainerItem.prototype, "StorageItems", {
-        get: function () {
-            return (this._storageItems);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoSectorContainerItem.prototype, "SectorHierarchys", {
-        get: function () {
-            return this._sectorHierarchys;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoSectorContainerItem.prototype, "SectorFriends", {
-        get: function () {
-            return this._sectorFriends;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoSectorContainerItem.prototype, "ComponentSectors", {
-        get: function () {
-            return (this._componentSectors);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoSectorContainerItem.prototype, "ComponentTags", {
-        get: function () {
-            return (this._componentTags);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoSectorContainerItem.prototype, "ComponentElements", {
-        get: function () {
-            return (this._componentElements);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoSectorContainerItem.prototype, "ComponentInstances", {
-        get: function () {
-            return (this._componentInstances);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoSectorContainerItem.prototype, "Element", {
-        get: function () {
-            return this._element;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoSectorContainerItem.prototype, "CanDetachElement", {
-        get: function () {
-            return this._canDetachElement;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    return DrapoSectorContainerItem;
-}());
+}
+//# sourceMappingURL=DrapoSectorContainerItem.js.map

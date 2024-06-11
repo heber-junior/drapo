@@ -1,50 +1,34 @@
 "use strict";
-var DrapoQuerySource = (function () {
-    function DrapoQuerySource() {
+class DrapoQuerySource {
+    constructor() {
         this._joinType = null;
         this._source = null;
         this._alias = null;
         this._joinConditions = [];
     }
-    Object.defineProperty(DrapoQuerySource.prototype, "JoinType", {
-        get: function () {
-            return (this._joinType);
-        },
-        set: function (value) {
-            this._joinType = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoQuerySource.prototype, "Source", {
-        get: function () {
-            return (this._source);
-        },
-        set: function (value) {
-            this._source = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoQuerySource.prototype, "Alias", {
-        get: function () {
-            return (this._alias);
-        },
-        set: function (value) {
-            this._alias = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoQuerySource.prototype, "JoinConditions", {
-        get: function () {
-            return (this._joinConditions);
-        },
-        set: function (value) {
-            this._joinConditions = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    return DrapoQuerySource;
-}());
+    get JoinType() {
+        return (this._joinType);
+    }
+    set JoinType(value) {
+        this._joinType = value;
+    }
+    get Source() {
+        return (this._source);
+    }
+    set Source(value) {
+        this._source = value;
+    }
+    get Alias() {
+        return (this._alias);
+    }
+    set Alias(value) {
+        this._alias = value;
+    }
+    get JoinConditions() {
+        return (this._joinConditions);
+    }
+    set JoinConditions(value) {
+        this._joinConditions = value;
+    }
+}
+//# sourceMappingURL=DrapoQuerySource.js.map

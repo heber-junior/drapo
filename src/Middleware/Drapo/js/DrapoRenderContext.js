@@ -1,31 +1,31 @@
 "use strict";
-var DrapoRenderContext = (function () {
-    function DrapoRenderContext() {
+class DrapoRenderContext {
+    constructor() {
         this._sectorExpressionContexts = {};
         this._dataKeyElements = {};
     }
-    DrapoRenderContext.prototype.GetKey = function (sector, expression) {
+    GetKey(sector, expression) {
         return (sector + '_' + expression);
-    };
-    DrapoRenderContext.prototype.HasExpressionContext = function (sector, expression) {
-        var key = this.GetKey(sector, expression);
-        var value = this._sectorExpressionContexts[key];
+    }
+    HasExpressionContext(sector, expression) {
+        const key = this.GetKey(sector, expression);
+        const value = this._sectorExpressionContexts[key];
         if (value == null)
             return (null);
         return value;
-    };
-    DrapoRenderContext.prototype.AddExpressionContext = function (sector, expression, hasContext) {
-        var key = this.GetKey(sector, expression);
+    }
+    AddExpressionContext(sector, expression, hasContext) {
+        const key = this.GetKey(sector, expression);
         this._sectorExpressionContexts[key] = hasContext;
-    };
-    DrapoRenderContext.prototype.HasDataKeyElement = function (dataKey) {
-        var value = this._dataKeyElements[dataKey];
+    }
+    HasDataKeyElement(dataKey) {
+        const value = this._dataKeyElements[dataKey];
         if (value == null)
             return (null);
         return value;
-    };
-    DrapoRenderContext.prototype.AddDataKeyElement = function (dataKey, hasElement) {
+    }
+    AddDataKeyElement(dataKey, hasElement) {
         this._dataKeyElements[dataKey] = hasElement;
-    };
-    return DrapoRenderContext;
-}());
+    }
+}
+//# sourceMappingURL=DrapoRenderContext.js.map

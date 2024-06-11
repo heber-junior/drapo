@@ -1,18 +1,18 @@
 "use strict";
-var DrapoLinkedList = (function () {
-    function DrapoLinkedList() {
+class DrapoLinkedList {
+    constructor() {
         this._head = null;
     }
-    DrapoLinkedList.prototype.AddOrUpdate = function (index, value) {
+    AddOrUpdate(index, value) {
         if (this._head === null) {
             this._head = new DrapoLinkedListNode();
             this._head.Index = index;
         }
-        var node = this._head;
-        var isEnd = false;
+        let node = this._head;
+        let isEnd = false;
         while (node.Index !== index) {
             if ((isEnd = (node.Next === null)) || (node.Next.Index > index)) {
-                var nodeNew = new DrapoLinkedListNode();
+                const nodeNew = new DrapoLinkedListNode();
                 nodeNew.Index = index;
                 if ((isEnd) && (node.Index < index)) {
                     node.Next = nodeNew;
@@ -32,9 +32,9 @@ var DrapoLinkedList = (function () {
             }
         }
         node.Value = value;
-    };
-    DrapoLinkedList.prototype.Get = function (index) {
-        var node = this._head;
+    }
+    Get(index) {
+        let node = this._head;
         while (node !== null) {
             if (node.Index < index)
                 node = node.Next;
@@ -42,9 +42,9 @@ var DrapoLinkedList = (function () {
                 return (node.Value);
         }
         return (null);
-    };
-    DrapoLinkedList.prototype.GetHead = function () {
+    }
+    GetHead() {
         return (this._head);
-    };
-    return DrapoLinkedList;
-}());
+    }
+}
+//# sourceMappingURL=DrapoLinkedList.js.map

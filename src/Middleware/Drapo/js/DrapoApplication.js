@@ -8,35 +8,116 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (g && (g = 0, op[0] && (_ = 0)), _) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+class DrapoApplication {
+    get IsLoaded() {
+        return (this._isLoaded);
     }
-};
-var DrapoApplication = (function () {
-    function DrapoApplication() {
+    get Log() {
+        return (this._logger);
+    }
+    get Router() {
+        return (this._router);
+    }
+    get Server() {
+        return (this._server);
+    }
+    get Observer() {
+        return (this._observer);
+    }
+    get Document() {
+        return (this._document);
+    }
+    get ControlFlow() {
+        return (this._controlFlow);
+    }
+    get Parser() {
+        return (this._parser);
+    }
+    get Storage() {
+        return (this._storage);
+    }
+    get Solver() {
+        return (this._solver);
+    }
+    get Binder() {
+        return (this._binder);
+    }
+    get Config() {
+        return (this._config);
+    }
+    get Register() {
+        return (this._register);
+    }
+    get Serializer() {
+        return (this._serializer);
+    }
+    get Barber() {
+        return (this._barber);
+    }
+    get Searcher() {
+        return (this._searcher);
+    }
+    get ModelHandler() {
+        return (this._modelHandler);
+    }
+    get AttributeHandler() {
+        return (this._attributeHandler);
+    }
+    get ClassHandler() {
+        return (this._classHandler);
+    }
+    get EventHandler() {
+        return (this._eventHandler);
+    }
+    get FunctionHandler() {
+        return (this._functionHandler);
+    }
+    get ComponentHandler() {
+        return (this._componentHandler);
+    }
+    get CookieHandler() {
+        return (this._cookieHandler);
+    }
+    get SectorContainerHandler() {
+        return (this._sectorContainerHandler);
+    }
+    get WindowHandler() {
+        return (this._windowHandler);
+    }
+    get BehaviorHandler() {
+        return (this._behaviorHandler);
+    }
+    get Plumber() {
+        return (this._plumber);
+    }
+    get Formatter() {
+        return (this._formatter);
+    }
+    get Validator() {
+        return (this._validator);
+    }
+    get ExceptionHandler() {
+        return (this._exceptionHandler);
+    }
+    get Globalization() {
+        return (this._globalization);
+    }
+    get Stylist() {
+        return (this._stylist);
+    }
+    get ViewportHandler() {
+        return (this._viewportHandler);
+    }
+    get CacheHandler() {
+        return (this._cacheHandler);
+    }
+    get Worker() {
+        return (this._worker);
+    }
+    get Debugger() {
+        return (this._debugger);
+    }
+    constructor() {
         this._isLoaded = false;
         this._logger = new DrapoLogger(this);
         this._router = new DrapoRouter(this);
@@ -74,321 +155,47 @@ var DrapoApplication = (function () {
         this._worker = new DrapoWorker(this);
         this._debugger = new DrapoDebugger(this);
     }
-    Object.defineProperty(DrapoApplication.prototype, "IsLoaded", {
-        get: function () {
-            return (this._isLoaded);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoApplication.prototype, "Log", {
-        get: function () {
-            return (this._logger);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoApplication.prototype, "Router", {
-        get: function () {
-            return (this._router);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoApplication.prototype, "Server", {
-        get: function () {
-            return (this._server);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoApplication.prototype, "Observer", {
-        get: function () {
-            return (this._observer);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoApplication.prototype, "Document", {
-        get: function () {
-            return (this._document);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoApplication.prototype, "ControlFlow", {
-        get: function () {
-            return (this._controlFlow);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoApplication.prototype, "Parser", {
-        get: function () {
-            return (this._parser);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoApplication.prototype, "Storage", {
-        get: function () {
-            return (this._storage);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoApplication.prototype, "Solver", {
-        get: function () {
-            return (this._solver);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoApplication.prototype, "Binder", {
-        get: function () {
-            return (this._binder);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoApplication.prototype, "Config", {
-        get: function () {
-            return (this._config);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoApplication.prototype, "Register", {
-        get: function () {
-            return (this._register);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoApplication.prototype, "Serializer", {
-        get: function () {
-            return (this._serializer);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoApplication.prototype, "Barber", {
-        get: function () {
-            return (this._barber);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoApplication.prototype, "Searcher", {
-        get: function () {
-            return (this._searcher);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoApplication.prototype, "ModelHandler", {
-        get: function () {
-            return (this._modelHandler);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoApplication.prototype, "AttributeHandler", {
-        get: function () {
-            return (this._attributeHandler);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoApplication.prototype, "ClassHandler", {
-        get: function () {
-            return (this._classHandler);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoApplication.prototype, "EventHandler", {
-        get: function () {
-            return (this._eventHandler);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoApplication.prototype, "FunctionHandler", {
-        get: function () {
-            return (this._functionHandler);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoApplication.prototype, "ComponentHandler", {
-        get: function () {
-            return (this._componentHandler);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoApplication.prototype, "CookieHandler", {
-        get: function () {
-            return (this._cookieHandler);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoApplication.prototype, "SectorContainerHandler", {
-        get: function () {
-            return (this._sectorContainerHandler);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoApplication.prototype, "WindowHandler", {
-        get: function () {
-            return (this._windowHandler);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoApplication.prototype, "BehaviorHandler", {
-        get: function () {
-            return (this._behaviorHandler);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoApplication.prototype, "Plumber", {
-        get: function () {
-            return (this._plumber);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoApplication.prototype, "Formatter", {
-        get: function () {
-            return (this._formatter);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoApplication.prototype, "Validator", {
-        get: function () {
-            return (this._validator);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoApplication.prototype, "ExceptionHandler", {
-        get: function () {
-            return (this._exceptionHandler);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoApplication.prototype, "Globalization", {
-        get: function () {
-            return (this._globalization);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoApplication.prototype, "Stylist", {
-        get: function () {
-            return (this._stylist);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoApplication.prototype, "ViewportHandler", {
-        get: function () {
-            return (this._viewportHandler);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoApplication.prototype, "CacheHandler", {
-        get: function () {
-            return (this._cacheHandler);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoApplication.prototype, "Worker", {
-        get: function () {
-            return (this._worker);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoApplication.prototype, "Debugger", {
-        get: function () {
-            return (this._debugger);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    DrapoApplication.prototype.OnLoad = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var e_1;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        _a.trys.push([0, 7, , 9]);
-                        this.Log.WriteVerbose('Application - OnLoad - Started');
-                        return [4, this.Debugger.Initialize()];
-                    case 1:
-                        _a.sent();
-                        return [4, this.Plumber.ConnectPipe()];
-                    case 2:
-                        _a.sent();
-                        return [4, this.CacheHandler.Initialize()];
-                    case 3:
-                        _a.sent();
-                        return [4, this.Document.Resolve()];
-                    case 4:
-                        _a.sent();
-                        return [4, this.Document.StartUnitTest()];
-                    case 5:
-                        _a.sent();
-                        return [4, this.Debugger.ConnectDebugger()];
-                    case 6:
-                        _a.sent();
-                        this._isLoaded = true;
-                        this.Log.WriteVerbose('Application - OnLoad - Finished');
-                        return [3, 9];
-                    case 7:
-                        e_1 = _a.sent();
-                        return [4, this.ExceptionHandler.Handle(e_1, 'OnLoad')];
-                    case 8:
-                        _a.sent();
-                        return [3, 9];
-                    case 9: return [2];
-                }
-            });
+    OnLoad() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                this.Log.WriteVerbose('Application - OnLoad - Started');
+                yield this.Debugger.Initialize();
+                yield this.Plumber.ConnectPipe();
+                yield this.CacheHandler.Initialize();
+                yield this.Document.Resolve();
+                yield this.Document.StartUnitTest();
+                yield this.Debugger.ConnectDebugger();
+                this._isLoaded = true;
+                this.Log.WriteVerbose('Application - OnLoad - Finished');
+            }
+            catch (e) {
+                yield this.ExceptionHandler.Handle(e, 'OnLoad');
+            }
         });
-    };
-    DrapoApplication.prototype.show = function () {
+    }
+    show() {
         this.Debugger.ShowDebugger();
         return ('');
-    };
-    DrapoApplication.prototype.close = function () {
+    }
+    close() {
         this.Debugger.CloseDebugger();
         return ('');
-    };
-    return DrapoApplication;
-}());
-window.onload = function () {
-    var application = new DrapoApplication();
-    var windowAny = window;
+    }
+}
+window.onload = () => {
+    const application = new DrapoApplication();
+    const windowAny = window;
     windowAny.drapo = application;
     application.OnLoad();
 };
-window.onpopstate = function (e) {
-    var windowAny = window;
-    var application = windowAny.drapo;
+window.onpopstate = (e) => {
+    const windowAny = window;
+    const application = windowAny.drapo;
     application.Router.OnPopState(e);
 };
-window.addEventListener('message', function (event) {
-    var windowAny = window;
-    var application = windowAny.drapo;
+window.addEventListener('message', (event) => {
+    const windowAny = window;
+    const application = windowAny.drapo;
     application.Document.ReceiveMessage(event.data);
 }, false);
+//# sourceMappingURL=DrapoApplication.js.map

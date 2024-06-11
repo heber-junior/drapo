@@ -5,3 +5,4 @@ var DrapoPipeMessageType;
     DrapoPipeMessageType[DrapoPipeMessageType["Storage"] = 1] = "Storage";
     DrapoPipeMessageType[DrapoPipeMessageType["Execute"] = 2] = "Execute";
 })(DrapoPipeMessageType || (DrapoPipeMessageType = {}));
+//# sourceMappingURL=DrapoPipeMessageType.js.map

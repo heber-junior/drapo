@@ -8,351 +8,200 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (g && (g = 0, op[0] && (_ = 0)), _) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+class DrapoBehaviorHandler {
+    get Application() {
+        return (this._application);
     }
-};
-var DrapoBehaviorHandler = (function () {
-    function DrapoBehaviorHandler(application) {
+    constructor(application) {
         this._application = application;
     }
-    Object.defineProperty(DrapoBehaviorHandler.prototype, "Application", {
-        get: function () {
-            return (this._application);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    DrapoBehaviorHandler.prototype.HasContentBehaviorContext = function (content) {
+    HasContentBehaviorContext(content) {
         return ((content.indexOf('d-dragstart') > -1) || (content.indexOf('d-dragend') > -1) || (content.indexOf('d-resize-location') > -1));
-    };
-    DrapoBehaviorHandler.prototype.ResolveBehavior = function (el, canBind, canSubscribeDelay, dataKeyFilter, dataFieldFilter) {
-        if (canBind === void 0) { canBind = true; }
-        if (canSubscribeDelay === void 0) { canSubscribeDelay = true; }
-        if (dataKeyFilter === void 0) { dataKeyFilter = null; }
-        if (dataFieldFilter === void 0) { dataFieldFilter = null; }
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        this.ResolveBehaviorDragStart(el);
-                        return [4, this.ResolveBehaviorDragEnd(el)];
-                    case 1:
-                        _a.sent();
-                        return [4, this.ResolveBehaviorResize(el, canBind, canSubscribeDelay, dataKeyFilter, dataFieldFilter)];
-                    case 2:
-                        _a.sent();
-                        return [2];
-                }
-            });
+    }
+    ResolveBehavior(el, canBind = true, canSubscribeDelay = true, dataKeyFilter = null, dataFieldFilter = null) {
+        return __awaiter(this, void 0, void 0, function* () {
+            this.ResolveBehaviorDragStart(el);
+            yield this.ResolveBehaviorDragEnd(el);
+            yield this.ResolveBehaviorResize(el, canBind, canSubscribeDelay, dataKeyFilter, dataFieldFilter);
         });
-    };
-    DrapoBehaviorHandler.prototype.ResolveBehaviorContext = function (context, element, canBind) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4, this.ResolveBehaviorDragStartContext(context, element, canBind)];
-                    case 1:
-                        _a.sent();
-                        return [4, this.ResolveBehaviorDragEndContext(context, element, canBind)];
-                    case 2:
-                        _a.sent();
-                        return [4, this.ResolveBehaviorResizeContext(context, element, canBind)];
-                    case 3:
-                        _a.sent();
-                        return [2];
-                }
-            });
+    }
+    ResolveBehaviorContext(context, element, canBind) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield this.ResolveBehaviorDragStartContext(context, element, canBind);
+            yield this.ResolveBehaviorDragEndContext(context, element, canBind);
+            yield this.ResolveBehaviorResizeContext(context, element, canBind);
         });
-    };
-    DrapoBehaviorHandler.prototype.ResolveBehaviorDragStart = function (el) {
-        var dragStartAttribute = el.getAttribute('d-dragStart');
+    }
+    ResolveBehaviorDragStart(el) {
+        const dragStartAttribute = el.getAttribute('d-dragStart');
         if ((dragStartAttribute === null) || (dragStartAttribute === undefined))
             return;
-        var dragActionAttribute = el.getAttribute('d-dragAction');
+        const dragActionAttribute = el.getAttribute('d-dragAction');
         if (dragActionAttribute !== 'barber')
             return;
-        var sector = this.Application.Document.GetSector(el);
-        var onBefore = el.getAttribute('d-dragOnBeforeStart');
-        var onAfter = el.getAttribute('d-dragOnAfterEnd');
-        var application = this.Application;
-        var drag = this.CreateDrag(dragActionAttribute, null, null, this.Application.Parser.ParseTags(dragStartAttribute), false, null, sector, onBefore, onAfter);
+        const sector = this.Application.Document.GetSector(el);
+        const onBefore = el.getAttribute('d-dragOnBeforeStart');
+        const onAfter = el.getAttribute('d-dragOnAfterEnd');
+        const application = this.Application;
+        const drag = this.CreateDrag(dragActionAttribute, null, null, this.Application.Parser.ParseTags(dragStartAttribute), false, null, sector, onBefore, onAfter);
         el.setAttribute('draggable', 'true');
-        var eventType = 'dragstart';
-        var eventNamespace = this.Application.EventHandler.CreateEventNamespace(null, null, eventType, 'drag');
+        const eventType = 'dragstart';
+        const eventNamespace = this.Application.EventHandler.CreateEventNamespace(null, null, eventType, 'drag');
         this.Application.EventHandler.DetachEventListener(el, eventNamespace);
-        this.Application.EventHandler.AttachEventListener(el, eventType, eventNamespace, function (e) {
+        this.Application.EventHandler.AttachEventListener(el, eventType, eventNamespace, (e) => {
             application.BehaviorHandler.SetDrag(drag);
             e.dataTransfer.effectAllowed = 'move';
             e.dataTransfer.setData('text', drag.Code);
         });
-    };
-    DrapoBehaviorHandler.prototype.ResolveBehaviorDragEnd = function (el) {
-        return __awaiter(this, void 0, void 0, function () {
-            var dragEndAttribute, dragActionAttribute, notifyText, notify, _a, onBefore, onAfter, application, tags, sector, eventTypeDragover, eventNamespaceDragover, eventTypeDrop, eventNamespaceDrop;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
-                    case 0:
-                        dragEndAttribute = el.getAttribute('d-dragEnd');
-                        if ((dragEndAttribute === null) || (dragEndAttribute === undefined))
-                            return [2];
-                        dragActionAttribute = el.getAttribute('d-dragAction');
-                        if (dragActionAttribute !== 'barber')
-                            return [2];
-                        notifyText = el.getAttribute('d-dragNotify');
-                        if (!((notifyText == null) || (notifyText == ''))) return [3, 1];
-                        _a = true;
-                        return [3, 3];
-                    case 1: return [4, this.Application.Solver.ResolveConditional(notifyText)];
-                    case 2:
-                        _a = _b.sent();
-                        _b.label = 3;
-                    case 3:
-                        notify = _a;
-                        onBefore = el.getAttribute('d-dragOnBeforeStart');
-                        onAfter = el.getAttribute('d-dragOnAfterEnd');
-                        application = this.Application;
-                        tags = this.Application.Parser.ParseTags(dragEndAttribute);
-                        sector = this.Application.Document.GetSector(el);
-                        eventTypeDragover = 'dragover';
-                        eventNamespaceDragover = this.Application.EventHandler.CreateEventNamespace(null, null, eventTypeDragover, 'drag');
-                        this.Application.EventHandler.DetachEventListener(el, eventNamespaceDragover);
-                        this.Application.EventHandler.AttachEventListener(el, eventTypeDragover, eventNamespaceDragover, function (e) {
-                            e.preventDefault();
-                            var drag = application.BehaviorHandler.GetDrag();
-                            if (!application.BehaviorHandler.IsDragMatch(drag, e.dataTransfer.getData('Text'), tags))
-                                return;
-                            e.dataTransfer.dropEffect = 'move';
-                        });
-                        eventTypeDrop = 'drop';
-                        eventNamespaceDrop = this.Application.EventHandler.CreateEventNamespace(null, null, eventTypeDrop, 'drag');
-                        this.Application.EventHandler.DetachEventListener(el, eventNamespaceDrop);
-                        this.Application.EventHandler.AttachEventListener(el, eventTypeDrop, eventNamespaceDrop, function (e) {
-                            application.BehaviorHandler.ResolveBehaviorDragEndDrop(e, null, tags, notify, null, sector, onBefore, onAfter);
-                        });
-                        return [2];
-                }
+    }
+    ResolveBehaviorDragEnd(el) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const dragEndAttribute = el.getAttribute('d-dragEnd');
+            if ((dragEndAttribute === null) || (dragEndAttribute === undefined))
+                return;
+            const dragActionAttribute = el.getAttribute('d-dragAction');
+            if (dragActionAttribute !== 'barber')
+                return;
+            const notifyText = el.getAttribute('d-dragNotify');
+            const notify = ((notifyText == null) || (notifyText == '')) ? true : yield this.Application.Solver.ResolveConditional(notifyText);
+            const onBefore = el.getAttribute('d-dragOnBeforeStart');
+            const onAfter = el.getAttribute('d-dragOnAfterEnd');
+            const application = this.Application;
+            const tags = this.Application.Parser.ParseTags(dragEndAttribute);
+            const sector = this.Application.Document.GetSector(el);
+            const eventTypeDragover = 'dragover';
+            const eventNamespaceDragover = this.Application.EventHandler.CreateEventNamespace(null, null, eventTypeDragover, 'drag');
+            this.Application.EventHandler.DetachEventListener(el, eventNamespaceDragover);
+            this.Application.EventHandler.AttachEventListener(el, eventTypeDragover, eventNamespaceDragover, (e) => {
+                e.preventDefault();
+                const drag = application.BehaviorHandler.GetDrag();
+                if (!application.BehaviorHandler.IsDragMatch(drag, e.dataTransfer.getData('Text'), tags))
+                    return;
+                e.dataTransfer.dropEffect = 'move';
+            });
+            const eventTypeDrop = 'drop';
+            const eventNamespaceDrop = this.Application.EventHandler.CreateEventNamespace(null, null, eventTypeDrop, 'drag');
+            this.Application.EventHandler.DetachEventListener(el, eventNamespaceDrop);
+            this.Application.EventHandler.AttachEventListener(el, eventTypeDrop, eventNamespaceDrop, (e) => {
+                application.BehaviorHandler.ResolveBehaviorDragEndDrop(e, null, tags, notify, null, sector, onBefore, onAfter);
             });
         });
-    };
-    DrapoBehaviorHandler.prototype.ResolveBehaviorDragStartContext = function (context, el, canBind) {
-        return __awaiter(this, void 0, void 0, function () {
-            var dragStartAttribute, dragActionAttribute, custom, notifyText, notify, _a, dataKey, sector, onBefore, onAfter, application, drag, eventType, eventNamespace;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
-                    case 0:
-                        dragStartAttribute = el.getAttribute('d-dragStart');
-                        if ((dragStartAttribute === null) || (dragStartAttribute === undefined))
-                            return [2];
-                        dragActionAttribute = el.getAttribute('d-dragAction');
-                        if ((dragActionAttribute === null) || (dragActionAttribute === undefined))
-                            dragActionAttribute = 'move';
-                        if (dragActionAttribute === 'barber')
-                            return [2];
-                        custom = null;
-                        if (dragActionAttribute === 'custom')
-                            custom = el.getAttribute('d-dragActionCustom');
-                        notifyText = el.getAttribute('d-dragNotify');
-                        if (!((notifyText == null) || (notifyText == ''))) return [3, 1];
-                        _a = true;
-                        return [3, 3];
-                    case 1: return [4, this.Application.Solver.ResolveConditional(notifyText)];
-                    case 2:
-                        _a = _b.sent();
-                        _b.label = 3;
-                    case 3:
-                        notify = _a;
-                        dataKey = el.getAttribute('d-dragStartDataKey');
-                        sector = this.Application.Document.GetSector(el);
-                        onBefore = el.getAttribute('d-dragOnBeforeStart');
-                        onAfter = el.getAttribute('d-dragOnAfterEnd');
-                        application = this.Application;
-                        drag = this.CreateDrag(dragActionAttribute, custom, context.Item, this.Application.Parser.ParseTags(dragStartAttribute), notify, dataKey, sector, onBefore, onAfter);
-                        el.setAttribute('draggable', 'true');
-                        eventType = 'dragstart';
-                        eventNamespace = this.Application.EventHandler.CreateEventNamespace(null, null, eventType, 'drag');
-                        this.Application.EventHandler.DetachEventListener(el, eventNamespace);
-                        this.Application.EventHandler.AttachEventListener(el, eventType, eventNamespace, function (e) {
-                            application.BehaviorHandler.SetDrag(drag);
-                            e.dataTransfer.effectAllowed = 'move';
-                            e.dataTransfer.setData('text', drag.Code);
-                        });
-                        return [2];
-                }
+    }
+    ResolveBehaviorDragStartContext(context, el, canBind) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const dragStartAttribute = el.getAttribute('d-dragStart');
+            if ((dragStartAttribute === null) || (dragStartAttribute === undefined))
+                return;
+            let dragActionAttribute = el.getAttribute('d-dragAction');
+            if ((dragActionAttribute === null) || (dragActionAttribute === undefined))
+                dragActionAttribute = 'move';
+            if (dragActionAttribute === 'barber')
+                return;
+            let custom = null;
+            if (dragActionAttribute === 'custom')
+                custom = el.getAttribute('d-dragActionCustom');
+            const notifyText = el.getAttribute('d-dragNotify');
+            const notify = ((notifyText == null) || (notifyText == '')) ? true : yield this.Application.Solver.ResolveConditional(notifyText);
+            const dataKey = el.getAttribute('d-dragStartDataKey');
+            const sector = this.Application.Document.GetSector(el);
+            const onBefore = el.getAttribute('d-dragOnBeforeStart');
+            const onAfter = el.getAttribute('d-dragOnAfterEnd');
+            const application = this.Application;
+            const drag = this.CreateDrag(dragActionAttribute, custom, context.Item, this.Application.Parser.ParseTags(dragStartAttribute), notify, dataKey, sector, onBefore, onAfter);
+            el.setAttribute('draggable', 'true');
+            const eventType = 'dragstart';
+            const eventNamespace = this.Application.EventHandler.CreateEventNamespace(null, null, eventType, 'drag');
+            this.Application.EventHandler.DetachEventListener(el, eventNamespace);
+            this.Application.EventHandler.AttachEventListener(el, eventType, eventNamespace, (e) => {
+                application.BehaviorHandler.SetDrag(drag);
+                e.dataTransfer.effectAllowed = 'move';
+                e.dataTransfer.setData('text', drag.Code);
             });
         });
-    };
-    DrapoBehaviorHandler.prototype.ResolveBehaviorDragEndContext = function (context, el, canBind) {
-        return __awaiter(this, void 0, void 0, function () {
-            var dragEndAttribute, dragActionAttribute, notifyText, notify, _a, dataKey, onBefore, onAfter, application, item, tags, sector, eventTypeDragover, eventNamespaceDragover, eventTypeDrop, eventNamespaceDrop;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
-                    case 0:
-                        dragEndAttribute = el.getAttribute('d-dragEnd');
-                        if ((dragEndAttribute === null) || (dragEndAttribute === undefined))
-                            return [2];
-                        dragActionAttribute = el.getAttribute('d-dragAction');
-                        if (dragActionAttribute === 'barber')
-                            return [2];
-                        notifyText = el.getAttribute('d-dragNotify');
-                        if (!((notifyText == null) || (notifyText == ''))) return [3, 1];
-                        _a = true;
-                        return [3, 3];
-                    case 1: return [4, this.Application.Solver.ResolveConditional(notifyText)];
-                    case 2:
-                        _a = _b.sent();
-                        _b.label = 3;
-                    case 3:
-                        notify = _a;
-                        dataKey = el.getAttribute('d-dragEndDataKey');
-                        onBefore = el.getAttribute('d-dragOnBeforeStart');
-                        onAfter = el.getAttribute('d-dragOnAfterEnd');
-                        application = this.Application;
-                        item = context.Item;
-                        tags = this.Application.Parser.ParseTags(dragEndAttribute);
-                        sector = this.Application.Document.GetSector(el);
-                        eventTypeDragover = 'dragover';
-                        eventNamespaceDragover = this.Application.EventHandler.CreateEventNamespace(null, null, eventTypeDragover, 'drag');
-                        this.Application.EventHandler.DetachEventListener(el, eventNamespaceDragover);
-                        this.Application.EventHandler.AttachEventListener(el, eventTypeDragover, eventNamespaceDragover, function (e) {
-                            e.preventDefault();
-                            var drag = application.BehaviorHandler.GetDrag();
-                            if (!application.BehaviorHandler.IsDragMatch(drag, e.dataTransfer.getData('Text'), tags))
-                                return;
-                            e.dataTransfer.dropEffect = 'move';
-                        });
-                        eventTypeDrop = 'drop';
-                        eventNamespaceDrop = this.Application.EventHandler.CreateEventNamespace(null, null, eventTypeDrop, 'drag');
-                        this.Application.EventHandler.DetachEventListener(el, eventNamespaceDrop);
-                        this.Application.EventHandler.AttachEventListener(el, eventTypeDrop, eventNamespaceDrop, function (e) {
-                            application.BehaviorHandler.ResolveBehaviorDragEndDrop(e, item, tags, notify, dataKey, sector, onBefore, onAfter);
-                        });
-                        return [2];
-                }
+    }
+    ResolveBehaviorDragEndContext(context, el, canBind) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const dragEndAttribute = el.getAttribute('d-dragEnd');
+            if ((dragEndAttribute === null) || (dragEndAttribute === undefined))
+                return;
+            const dragActionAttribute = el.getAttribute('d-dragAction');
+            if (dragActionAttribute === 'barber')
+                return;
+            const notifyText = el.getAttribute('d-dragNotify');
+            const notify = ((notifyText == null) || (notifyText == '')) ? true : yield this.Application.Solver.ResolveConditional(notifyText);
+            const dataKey = el.getAttribute('d-dragEndDataKey');
+            const onBefore = el.getAttribute('d-dragOnBeforeStart');
+            const onAfter = el.getAttribute('d-dragOnAfterEnd');
+            const application = this.Application;
+            const item = context.Item;
+            const tags = this.Application.Parser.ParseTags(dragEndAttribute);
+            const sector = this.Application.Document.GetSector(el);
+            const eventTypeDragover = 'dragover';
+            const eventNamespaceDragover = this.Application.EventHandler.CreateEventNamespace(null, null, eventTypeDragover, 'drag');
+            this.Application.EventHandler.DetachEventListener(el, eventNamespaceDragover);
+            this.Application.EventHandler.AttachEventListener(el, eventTypeDragover, eventNamespaceDragover, (e) => {
+                e.preventDefault();
+                const drag = application.BehaviorHandler.GetDrag();
+                if (!application.BehaviorHandler.IsDragMatch(drag, e.dataTransfer.getData('Text'), tags))
+                    return;
+                e.dataTransfer.dropEffect = 'move';
+            });
+            const eventTypeDrop = 'drop';
+            const eventNamespaceDrop = this.Application.EventHandler.CreateEventNamespace(null, null, eventTypeDrop, 'drag');
+            this.Application.EventHandler.DetachEventListener(el, eventNamespaceDrop);
+            this.Application.EventHandler.AttachEventListener(el, eventTypeDrop, eventNamespaceDrop, (e) => {
+                application.BehaviorHandler.ResolveBehaviorDragEndDrop(e, item, tags, notify, dataKey, sector, onBefore, onAfter);
             });
         });
-    };
-    DrapoBehaviorHandler.prototype.ResolveBehaviorDragEndDrop = function (e, item, tags, notify, dataKey, sector, onBefore, onAfter) {
-        return __awaiter(this, void 0, void 0, function () {
-            var dragBefore, dragAfter;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        e.preventDefault();
-                        dragBefore = this.GetDrag();
-                        if (!this.IsDragMatch(dragBefore, e.dataTransfer.getData('Text'), tags))
-                            return [2];
-                        this.SetDrag(null);
-                        dragAfter = this.CreateDrag(null, null, item, tags, notify, dataKey, sector, onBefore, onAfter);
-                        if (!(dragBefore.DataKey !== null)) return [3, 2];
-                        return [4, this.Application.Storage.UpdateData(dragBefore.DataKey, sector, dragBefore.Item.Data)];
-                    case 1:
-                        _a.sent();
-                        _a.label = 2;
-                    case 2:
-                        if (!(dragAfter.DataKey !== null)) return [3, 4];
-                        return [4, this.Application.Storage.UpdateData(dragAfter.DataKey, sector, dragAfter.Item.Data)];
-                    case 3:
-                        _a.sent();
-                        _a.label = 4;
-                    case 4: return [4, this.ResolveBehaviorDragStartOnBefore(dragBefore, dragAfter)];
-                    case 5:
-                        _a.sent();
-                        if (!this.IsMoveDrag(dragBefore, dragAfter)) return [3, 7];
-                        return [4, this.MoveDrag(dragBefore, dragAfter)];
-                    case 6:
-                        _a.sent();
-                        return [3, 10];
-                    case 7:
-                        if (!this.IsSwapDrag(dragBefore, dragAfter)) return [3, 8];
-                        this.SwapDrag(dragBefore, dragAfter);
-                        return [3, 10];
-                    case 8:
-                        if (!this.IsCustomDrag(dragBefore, dragAfter)) return [3, 10];
-                        return [4, this.CustomDrag(dragBefore, dragAfter)];
-                    case 9:
-                        _a.sent();
-                        _a.label = 10;
-                    case 10: return [4, this.ResolveBehaviorDragEndOnAfter(dragBefore, dragAfter)];
-                    case 11:
-                        _a.sent();
-                        return [2];
-                }
-            });
+    }
+    ResolveBehaviorDragEndDrop(e, item, tags, notify, dataKey, sector, onBefore, onAfter) {
+        return __awaiter(this, void 0, void 0, function* () {
+            e.preventDefault();
+            const dragBefore = this.GetDrag();
+            if (!this.IsDragMatch(dragBefore, e.dataTransfer.getData('Text'), tags))
+                return;
+            this.SetDrag(null);
+            const dragAfter = this.CreateDrag(null, null, item, tags, notify, dataKey, sector, onBefore, onAfter);
+            if (dragBefore.DataKey !== null)
+                yield this.Application.Storage.UpdateData(dragBefore.DataKey, sector, dragBefore.Item.Data);
+            if (dragAfter.DataKey !== null)
+                yield this.Application.Storage.UpdateData(dragAfter.DataKey, sector, dragAfter.Item.Data);
+            yield this.ResolveBehaviorDragStartOnBefore(dragBefore, dragAfter);
+            if (this.IsMoveDrag(dragBefore, dragAfter)) {
+                yield this.MoveDrag(dragBefore, dragAfter);
+            }
+            else if (this.IsSwapDrag(dragBefore, dragAfter)) {
+                this.SwapDrag(dragBefore, dragAfter);
+            }
+            else if (this.IsCustomDrag(dragBefore, dragAfter)) {
+                yield this.CustomDrag(dragBefore, dragAfter);
+            }
+            yield this.ResolveBehaviorDragEndOnAfter(dragBefore, dragAfter);
         });
-    };
-    DrapoBehaviorHandler.prototype.ResolveBehaviorDragStartOnBefore = function (dragBefore, dragAfter) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        if (!(dragBefore.OnBefore != null)) return [3, 2];
-                        return [4, this.Application.FunctionHandler.ResolveFunctionWithoutContext(dragBefore.Sector, dragBefore.Item != null ? dragBefore.Item.Element : null, dragBefore.OnBefore)];
-                    case 1:
-                        _a.sent();
-                        _a.label = 2;
-                    case 2:
-                        if (!((dragAfter.OnBefore != null) && (dragAfter.OnBefore != dragBefore.OnBefore))) return [3, 4];
-                        return [4, this.Application.FunctionHandler.ResolveFunctionWithoutContext(dragAfter.Sector, dragAfter.Item != null ? dragAfter.Item.Element : null, dragAfter.OnBefore)];
-                    case 3:
-                        _a.sent();
-                        _a.label = 4;
-                    case 4: return [2];
-                }
-            });
+    }
+    ResolveBehaviorDragStartOnBefore(dragBefore, dragAfter) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (dragBefore.OnBefore != null)
+                yield this.Application.FunctionHandler.ResolveFunctionWithoutContext(dragBefore.Sector, dragBefore.Item != null ? dragBefore.Item.Element : null, dragBefore.OnBefore);
+            if ((dragAfter.OnBefore != null) && (dragAfter.OnBefore != dragBefore.OnBefore))
+                yield this.Application.FunctionHandler.ResolveFunctionWithoutContext(dragAfter.Sector, dragAfter.Item != null ? dragAfter.Item.Element : null, dragAfter.OnBefore);
         });
-    };
-    DrapoBehaviorHandler.prototype.ResolveBehaviorDragEndOnAfter = function (dragBefore, dragAfter) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        if (!(dragBefore.OnAfter != null)) return [3, 2];
-                        return [4, this.Application.FunctionHandler.ResolveFunctionWithoutContext(dragBefore.Sector, dragBefore.Item != null ? dragBefore.Item.Element : null, dragBefore.OnAfter)];
-                    case 1:
-                        _a.sent();
-                        _a.label = 2;
-                    case 2:
-                        if (!((dragAfter.OnAfter != null) && (dragAfter.OnAfter != dragBefore.OnAfter))) return [3, 4];
-                        return [4, this.Application.FunctionHandler.ResolveFunctionWithoutContext(dragAfter.Sector, dragAfter.Item != null ? dragAfter.Item.Element : null, dragAfter.OnAfter)];
-                    case 3:
-                        _a.sent();
-                        _a.label = 4;
-                    case 4: return [2];
-                }
-            });
+    }
+    ResolveBehaviorDragEndOnAfter(dragBefore, dragAfter) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (dragBefore.OnAfter != null)
+                yield this.Application.FunctionHandler.ResolveFunctionWithoutContext(dragBefore.Sector, dragBefore.Item != null ? dragBefore.Item.Element : null, dragBefore.OnAfter);
+            if ((dragAfter.OnAfter != null) && (dragAfter.OnAfter != dragBefore.OnAfter))
+                yield this.Application.FunctionHandler.ResolveFunctionWithoutContext(dragAfter.Sector, dragAfter.Item != null ? dragAfter.Item.Element : null, dragAfter.OnAfter);
         });
-    };
-    DrapoBehaviorHandler.prototype.GetDrag = function () {
+    }
+    GetDrag() {
         return (this._drag);
-    };
-    DrapoBehaviorHandler.prototype.SetDrag = function (drag) {
+    }
+    SetDrag(drag) {
         this._drag = drag;
-    };
-    DrapoBehaviorHandler.prototype.IsDragMatch = function (drag, code, tags) {
+    }
+    IsDragMatch(drag, code, tags) {
         if (drag === null)
             return (false);
         if (drag.Code !== code)
@@ -360,9 +209,9 @@ var DrapoBehaviorHandler = (function () {
         if (!drag.IsMatch(tags))
             return (false);
         return (true);
-    };
-    DrapoBehaviorHandler.prototype.CreateDrag = function (action, custom, item, tags, notify, dataKey, sector, onBefore, onAfter) {
-        var drag = new DrapoDrag();
+    }
+    CreateDrag(action, custom, item, tags, notify, dataKey, sector, onBefore, onAfter) {
+        const drag = new DrapoDrag();
         drag.Code = this.Application.Document.CreateGuid();
         drag.Action = action;
         drag.Custom = custom;
@@ -374,115 +223,89 @@ var DrapoBehaviorHandler = (function () {
         drag.OnBefore = onBefore;
         drag.OnAfter = onAfter;
         return (drag);
-    };
-    DrapoBehaviorHandler.prototype.IsMoveDrag = function (dragBefore, dragAfter) {
+    }
+    IsMoveDrag(dragBefore, dragAfter) {
         return (dragBefore.Action === 'move');
-    };
-    DrapoBehaviorHandler.prototype.MoveDrag = function (dragBefore, dragAfter) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                if (this.IsInternalDrag(dragBefore, dragAfter))
-                    return [2, (this.Application.Storage.MoveDataItem(dragAfter.Item.DataKey, dragAfter.Sector, dragBefore.Item.Data, dragAfter.Item.Data, dragAfter.Notify))];
-                return [2, (false)];
-            });
+    }
+    MoveDrag(dragBefore, dragAfter) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (this.IsInternalDrag(dragBefore, dragAfter))
+                return (this.Application.Storage.MoveDataItem(dragAfter.Item.DataKey, dragAfter.Sector, dragBefore.Item.Data, dragAfter.Item.Data, dragAfter.Notify));
+            return (false);
         });
-    };
-    DrapoBehaviorHandler.prototype.IsInternalDrag = function (dragBefore, dragAfter) {
+    }
+    IsInternalDrag(dragBefore, dragAfter) {
         return (dragBefore.Item.DataKey === dragAfter.Item.DataKey);
-    };
-    DrapoBehaviorHandler.prototype.IsSwapDrag = function (dragBefore, dragAfter) {
+    }
+    IsSwapDrag(dragBefore, dragAfter) {
         return (dragBefore.Action === 'swap');
-    };
-    DrapoBehaviorHandler.prototype.SwapDrag = function (dragBefore, dragAfter) {
+    }
+    SwapDrag(dragBefore, dragAfter) {
         return (false);
-    };
-    DrapoBehaviorHandler.prototype.IsCustomDrag = function (dragBefore, dragAfter) {
+    }
+    IsCustomDrag(dragBefore, dragAfter) {
         return (dragBefore.Action === 'custom');
-    };
-    DrapoBehaviorHandler.prototype.CustomDrag = function (dragBefore, dragAfter) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4, this.Application.FunctionHandler.ResolveFunctionWithoutContext(dragBefore.Sector, dragBefore.Item != null ? dragBefore.Item.Element : null, dragBefore.Custom)];
-                    case 1:
-                        _a.sent();
-                        return [2, (true)];
-                }
-            });
+    }
+    CustomDrag(dragBefore, dragAfter) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield this.Application.FunctionHandler.ResolveFunctionWithoutContext(dragBefore.Sector, dragBefore.Item != null ? dragBefore.Item.Element : null, dragBefore.Custom);
+            return (true);
         });
-    };
-    DrapoBehaviorHandler.prototype.ResolveBehaviorResizeContext = function (context, el, canBind) {
-        return __awaiter(this, void 0, void 0, function () {
-            var resizeLocation;
-            return __generator(this, function (_a) {
-                resizeLocation = el.getAttribute('d-resize-location');
-                if (resizeLocation == null)
-                    return [2];
-                return [2, (this.ResolveBehaviorResizeInternal(context, el, canBind, resizeLocation))];
-            });
+    }
+    ResolveBehaviorResizeContext(context, el, canBind) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const resizeLocation = el.getAttribute('d-resize-location');
+            if (resizeLocation == null)
+                return;
+            return (this.ResolveBehaviorResizeInternal(context, el, canBind, resizeLocation));
         });
-    };
-    DrapoBehaviorHandler.prototype.ResolveBehaviorResize = function (el, canBind, canSubscribeDelay, dataKeyFilter, dataFieldFilter) {
-        if (canBind === void 0) { canBind = true; }
-        if (canSubscribeDelay === void 0) { canSubscribeDelay = true; }
-        if (dataKeyFilter === void 0) { dataKeyFilter = null; }
-        if (dataFieldFilter === void 0) { dataFieldFilter = null; }
-        return __awaiter(this, void 0, void 0, function () {
-            var resizeLocation, context;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        resizeLocation = el.getAttribute('d-resize-location');
-                        if (resizeLocation == null)
-                            return [2];
-                        context = new DrapoContext();
-                        return [4, this.ResolveBehaviorResizeInternal(context, el, canBind, resizeLocation)];
-                    case 1: return [2, (_a.sent())];
-                }
-            });
+    }
+    ResolveBehaviorResize(el, canBind = true, canSubscribeDelay = true, dataKeyFilter = null, dataFieldFilter = null) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const resizeLocation = el.getAttribute('d-resize-location');
+            if (resizeLocation == null)
+                return;
+            const context = new DrapoContext();
+            return (yield this.ResolveBehaviorResizeInternal(context, el, canBind, resizeLocation));
         });
-    };
-    DrapoBehaviorHandler.prototype.ResolveBehaviorResizeInternal = function (context, el, canBind, resizeLocation) {
-        return __awaiter(this, void 0, void 0, function () {
-            var resizeModel, resizeClass, resizeType, resizeContainer, resizePreview, resizer, application, eventTypeMousedown, eventTypeMousemove, eventTypeMouseup, eventNamespaceMousedown, eventNamespaceMouseMove, eventNamespaceMouseUp;
-            return __generator(this, function (_a) {
-                resizeModel = el.getAttribute('d-resize-model');
-                resizeClass = el.getAttribute('d-resize-class');
-                resizeType = el.getAttribute('d-resize-type');
-                if (resizeType == null)
-                    resizeType = 'normal';
-                resizeContainer = this.Application.Parser.ParseNumber(el.getAttribute('d-resize-container'), 2);
-                resizePreview = this.Application.Parser.ParseBoolean(el.getAttribute('d-resize-preview'), false);
-                resizer = this.CreateResize(context.Item, el, resizeModel, resizeLocation, resizeType, resizeClass, resizePreview, resizeContainer);
-                application = this.Application;
-                eventTypeMousedown = 'mousedown';
-                eventTypeMousemove = 'mousemove';
-                eventTypeMouseup = 'mouseup';
-                eventNamespaceMousedown = this.Application.EventHandler.CreateEventNamespace(el, null, eventTypeMousedown, resizer.Code);
-                eventNamespaceMouseMove = this.Application.EventHandler.CreateEventNamespace(el, null, eventTypeMousemove, resizer.Code);
-                eventNamespaceMouseUp = this.Application.EventHandler.CreateEventNamespace(el, null, eventTypeMouseup, resizer.Code);
-                this.Application.EventHandler.DetachEventListener(el, eventNamespaceMousedown);
-                this.Application.EventHandler.AttachEventListener(el, eventTypeMousedown, eventNamespaceMousedown, function (e) {
-                    var container = resizer.Container;
-                    if (resizer.Preview) {
-                        application.EventHandler.AttachEventListener(container, eventTypeMousemove, eventNamespaceMouseMove, function (ev) {
-                            application.BehaviorHandler.ResolveBehaviorResizeContinue(resizer, ev);
-                        });
-                    }
-                    application.EventHandler.AttachEventListener(container, eventTypeMouseup, eventNamespaceMouseUp, function (ev) {
-                        application.BehaviorHandler.ResolveBehaviorResizeFinish(resizer, ev);
-                        if (resizer.Preview)
-                            application.EventHandler.DetachEventListener(container, eventNamespaceMouseMove);
-                        application.EventHandler.DetachEventListener(container, eventNamespaceMouseUp);
+    }
+    ResolveBehaviorResizeInternal(context, el, canBind, resizeLocation) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const resizeModel = el.getAttribute('d-resize-model');
+            const resizeClass = el.getAttribute('d-resize-class');
+            let resizeType = el.getAttribute('d-resize-type');
+            if (resizeType == null)
+                resizeType = 'normal';
+            const resizeContainer = this.Application.Parser.ParseNumber(el.getAttribute('d-resize-container'), 2);
+            const resizePreview = this.Application.Parser.ParseBoolean(el.getAttribute('d-resize-preview'), false);
+            const resizer = this.CreateResize(context.Item, el, resizeModel, resizeLocation, resizeType, resizeClass, resizePreview, resizeContainer);
+            const application = this.Application;
+            const eventTypeMousedown = 'mousedown';
+            const eventTypeMousemove = 'mousemove';
+            const eventTypeMouseup = 'mouseup';
+            const eventNamespaceMousedown = this.Application.EventHandler.CreateEventNamespace(el, null, eventTypeMousedown, resizer.Code);
+            const eventNamespaceMouseMove = this.Application.EventHandler.CreateEventNamespace(el, null, eventTypeMousemove, resizer.Code);
+            const eventNamespaceMouseUp = this.Application.EventHandler.CreateEventNamespace(el, null, eventTypeMouseup, resizer.Code);
+            this.Application.EventHandler.DetachEventListener(el, eventNamespaceMousedown);
+            this.Application.EventHandler.AttachEventListener(el, eventTypeMousedown, eventNamespaceMousedown, (e) => {
+                const container = resizer.Container;
+                if (resizer.Preview) {
+                    application.EventHandler.AttachEventListener(container, eventTypeMousemove, eventNamespaceMouseMove, (ev) => {
+                        application.BehaviorHandler.ResolveBehaviorResizeContinue(resizer, ev);
                     });
-                    application.BehaviorHandler.ResolveBehaviorResizeStart(resizer, e);
+                }
+                application.EventHandler.AttachEventListener(container, eventTypeMouseup, eventNamespaceMouseUp, (ev) => {
+                    application.BehaviorHandler.ResolveBehaviorResizeFinish(resizer, ev);
+                    if (resizer.Preview)
+                        application.EventHandler.DetachEventListener(container, eventNamespaceMouseMove);
+                    application.EventHandler.DetachEventListener(container, eventNamespaceMouseUp);
                 });
-                return [2];
+                application.BehaviorHandler.ResolveBehaviorResizeStart(resizer, e);
             });
         });
-    };
-    DrapoBehaviorHandler.prototype.CreateResize = function (item, element, model, location, type, resizeClass, preview, container) {
-        var resizer = new DrapoResize();
+    }
+    CreateResize(item, element, model, location, type, resizeClass, preview, container) {
+        const resizer = new DrapoResize();
         resizer.Code = this.Application.Document.CreateGuid();
         resizer.Item = item;
         resizer.Element = element;
@@ -494,63 +317,47 @@ var DrapoBehaviorHandler = (function () {
         resizer.Parent = resizer.Element.parentElement;
         resizer.Container = this.Application.EventHandler.GetElementParent(resizer.Element, container);
         return (resizer);
-    };
-    DrapoBehaviorHandler.prototype.ResolveBehaviorResizeStart = function (resizer, e) {
-        return __awaiter(this, void 0, void 0, function () {
-            var sizeUnit;
-            return __generator(this, function (_a) {
-                sizeUnit = this.GetSize(resizer);
-                resizer.UnitStart = this.GetSizeUnit(sizeUnit);
-                resizer.SizeStart = this.GetSizeValue(resizer.UnitStart, sizeUnit);
-                resizer.EventStartValue = this.GetResizerEventValue(resizer, e);
-                resizer.EventCurrentValue = null;
-                if (resizer.Class !== null)
-                    resizer.Container.classList.add(resizer.Class);
-                return [2];
-            });
+    }
+    ResolveBehaviorResizeStart(resizer, e) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const sizeUnit = this.GetSize(resizer);
+            resizer.UnitStart = this.GetSizeUnit(sizeUnit);
+            resizer.SizeStart = this.GetSizeValue(resizer.UnitStart, sizeUnit);
+            resizer.EventStartValue = this.GetResizerEventValue(resizer, e);
+            resizer.EventCurrentValue = null;
+            if (resizer.Class !== null)
+                resizer.Container.classList.add(resizer.Class);
         });
-    };
-    DrapoBehaviorHandler.prototype.ResolveBehaviorResizeContinue = function (resizer, e) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                if (resizer.EventStartValue == null)
-                    return [2];
-                resizer.EventCurrentValue = this.GetResizerEventValue(resizer, e);
-                this.ApplySizeNew(resizer);
-                return [2];
-            });
+    }
+    ResolveBehaviorResizeContinue(resizer, e) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (resizer.EventStartValue == null)
+                return;
+            resizer.EventCurrentValue = this.GetResizerEventValue(resizer, e);
+            this.ApplySizeNew(resizer);
         });
-    };
-    DrapoBehaviorHandler.prototype.ResolveBehaviorResizeFinish = function (resizer, e) {
-        return __awaiter(this, void 0, void 0, function () {
-            var sizeNew, dataPath;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        if (resizer.EventStartValue == null)
-                            return [2];
-                        resizer.EventCurrentValue = this.GetResizerEventValue(resizer, e);
-                        sizeNew = this.ApplySizeNew(resizer);
-                        resizer.EventStartValue = null;
-                        if (resizer.Class !== null)
-                            resizer.Container.classList.remove(resizer.Class);
-                        if (resizer.Model === null)
-                            return [2];
-                        dataPath = this.Application.Parser.ParseMustache(resizer.Model);
-                        return [4, this.Application.Solver.UpdateItemDataPathObject(this.Application.Document.GetSector(resizer.Element), resizer.Item, null, dataPath, sizeNew, true)];
-                    case 1:
-                        _a.sent();
-                        return [2];
-                }
-            });
+    }
+    ResolveBehaviorResizeFinish(resizer, e) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (resizer.EventStartValue == null)
+                return;
+            resizer.EventCurrentValue = this.GetResizerEventValue(resizer, e);
+            const sizeNew = this.ApplySizeNew(resizer);
+            resizer.EventStartValue = null;
+            if (resizer.Class !== null)
+                resizer.Container.classList.remove(resizer.Class);
+            if (resizer.Model === null)
+                return;
+            const dataPath = this.Application.Parser.ParseMustache(resizer.Model);
+            yield this.Application.Solver.UpdateItemDataPathObject(this.Application.Document.GetSector(resizer.Element), resizer.Item, null, dataPath, sizeNew, true);
         });
-    };
-    DrapoBehaviorHandler.prototype.GetSize = function (resizer) {
+    }
+    GetSize(resizer) {
         if (resizer.Location == 'bootstrap') {
-            var classAttribute = resizer.Parent.getAttribute('class');
-            var classesAttribute = this.Application.Parser.Tokenize(classAttribute);
-            for (var i = 0; i < classesAttribute.length; i++) {
-                var classCurrent = classesAttribute[i];
+            const classAttribute = resizer.Parent.getAttribute('class');
+            const classesAttribute = this.Application.Parser.Tokenize(classAttribute);
+            for (let i = 0; i < classesAttribute.length; i++) {
+                const classCurrent = classesAttribute[i];
                 if (this.IsClassBootstrap(classCurrent))
                     return (classCurrent);
             }
@@ -559,86 +366,86 @@ var DrapoBehaviorHandler = (function () {
         else {
             return (this.Application.Stylist.GetElementStyleProperty(resizer.Parent, 'width'));
         }
-    };
-    DrapoBehaviorHandler.prototype.GetSizeUnit = function (size) {
+    }
+    GetSizeUnit(size) {
         if (this.EndsWith(size, '%'))
             return ('%');
         if (this.EndsWith(size, 'px'))
             return ('px');
         if (this.IsClassBootstrap(size)) {
-            var parts = this.Application.Parser.Tokenize(size, '-');
+            const parts = this.Application.Parser.Tokenize(size, '-');
             if (parts.length < 3)
                 return ('');
             return (parts[parts.length - 2]);
         }
         throw new Error('Size unit not supported: ' + size);
-    };
-    DrapoBehaviorHandler.prototype.IsClassBootstrap = function (data) {
+    }
+    IsClassBootstrap(data) {
         return (data.indexOf('col-') === 0);
-    };
-    DrapoBehaviorHandler.prototype.CreateClassBootstrap = function (type, size) {
-        var className = 'col-';
+    }
+    CreateClassBootstrap(type, size) {
+        let className = 'col-';
         if (type != '')
             className = className + type + '-';
         className = className + size;
         return (className);
-    };
-    DrapoBehaviorHandler.prototype.EndsWith = function (data, endsWith) {
-        var size = endsWith.length;
-        var diff = data.length - size;
-        for (var i = 0; i < size; i++)
+    }
+    EndsWith(data, endsWith) {
+        const size = endsWith.length;
+        const diff = data.length - size;
+        for (let i = 0; i < size; i++)
             if (endsWith[i] !== data[i + diff])
                 return (false);
         return (true);
-    };
-    DrapoBehaviorHandler.prototype.GetSizeValue = function (unit, sizeUnit) {
+    }
+    GetSizeValue(unit, sizeUnit) {
         if (this.IsClassBootstrap(sizeUnit)) {
-            var parts = this.Application.Parser.Tokenize(sizeUnit, '-');
+            const parts = this.Application.Parser.Tokenize(sizeUnit, '-');
             return (Number(parts[parts.length - 1]));
         }
-        var valueString = sizeUnit.substr(0, sizeUnit.length - (unit.length));
+        const valueString = sizeUnit.substr(0, sizeUnit.length - (unit.length));
         return (Number(valueString));
-    };
-    DrapoBehaviorHandler.prototype.GetSizeStartWithOffset = function (resizer) {
-        var offset = this.GetResizerOffset(resizer);
+    }
+    GetSizeStartWithOffset(resizer) {
+        const offset = this.GetResizerOffset(resizer);
         return (resizer.SizeStart + offset);
-    };
-    DrapoBehaviorHandler.prototype.GetResizerOffset = function (resizer) {
-        var start = resizer.EventStartValue;
-        var end = resizer.EventCurrentValue;
+    }
+    GetResizerOffset(resizer) {
+        const start = resizer.EventStartValue;
+        const end = resizer.EventCurrentValue;
         if (resizer.Type === 'reverse')
             return (start - end);
         return (end - start);
-    };
-    DrapoBehaviorHandler.prototype.GetResizerEventValue = function (resizer, event) {
+    }
+    GetResizerEventValue(resizer, event) {
         if (resizer.Location === 'height')
             return (event.pageY);
         return (event.pageX);
-    };
-    DrapoBehaviorHandler.prototype.ApplySizeNew = function (resizer) {
+    }
+    ApplySizeNew(resizer) {
         if (resizer.Location === 'bootstrap') {
-            var sizeBase = this.Application.Stylist.GetElementStyleProperty(resizer.Parent, 'width');
-            var sizeBaseUnit = this.GetSizeUnit(sizeBase);
-            var sizeBaseValue = this.GetSizeValue(sizeBaseUnit, sizeBase);
-            var sizeBaseValueOne = sizeBaseValue / resizer.SizeStart;
-            var sizeOffset = this.GetResizerOffset(resizer);
-            var valueOffset = Math.round(sizeOffset / sizeBaseValueOne);
+            const sizeBase = this.Application.Stylist.GetElementStyleProperty(resizer.Parent, 'width');
+            const sizeBaseUnit = this.GetSizeUnit(sizeBase);
+            const sizeBaseValue = this.GetSizeValue(sizeBaseUnit, sizeBase);
+            const sizeBaseValueOne = sizeBaseValue / resizer.SizeStart;
+            const sizeOffset = this.GetResizerOffset(resizer);
+            const valueOffset = Math.round(sizeOffset / sizeBaseValueOne);
             if (valueOffset === 0)
                 return (0);
-            var valueNew = resizer.SizeStart + valueOffset;
-            var classRemove = this.CreateClassBootstrap(resizer.UnitStart, resizer.SizeStart);
-            var classInsert = this.CreateClassBootstrap(resizer.UnitStart, valueNew);
+            const valueNew = resizer.SizeStart + valueOffset;
+            const classRemove = this.CreateClassBootstrap(resizer.UnitStart, resizer.SizeStart);
+            const classInsert = this.CreateClassBootstrap(resizer.UnitStart, valueNew);
             resizer.Parent.classList.remove(classRemove);
             resizer.Parent.classList.add(classInsert);
             return (valueNew);
         }
         else {
-            var sizeNew = this.GetSizeStartWithOffset(resizer);
+            const sizeNew = this.GetSizeStartWithOffset(resizer);
             if (sizeNew === null)
                 return (null);
             this.Application.Stylist.SetElementStyleProperty(resizer.Parent, resizer.Location, sizeNew + resizer.Unit);
             return (sizeNew);
         }
-    };
-    return DrapoBehaviorHandler;
-}());
+    }
+}
+//# sourceMappingURL=DrapoBehaviorHandler.js.map

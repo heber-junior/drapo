@@ -1,11 +1,11 @@
 "use strict";
-var DrapoLinkedTableNode = (function () {
-    function DrapoLinkedTableNode() {
+class DrapoLinkedTableNode {
+    constructor() {
         this.Value = null;
         this.NextCell = null;
         this.NextRow = null;
         this.Row = null;
         this.Column = null;
     }
-    return DrapoLinkedTableNode;
-}());
+}
+//# sourceMappingURL=DrapoLinkedTableNode.js.map

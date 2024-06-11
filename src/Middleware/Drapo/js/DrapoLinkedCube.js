@@ -1,9 +1,9 @@
 "use strict";
-var DrapoLinkedCube = (function () {
-    function DrapoLinkedCube() {
+class DrapoLinkedCube {
+    constructor() {
         this._head = null;
     }
-    DrapoLinkedCube.prototype.AddOrUpdate = function (context, value) {
+    AddOrUpdate(context, value) {
         if (this._head === null) {
             this._head = this.CreateNode(context, value);
             return (this._head);
@@ -12,15 +12,15 @@ var DrapoLinkedCube = (function () {
             throw new Error('Drapo: The context in DrapoLinkedcube cant be null');
         if (this._head.Context.length != context.length)
             throw new Error('Drapo: The context to insert in linked cube must be the same lenght of the context lenght of head');
-        var node = this._head;
-        var nodePrevious = null;
-        var nodePreviousIndex = null;
-        var compare = 0;
-        for (var i = 0; i < context.length; i++) {
-            var contextValue = context[i];
+        let node = this._head;
+        let nodePrevious = null;
+        let nodePreviousIndex = null;
+        let compare = 0;
+        for (let i = 0; i < context.length; i++) {
+            const contextValue = context[i];
             while ((compare = this.Compare(contextValue, node.Context[i])) !== 0) {
                 if (compare < 0) {
-                    var nodeNew = this.CreateNode(context, value);
+                    const nodeNew = this.CreateNode(context, value);
                     this.AddNodeNext(nodeNew, node, i);
                     if (node === this._head)
                         this._head = nodeNew;
@@ -31,9 +31,9 @@ var DrapoLinkedCube = (function () {
                 else {
                     nodePrevious = node;
                     nodePreviousIndex = i;
-                    var nodeNext = this.GetNodeNext(node, i);
+                    const nodeNext = this.GetNodeNext(node, i);
                     if (nodeNext === null) {
-                        var nodeNew = this.CreateNode(context, value);
+                        const nodeNew = this.CreateNode(context, value);
                         this.AddNodeNext(node, nodeNew, i);
                         return (nodeNew);
                     }
@@ -45,11 +45,11 @@ var DrapoLinkedCube = (function () {
         }
         node.Value = value;
         return (node);
-    };
-    DrapoLinkedCube.prototype.Get = function (context) {
-        var entry = null;
-        var node = this._head;
-        var index = 0;
+    }
+    Get(context) {
+        let entry = null;
+        let node = this._head;
+        let index = 0;
         while (node !== null) {
             if (this.IsEqualContext(node.Context, context))
                 return (node.Value);
@@ -60,13 +60,13 @@ var DrapoLinkedCube = (function () {
             index = entry[1];
         }
         return (null);
-    };
-    DrapoLinkedCube.prototype.GetNode = function (context) {
+    }
+    GetNode(context) {
         if (context == null)
             return (null);
-        var entry = null;
-        var node = this._head;
-        var index = 0;
+        let entry = null;
+        let node = this._head;
+        let index = 0;
         while (node !== null) {
             if (this.IsEqualContext(context, node.Context, false))
                 return (node);
@@ -77,19 +77,19 @@ var DrapoLinkedCube = (function () {
             index = entry[1];
         }
         return (null);
-    };
-    DrapoLinkedCube.prototype.Clear = function () {
+    }
+    Clear() {
         this._head = null;
-    };
-    DrapoLinkedCube.prototype.Remove = function (context) {
+    }
+    Remove(context) {
         if (this._head === null)
             return (null);
-        var node = this._head;
-        var nodePrevious = null;
-        var nodePreviousIndex = null;
-        var compare = 0;
-        for (var i = 0; ((i < context.length) && (node !== null)); i++) {
-            var contextValue = context[i];
+        let node = this._head;
+        let nodePrevious = null;
+        let nodePreviousIndex = null;
+        let compare = 0;
+        for (let i = 0; ((i < context.length) && (node !== null)); i++) {
+            const contextValue = context[i];
             while ((compare = this.Compare(contextValue, node.Context[i])) !== 0) {
                 if (compare < 0) {
                     return (null);
@@ -97,7 +97,7 @@ var DrapoLinkedCube = (function () {
                 else {
                     nodePrevious = node;
                     nodePreviousIndex = i;
-                    var nodeNext = this.GetNodeNext(node, i);
+                    const nodeNext = this.GetNodeNext(node, i);
                     node = nodeNext;
                     if (node === null)
                         return (null);
@@ -105,9 +105,9 @@ var DrapoLinkedCube = (function () {
             }
         }
         if (node !== null) {
-            var isContextToRemove = context.length < this._head.Context.length;
-            var nodeNext = this.GetNextReverse(node, isContextToRemove ? context.length - 1 : null);
-            var nodeNextIndex = this.GetNextReverseIndex(node, isContextToRemove ? context.length - 1 : null);
+            const isContextToRemove = context.length < this._head.Context.length;
+            const nodeNext = this.GetNextReverse(node, isContextToRemove ? context.length - 1 : null);
+            const nodeNextIndex = this.GetNextReverseIndex(node, isContextToRemove ? context.length - 1 : null);
             if (nodePrevious === null) {
                 if (nodeNext !== null) {
                     this.MoveLinks(nodeNext, node, nodeNextIndex);
@@ -120,19 +120,19 @@ var DrapoLinkedCube = (function () {
             }
         }
         return (node);
-    };
-    DrapoLinkedCube.prototype.GetHead = function () {
+    }
+    GetHead() {
         return (this._head);
-    };
-    DrapoLinkedCube.prototype.CreateNode = function (context, value) {
-        var node = new DrapoLinkedCubeNode();
+    }
+    CreateNode(context, value) {
+        const node = new DrapoLinkedCubeNode();
         node.Context = context;
         node.Value = value;
         return (node);
-    };
-    DrapoLinkedCube.prototype.GetNextInContext = function (node, context, index) {
-        for (var i = index; i < context.length; i++) {
-            var compare = this.Compare(context[i], node.Context[i]);
+    }
+    GetNextInContext(node, context, index) {
+        for (let i = index; i < context.length; i++) {
+            const compare = this.Compare(context[i], node.Context[i]);
             if (compare < 0)
                 return (null);
             else if (compare === 0)
@@ -142,58 +142,55 @@ var DrapoLinkedCube = (function () {
             return ([node.Next[i], i]);
         }
         return (null);
-    };
-    DrapoLinkedCube.prototype.Compare = function (value1, value2) {
+    }
+    Compare(value1, value2) {
         if (value1 < value2)
             return (-1);
         if (value1 > value2)
             return (1);
         return (0);
-    };
-    DrapoLinkedCube.prototype.GetNextReverse = function (node, index) {
-        if (index === void 0) { index = null; }
+    }
+    GetNextReverse(node, index = null) {
         if (node.Next === null)
             return (null);
-        var start = index !== null ? index : node.Next.length - 1;
+        let start = index !== null ? index : node.Next.length - 1;
         if (start >= node.Next.length)
             start = node.Next.length - 1;
-        for (var i = start; i >= 0; i--) {
-            var nodeNext = node.Next[i];
+        for (let i = start; i >= 0; i--) {
+            const nodeNext = node.Next[i];
             if (nodeNext !== null)
                 return (nodeNext);
         }
         return (null);
-    };
-    DrapoLinkedCube.prototype.GetNextReverseIndex = function (node, index) {
-        if (index === void 0) { index = null; }
+    }
+    GetNextReverseIndex(node, index = null) {
         if (node.Next === null)
             return (null);
-        var start = index !== null ? index : node.Next.length - 1;
+        let start = index !== null ? index : node.Next.length - 1;
         if (start >= node.Next.length)
             start = node.Next.length - 1;
-        for (var i = start; i >= 0; i--) {
-            var nodeNext = node.Next[i];
+        for (let i = start; i >= 0; i--) {
+            const nodeNext = node.Next[i];
             if (nodeNext !== null)
                 return (i);
         }
         return (null);
-    };
-    DrapoLinkedCube.prototype.IsEqualContext = function (context1, context2, checkSize) {
-        if (checkSize === void 0) { checkSize = true; }
+    }
+    IsEqualContext(context1, context2, checkSize = true) {
         if ((checkSize) && (context1.length != context2.length))
             return (false);
-        for (var i = 0; i < context1.length; i++)
+        for (let i = 0; i < context1.length; i++)
             if (context1[i] !== context2[i])
                 return (false);
         return (true);
-    };
-    DrapoLinkedCube.prototype.EnsureNodeNext = function (node, index) {
+    }
+    EnsureNodeNext(node, index) {
         if (node.Next === null)
             node.Next = [];
         while (node.Next.length <= index)
             node.Next.push(null);
-    };
-    DrapoLinkedCube.prototype.AddNodeNext = function (node, nodeNext, index) {
+    }
+    AddNodeNext(node, nodeNext, index) {
         this.EnsureNodeNext(node, index);
         node.Next[index] = nodeNext;
         if (nodeNext === null)
@@ -201,9 +198,8 @@ var DrapoLinkedCube = (function () {
         if (nodeNext.Next === null)
             return;
         this.MoveLinks(node, nodeNext, index);
-    };
-    DrapoLinkedCube.prototype.MoveLinks = function (node, nodeNext, index) {
-        if (index === void 0) { index = null; }
+    }
+    MoveLinks(node, nodeNext, index = null) {
         if (node === null)
             return;
         if (nodeNext === null)
@@ -211,33 +207,32 @@ var DrapoLinkedCube = (function () {
         if (nodeNext.Next === null)
             return;
         this.EnsureNodeNext(node, index);
-        for (var i = 0; ((index === null) || (i < index)) && (i < nodeNext.Next.length); i++) {
+        for (let i = 0; ((index === null) || (i < index)) && (i < nodeNext.Next.length); i++) {
             if (node.Context[i] !== nodeNext.Context[i])
                 break;
             if (node.Next[i] === null)
                 node.Next[i] = nodeNext.Next[i];
             nodeNext.Next[i] = null;
         }
-    };
-    DrapoLinkedCube.prototype.GetNodeNext = function (node, index) {
+    }
+    GetNodeNext(node, index) {
         if (node.Next === null)
             return (null);
         if (node.Next.length <= index)
             return (null);
         return (node.Next[index]);
-    };
-    DrapoLinkedCube.prototype.ToList = function (node) {
-        if (node === void 0) { node = null; }
-        var list = [];
-        var stack = [];
+    }
+    ToList(node = null) {
+        const list = [];
+        const stack = [];
         if (node === null)
             node = this._head;
         while (node != null || stack.length > 0) {
             if (node != null) {
                 list.push(node);
                 if (node.Next != null) {
-                    for (var i = node.Next.length - 1; i >= 0; i--) {
-                        var nodeNext = node.Next[i];
+                    for (let i = node.Next.length - 1; i >= 0; i--) {
+                        const nodeNext = node.Next[i];
                         if (nodeNext !== null)
                             stack.push(nodeNext);
                     }
@@ -246,14 +241,13 @@ var DrapoLinkedCube = (function () {
             node = stack.pop();
         }
         return list;
-    };
-    DrapoLinkedCube.prototype.ToListValues = function (node) {
-        if (node === void 0) { node = null; }
-        var listValues = [];
-        var list = this.ToList(node);
-        for (var i = 0; i < list.length; i++)
+    }
+    ToListValues(node = null) {
+        const listValues = [];
+        const list = this.ToList(node);
+        for (let i = 0; i < list.length; i++)
             listValues.push(list[i].Value);
         return (listValues);
-    };
-    return DrapoLinkedCube;
-}());
+    }
+}
+//# sourceMappingURL=DrapoLinkedCube.js.map

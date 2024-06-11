@@ -1,21 +1,21 @@
 "use strict";
-var DrapoLinkedTable = (function () {
-    function DrapoLinkedTable() {
+class DrapoLinkedTable {
+    constructor() {
         this._head = null;
     }
-    DrapoLinkedTable.prototype.AddOrUpdate = function (row, column, value) {
+    AddOrUpdate(row, column, value) {
         if (this._head === null) {
             this._head = new DrapoLinkedTableNode();
             this._head.Row = row;
             this._head.Column = column;
         }
-        var node = this._head;
-        var nodeRowPrevious = null;
-        var isEnd = false;
+        let node = this._head;
+        let nodeRowPrevious = null;
+        let isEnd = false;
         while (node.Row !== row) {
             nodeRowPrevious = node;
             if ((isEnd = (node.NextRow === null)) || (node.NextRow.Row > row)) {
-                var nodeRow = new DrapoLinkedTableNode();
+                const nodeRow = new DrapoLinkedTableNode();
                 nodeRow.Row = row;
                 nodeRow.Column = column;
                 if ((isEnd) && (node.Row < row)) {
@@ -35,10 +35,10 @@ var DrapoLinkedTable = (function () {
                 node = node.NextRow;
             }
         }
-        var nodeRowHead = node;
+        const nodeRowHead = node;
         while (node.Column !== column) {
             if ((isEnd = (node.NextCell === null)) || (node.NextCell.Column > column)) {
-                var nodeCell = new DrapoLinkedTableNode();
+                const nodeCell = new DrapoLinkedTableNode();
                 nodeCell.Row = row;
                 nodeCell.Column = column;
                 if ((isEnd) && (node.Column < column)) {
@@ -60,9 +60,9 @@ var DrapoLinkedTable = (function () {
             }
         }
         node.Value = value;
-    };
-    DrapoLinkedTable.prototype.Get = function (row, column) {
-        var node = this._head;
+    }
+    Get(row, column) {
+        let node = this._head;
         while (node !== null) {
             if (node.Row < row) {
                 node = node.NextRow;
@@ -80,11 +80,11 @@ var DrapoLinkedTable = (function () {
             }
         }
         return (null);
-    };
-    DrapoLinkedTable.prototype.GetHead = function () {
+    }
+    GetHead() {
         return (this._head);
-    };
-    DrapoLinkedTable.prototype.Delete = function (row, column) {
-    };
-    return DrapoLinkedTable;
-}());
+    }
+    Delete(row, column) {
+    }
+}
+//# sourceMappingURL=DrapoLinkedTable.js.map

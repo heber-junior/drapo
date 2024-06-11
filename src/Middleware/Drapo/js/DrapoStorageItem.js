@@ -1,6 +1,284 @@
 "use strict";
-var DrapoStorageItem = (function () {
-    function DrapoStorageItem(dataKey, type, access, element, data, urlGet, urlSet, urlSetChunk, chunk, urlParameters, postGet, start, increment, isIncremental, isFull, isUnitOfWork, isDelay, cookieName, isCookieChange, userConfig, isToken, sector, groups, pipes, channels, canCache, cacheKeys, onLoad, onAfterLoad, onAfterContainerLoad, onBeforeContainerUnload, onAfterCached, onNotify, headersGet, headersSet, pollingKey, pollingTimespan) {
+class DrapoStorageItem {
+    get DataKey() {
+        return (this._dataKey);
+    }
+    get Type() {
+        return (this._type);
+    }
+    set Type(value) {
+        this._type = value;
+    }
+    get Access() {
+        return (this._access);
+    }
+    set Access(value) {
+        this._access = value;
+    }
+    get Element() {
+        return (this._element);
+    }
+    set Element(value) {
+        this._element = value;
+    }
+    get Data() {
+        return (this._data);
+    }
+    set Data(value) {
+        this._data = value;
+        this._isFull = false;
+        this._isGrowing = false;
+    }
+    get DataInserted() {
+        return (this._dataInserted);
+    }
+    set DataInserted(value) {
+        this._dataInserted = value;
+    }
+    get DataUpdated() {
+        return (this._dataUpdated);
+    }
+    set DataUpdated(value) {
+        this._dataUpdated = value;
+    }
+    get DataDeleted() {
+        return (this._dataDeleted);
+    }
+    set DataDeleted(value) {
+        this._dataDeleted = value;
+    }
+    get UrlGet() {
+        return (this._urlGet);
+    }
+    set UrlGet(value) {
+        this._urlGet = value;
+    }
+    get UrlSet() {
+        return (this._urlSet);
+    }
+    set UrlSet(value) {
+        this._urlSet = value;
+    }
+    get UrlSetChunk() {
+        return (this._urlSetChunk);
+    }
+    set UrlSetChunk(value) {
+        this._urlSetChunk = value;
+    }
+    get Chunk() {
+        return (this._chunk);
+    }
+    set Chunk(value) {
+        this._chunk = value;
+    }
+    get UrlParameters() {
+        return (this._urlParameters);
+    }
+    get IsUrlParametersRequired() {
+        return (this._urlParameters === 'required');
+    }
+    get PostGet() {
+        return (this._postGet);
+    }
+    set PostGet(value) {
+        this._postGet = value;
+    }
+    get Start() {
+        return (this._start);
+    }
+    set Start(value) {
+        this._start = value;
+    }
+    get Increment() {
+        return (this._increment);
+    }
+    set Increment(value) {
+        this._increment = value;
+    }
+    get IsIncremental() {
+        return (this._isIncremental);
+    }
+    set IsIncremental(value) {
+        this._isIncremental = value;
+    }
+    get IsFull() {
+        return (this._isFull);
+    }
+    set IsFull(value) {
+        this._isFull = value;
+    }
+    get IsGrowing() {
+        return (this._isGrowing);
+    }
+    set IsGrowing(value) {
+        this._isGrowing = value;
+    }
+    get IsUnitOfWork() {
+        return (this._isUnitOfWork);
+    }
+    set IsUnitOfWork(value) {
+        this._isUnitOfWork = value;
+    }
+    get IsDelay() {
+        return (this._isDelay);
+    }
+    set IsDelay(value) {
+        this._isDelay = value;
+    }
+    get CookieName() {
+        return (this._cookieName);
+    }
+    set CookieName(value) {
+        this._cookieName = value;
+    }
+    get IsCookieChange() {
+        return (this._isCookieChange);
+    }
+    set IsCookieChange(value) {
+        this._isCookieChange = value;
+    }
+    get UserConfig() {
+        return (this._userConfig);
+    }
+    set UserConfig(value) {
+        this._userConfig = value;
+    }
+    get IsTypeValue() {
+        return (this._type === 'value');
+    }
+    get IsTypeObject() {
+        return (this._type === 'object');
+    }
+    get IsTypeParent() {
+        return (this._type === 'parent');
+    }
+    get IsTypeArray() {
+        return ((this._type === 'array') || (Array.isArray(this.Data)));
+    }
+    get IsTypeFunction() {
+        return (this._type === 'function');
+    }
+    get IsAccessPublic() {
+        return (this._access === 'public');
+    }
+    get IsAccessPrivate() {
+        return (this._access === 'private');
+    }
+    get IsToken() {
+        return (this._isToken);
+    }
+    set IsToken(value) {
+        this._isToken = value;
+    }
+    get Sector() {
+        return (this._sector);
+    }
+    set Sector(value) {
+        this._sector = value;
+    }
+    get Pipes() {
+        return (this._pipes);
+    }
+    set Pipes(value) {
+        this._pipes = value;
+    }
+    get Channels() {
+        return (this._channels);
+    }
+    set Channels(value) {
+        this._channels = value;
+    }
+    get CanCache() {
+        return (this._canCache);
+    }
+    set CanCache(value) {
+        this._canCache = value;
+    }
+    get CacheKeys() {
+        return (this._cacheKeys);
+    }
+    set CacheKeys(value) {
+        this._cacheKeys = value;
+    }
+    get OnLoad() {
+        return (this._onLoad);
+    }
+    set OnLoad(value) {
+        this._onLoad = value;
+    }
+    get OnAfterLoad() {
+        return (this._onAfterLoad);
+    }
+    set OnAfterLoad(value) {
+        this._onAfterLoad = value;
+    }
+    get OnAfterContainerLoad() {
+        return (this._onAfterContainerLoad);
+    }
+    set OnAfterContainerLoad(value) {
+        this._onAfterContainerLoad = value;
+    }
+    get OnBeforeContainerUnload() {
+        return (this._onBeforeContainerUnload);
+    }
+    set OnBeforeContainerUnload(value) {
+        this._onBeforeContainerUnload = value;
+    }
+    get OnAfterCached() {
+        return (this._onAfterCached);
+    }
+    set OnAfterCached(value) {
+        this._onAfterCached = value;
+    }
+    get OnNotify() {
+        return (this._onNotify);
+    }
+    set OnNotify(value) {
+        this._onNotify = value;
+    }
+    get HeadersGet() {
+        return (this._headersGet);
+    }
+    set HeadersGet(value) {
+        this._headersGet = value;
+    }
+    get HeadersSet() {
+        return (this._headersSet);
+    }
+    set HeadersSet(value) {
+        this._headersSet = value;
+    }
+    get HasChanges() {
+        return (this._hasChanges);
+    }
+    set HasChanges(value) {
+        this._hasChanges = value;
+    }
+    get PollingKey() {
+        return (this._pollingKey);
+    }
+    set PollingKey(value) {
+        this._pollingKey = value;
+    }
+    get PollingTimespan() {
+        return (this._pollingTimespan);
+    }
+    set PollingTimespan(value) {
+        this._pollingTimespan = value;
+    }
+    get PollingDate() {
+        return (this._pollingDate);
+    }
+    set PollingDate(value) {
+        this._pollingDate = value;
+    }
+    get PollingHash() {
+        return (this._pollingHash);
+    }
+    set PollingHash(value) {
+        this._pollingHash = value;
+    }
+    constructor(dataKey, type, access, element, data, urlGet, urlSet, urlSetChunk, chunk, urlParameters, postGet, start, increment, isIncremental, isFull, isUnitOfWork, isDelay, cookieName, isCookieChange, userConfig, isToken, sector, groups, pipes, channels, canCache, cacheKeys, onLoad, onAfterLoad, onAfterContainerLoad, onBeforeContainerUnload, onAfterCached, onNotify, headersGet, headersSet, pollingKey, pollingTimespan) {
         this._dataKey = null;
         this._type = null;
         this._access = null;
@@ -83,507 +361,25 @@ var DrapoStorageItem = (function () {
         this._pollingTimespan = pollingTimespan;
         this.Initialize();
     }
-    Object.defineProperty(DrapoStorageItem.prototype, "DataKey", {
-        get: function () {
-            return (this._dataKey);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoStorageItem.prototype, "Type", {
-        get: function () {
-            return (this._type);
-        },
-        set: function (value) {
-            this._type = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoStorageItem.prototype, "Access", {
-        get: function () {
-            return (this._access);
-        },
-        set: function (value) {
-            this._access = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoStorageItem.prototype, "Element", {
-        get: function () {
-            return (this._element);
-        },
-        set: function (value) {
-            this._element = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoStorageItem.prototype, "Data", {
-        get: function () {
-            return (this._data);
-        },
-        set: function (value) {
-            this._data = value;
-            this._isFull = false;
-            this._isGrowing = false;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoStorageItem.prototype, "DataInserted", {
-        get: function () {
-            return (this._dataInserted);
-        },
-        set: function (value) {
-            this._dataInserted = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoStorageItem.prototype, "DataUpdated", {
-        get: function () {
-            return (this._dataUpdated);
-        },
-        set: function (value) {
-            this._dataUpdated = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoStorageItem.prototype, "DataDeleted", {
-        get: function () {
-            return (this._dataDeleted);
-        },
-        set: function (value) {
-            this._dataDeleted = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoStorageItem.prototype, "UrlGet", {
-        get: function () {
-            return (this._urlGet);
-        },
-        set: function (value) {
-            this._urlGet = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoStorageItem.prototype, "UrlSet", {
-        get: function () {
-            return (this._urlSet);
-        },
-        set: function (value) {
-            this._urlSet = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoStorageItem.prototype, "UrlSetChunk", {
-        get: function () {
-            return (this._urlSetChunk);
-        },
-        set: function (value) {
-            this._urlSetChunk = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoStorageItem.prototype, "Chunk", {
-        get: function () {
-            return (this._chunk);
-        },
-        set: function (value) {
-            this._chunk = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoStorageItem.prototype, "UrlParameters", {
-        get: function () {
-            return (this._urlParameters);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoStorageItem.prototype, "IsUrlParametersRequired", {
-        get: function () {
-            return (this._urlParameters === 'required');
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoStorageItem.prototype, "PostGet", {
-        get: function () {
-            return (this._postGet);
-        },
-        set: function (value) {
-            this._postGet = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoStorageItem.prototype, "Start", {
-        get: function () {
-            return (this._start);
-        },
-        set: function (value) {
-            this._start = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoStorageItem.prototype, "Increment", {
-        get: function () {
-            return (this._increment);
-        },
-        set: function (value) {
-            this._increment = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoStorageItem.prototype, "IsIncremental", {
-        get: function () {
-            return (this._isIncremental);
-        },
-        set: function (value) {
-            this._isIncremental = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoStorageItem.prototype, "IsFull", {
-        get: function () {
-            return (this._isFull);
-        },
-        set: function (value) {
-            this._isFull = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoStorageItem.prototype, "IsGrowing", {
-        get: function () {
-            return (this._isGrowing);
-        },
-        set: function (value) {
-            this._isGrowing = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoStorageItem.prototype, "IsUnitOfWork", {
-        get: function () {
-            return (this._isUnitOfWork);
-        },
-        set: function (value) {
-            this._isUnitOfWork = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoStorageItem.prototype, "IsDelay", {
-        get: function () {
-            return (this._isDelay);
-        },
-        set: function (value) {
-            this._isDelay = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoStorageItem.prototype, "CookieName", {
-        get: function () {
-            return (this._cookieName);
-        },
-        set: function (value) {
-            this._cookieName = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoStorageItem.prototype, "IsCookieChange", {
-        get: function () {
-            return (this._isCookieChange);
-        },
-        set: function (value) {
-            this._isCookieChange = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoStorageItem.prototype, "UserConfig", {
-        get: function () {
-            return (this._userConfig);
-        },
-        set: function (value) {
-            this._userConfig = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoStorageItem.prototype, "IsTypeValue", {
-        get: function () {
-            return (this._type === 'value');
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoStorageItem.prototype, "IsTypeObject", {
-        get: function () {
-            return (this._type === 'object');
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoStorageItem.prototype, "IsTypeParent", {
-        get: function () {
-            return (this._type === 'parent');
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoStorageItem.prototype, "IsTypeArray", {
-        get: function () {
-            return ((this._type === 'array') || (Array.isArray(this.Data)));
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoStorageItem.prototype, "IsTypeFunction", {
-        get: function () {
-            return (this._type === 'function');
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoStorageItem.prototype, "IsAccessPublic", {
-        get: function () {
-            return (this._access === 'public');
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoStorageItem.prototype, "IsAccessPrivate", {
-        get: function () {
-            return (this._access === 'private');
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoStorageItem.prototype, "IsToken", {
-        get: function () {
-            return (this._isToken);
-        },
-        set: function (value) {
-            this._isToken = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoStorageItem.prototype, "Sector", {
-        get: function () {
-            return (this._sector);
-        },
-        set: function (value) {
-            this._sector = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoStorageItem.prototype, "Pipes", {
-        get: function () {
-            return (this._pipes);
-        },
-        set: function (value) {
-            this._pipes = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoStorageItem.prototype, "Channels", {
-        get: function () {
-            return (this._channels);
-        },
-        set: function (value) {
-            this._channels = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoStorageItem.prototype, "CanCache", {
-        get: function () {
-            return (this._canCache);
-        },
-        set: function (value) {
-            this._canCache = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoStorageItem.prototype, "CacheKeys", {
-        get: function () {
-            return (this._cacheKeys);
-        },
-        set: function (value) {
-            this._cacheKeys = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoStorageItem.prototype, "OnLoad", {
-        get: function () {
-            return (this._onLoad);
-        },
-        set: function (value) {
-            this._onLoad = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoStorageItem.prototype, "OnAfterLoad", {
-        get: function () {
-            return (this._onAfterLoad);
-        },
-        set: function (value) {
-            this._onAfterLoad = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoStorageItem.prototype, "OnAfterContainerLoad", {
-        get: function () {
-            return (this._onAfterContainerLoad);
-        },
-        set: function (value) {
-            this._onAfterContainerLoad = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoStorageItem.prototype, "OnBeforeContainerUnload", {
-        get: function () {
-            return (this._onBeforeContainerUnload);
-        },
-        set: function (value) {
-            this._onBeforeContainerUnload = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoStorageItem.prototype, "OnAfterCached", {
-        get: function () {
-            return (this._onAfterCached);
-        },
-        set: function (value) {
-            this._onAfterCached = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoStorageItem.prototype, "OnNotify", {
-        get: function () {
-            return (this._onNotify);
-        },
-        set: function (value) {
-            this._onNotify = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoStorageItem.prototype, "HeadersGet", {
-        get: function () {
-            return (this._headersGet);
-        },
-        set: function (value) {
-            this._headersGet = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoStorageItem.prototype, "HeadersSet", {
-        get: function () {
-            return (this._headersSet);
-        },
-        set: function (value) {
-            this._headersSet = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoStorageItem.prototype, "HasChanges", {
-        get: function () {
-            return (this._hasChanges);
-        },
-        set: function (value) {
-            this._hasChanges = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoStorageItem.prototype, "PollingKey", {
-        get: function () {
-            return (this._pollingKey);
-        },
-        set: function (value) {
-            this._pollingKey = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoStorageItem.prototype, "PollingTimespan", {
-        get: function () {
-            return (this._pollingTimespan);
-        },
-        set: function (value) {
-            this._pollingTimespan = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoStorageItem.prototype, "PollingDate", {
-        get: function () {
-            return (this._pollingDate);
-        },
-        set: function (value) {
-            this._pollingDate = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoStorageItem.prototype, "PollingHash", {
-        get: function () {
-            return (this._pollingHash);
-        },
-        set: function (value) {
-            this._pollingHash = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    DrapoStorageItem.prototype.Initialize = function () {
+    Initialize() {
         if (this._access == null)
             this._access = this.IsTypeParent ? 'private' : 'public';
         this.CheckpointPolling();
-    };
-    DrapoStorageItem.prototype.CheckpointPolling = function () {
+    }
+    CheckpointPolling() {
         if (this._pollingTimespan === null)
             return;
-        var currentDate = new Date();
+        const currentDate = new Date();
         currentDate.setMilliseconds(currentDate.getMilliseconds() + this._pollingTimespan);
         this._pollingDate = currentDate;
-    };
-    DrapoStorageItem.prototype.ContainsGroup = function (group) {
+    }
+    ContainsGroup(group) {
         if (this._groups == null)
             return (false);
-        for (var i = 0; i < this._groups.length; i++)
+        for (let i = 0; i < this._groups.length; i++)
             if (this._groups[i] === group)
                 return (true);
         return (false);
-    };
-    return DrapoStorageItem;
-}());
+    }
+}
+//# sourceMappingURL=DrapoStorageItem.js.map

@@ -8,35 +8,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (g && (g = 0, op[0] && (_ = 0)), _) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+class DrapoDocument {
+    get Application() {
+        return (this._application);
     }
-};
-var DrapoDocument = (function () {
-    function DrapoDocument(application) {
+    get Message() {
+        return (this._message);
+    }
+    set Message(value) {
+        this._message = value;
+    }
+    constructor(application) {
         this._pendingAuthorizations = 0;
         this._sectorsLoaded = [];
         this._message = null;
@@ -45,185 +27,102 @@ var DrapoDocument = (function () {
         this._lastGuid = null;
         this._application = application;
     }
-    Object.defineProperty(DrapoDocument.prototype, "Application", {
-        get: function () {
-            return (this._application);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoDocument.prototype, "Message", {
-        get: function () {
-            return (this._message);
-        },
-        set: function (value) {
-            this._message = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    DrapoDocument.prototype.ResetPendingAuthorizations = function (count) {
-        if (count === void 0) { count = 0; }
+    ResetPendingAuthorizations(count = 0) {
         this._pendingAuthorizations = count;
-    };
-    DrapoDocument.prototype.StartUpdate = function (sector) {
+    }
+    StartUpdate(sector) {
         if (sector == null) {
             this.InitializeSectorsLoaded();
         }
         else {
-            for (var i = this._sectorsLoaded.length - 1; i >= 0; i--)
+            for (let i = this._sectorsLoaded.length - 1; i >= 0; i--)
                 if (this._sectorsLoaded[i] === sector)
                     this._sectorsLoaded.splice(i, 1);
         }
-    };
-    DrapoDocument.prototype.Resolve = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        this.StartUpdate(null);
-                        return [4, this.ResolveInternal()];
-                    case 1:
-                        _a.sent();
-                        return [2];
-                }
-            });
+    }
+    Resolve() {
+        return __awaiter(this, void 0, void 0, function* () {
+            this.StartUpdate(null);
+            yield this.ResolveInternal();
         });
-    };
-    DrapoDocument.prototype.ResolveInternal = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        this.Application.Log.WriteVerbose('Document - ResolveInternal - Started');
-                        return [4, this.ResolveParent()];
-                    case 1:
-                        if (!!(_a.sent())) return [3, 3];
-                        return [4, this.ResolveChildren(null)];
-                    case 2:
-                        _a.sent();
-                        _a.label = 3;
-                    case 3:
-                        this.Application.Log.WriteVerbose('Document - ResolveInternal - Finished');
-                        return [4, this.Application.Storage.ResolveData(false)];
-                    case 4:
-                        _a.sent();
-                        return [4, this.Application.ControlFlow.ResolveControlFlowDocument()];
-                    case 5:
-                        _a.sent();
-                        return [4, this.Application.ComponentHandler.ResolveComponents()];
-                    case 6:
-                        _a.sent();
-                        return [4, this.Application.Storage.ResolveData(true)];
-                    case 7:
-                        _a.sent();
-                        return [4, this.Application.Barber.ResolveMustaches()];
-                    case 8:
-                        _a.sent();
-                        return [4, this.TryOnAuthorizationRequest()];
-                    case 9:
-                        _a.sent();
-                        return [2];
-                }
-            });
+    }
+    ResolveInternal() {
+        return __awaiter(this, void 0, void 0, function* () {
+            this.Application.Log.WriteVerbose('Document - ResolveInternal - Started');
+            if (!(yield this.ResolveParent()))
+                yield this.ResolveChildren(null);
+            this.Application.Log.WriteVerbose('Document - ResolveInternal - Finished');
+            yield this.Application.Storage.ResolveData(false);
+            yield this.Application.ControlFlow.ResolveControlFlowDocument();
+            yield this.Application.ComponentHandler.ResolveComponents();
+            yield this.Application.Storage.ResolveData(true);
+            yield this.Application.Barber.ResolveMustaches();
+            yield this.TryOnAuthorizationRequest();
         });
-    };
-    DrapoDocument.prototype.ResolveParent = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var divElement, parent, parentSector, sectors, html;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        this.Application.Log.WriteVerbose('Document - ResolveParent - Started');
-                        divElement = this.Application.Searcher.FindByTagName('div');
-                        if (divElement == null) {
-                            this.Application.Log.WriteVerbose('Document - ResolveParent - Finished - NoDiv');
-                            return [2, (false)];
-                        }
-                        parent = divElement.getAttribute('d-sector-parent-url');
-                        if (parent == null) {
-                            this.Application.Log.WriteVerbose('Document - ResolveParent - Finished - NoParent');
-                            return [2, (false)];
-                        }
-                        parentSector = divElement.getAttribute('d-sector-parent');
-                        if (parentSector == null) {
-                            this.Application.Log.WriteVerbose('Document - ResolveParent - Finished - NoParentSector');
-                            return [2, (false)];
-                        }
-                        sectors = this.ExtractSectors(divElement);
-                        this.Application.Log.WriteVerbose('Document - ResolveParent - parent = {0}, parentSector = {1}', parent, parentSector);
-                        return [4, this.Application.Server.GetViewHTML(parent)];
-                    case 1:
-                        html = _a.sent();
-                        return [4, this.ResolveParentResponse(html, parent, parentSector, divElement.outerHTML, sectors)];
-                    case 2:
-                        _a.sent();
-                        this.Application.Log.WriteVerbose('Document - ResolveParent - Finished');
-                        return [2, (true)];
-                }
-            });
+    }
+    ResolveParent() {
+        return __awaiter(this, void 0, void 0, function* () {
+            this.Application.Log.WriteVerbose('Document - ResolveParent - Started');
+            const divElement = this.Application.Searcher.FindByTagName('div');
+            if (divElement == null) {
+                this.Application.Log.WriteVerbose('Document - ResolveParent - Finished - NoDiv');
+                return (false);
+            }
+            const parent = divElement.getAttribute('d-sector-parent-url');
+            if (parent == null) {
+                this.Application.Log.WriteVerbose('Document - ResolveParent - Finished - NoParent');
+                return (false);
+            }
+            const parentSector = divElement.getAttribute('d-sector-parent');
+            if (parentSector == null) {
+                this.Application.Log.WriteVerbose('Document - ResolveParent - Finished - NoParentSector');
+                return (false);
+            }
+            const sectors = this.ExtractSectors(divElement);
+            this.Application.Log.WriteVerbose('Document - ResolveParent - parent = {0}, parentSector = {1}', parent, parentSector);
+            const html = yield this.Application.Server.GetViewHTML(parent);
+            yield this.ResolveParentResponse(html, parent, parentSector, divElement.outerHTML, sectors);
+            this.Application.Log.WriteVerbose('Document - ResolveParent - Finished');
+            return (true);
         });
-    };
-    DrapoDocument.prototype.ResolveParentResponse = function (data, parent, parentSector, childHtml, sectors) {
-        return __awaiter(this, void 0, void 0, function () {
-            var elChildSector, i, sector, sectorName, url, container;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        this.Application.Log.WriteVerbose('Document - ResolveParentResponse - Started');
-                        if (this.Application.Log.ShowHTML)
-                            this.Application.Log.WriteVerbose('Document - ResolveParentResponse - data - {0}', data);
-                        this.ReplaceDocument(data);
-                        this.Application.Log.WriteVerbose('Document - ResolveParentResponse - parent = {0}, parentSector = {1}', parent, parentSector);
-                        elChildSector = this.Application.Searcher.FindByAttributeAndValue('d-sector', parentSector);
-                        if (!(elChildSector != null)) return [3, 2];
-                        return [4, this.AddSectorFriends(parentSector, elChildSector.getAttribute('d-sector-friend'))];
-                    case 1:
-                        _a.sent();
-                        this.SetHTML(elChildSector, childHtml);
-                        _a.label = 2;
-                    case 2:
-                        i = 0;
-                        _a.label = 3;
-                    case 3:
-                        if (!(i < sectors.length)) return [3, 7];
-                        sector = sectors[i];
-                        sectorName = sector[0];
-                        url = sector[1];
-                        container = sector[2];
-                        return [4, this.AddSectorHierarchy(sectorName, parentSector)];
-                    case 4:
-                        _a.sent();
-                        this.StartUpdate(sectorName);
-                        return [4, this.LoadChildSector(sectorName, url, null, true, false, container)];
-                    case 5:
-                        _a.sent();
-                        _a.label = 6;
-                    case 6:
-                        i++;
-                        return [3, 3];
-                    case 7:
-                        this.Application.Log.WriteVerbose('Document - ResolveParentResponse - Finished');
-                        return [4, this.ResolveInternal()];
-                    case 8:
-                        _a.sent();
-                        return [2];
-                }
-            });
+    }
+    ResolveParentResponse(data, parent, parentSector, childHtml, sectors) {
+        return __awaiter(this, void 0, void 0, function* () {
+            this.Application.Log.WriteVerbose('Document - ResolveParentResponse - Started');
+            if (this.Application.Log.ShowHTML)
+                this.Application.Log.WriteVerbose('Document - ResolveParentResponse - data - {0}', data);
+            this.ReplaceDocument(data);
+            this.Application.Log.WriteVerbose('Document - ResolveParentResponse - parent = {0}, parentSector = {1}', parent, parentSector);
+            const elChildSector = this.Application.Searcher.FindByAttributeAndValue('d-sector', parentSector);
+            if (elChildSector != null) {
+                yield this.AddSectorFriends(parentSector, elChildSector.getAttribute('d-sector-friend'));
+                this.SetHTML(elChildSector, childHtml);
+            }
+            for (let i = 0; i < sectors.length; i++) {
+                const sector = sectors[i];
+                const sectorName = sector[0];
+                const url = sector[1];
+                const container = sector[2];
+                yield this.AddSectorHierarchy(sectorName, parentSector);
+                this.StartUpdate(sectorName);
+                yield this.LoadChildSector(sectorName, url, null, true, false, container);
+            }
+            this.Application.Log.WriteVerbose('Document - ResolveParentResponse - Finished');
+            yield this.ResolveInternal();
         });
-    };
-    DrapoDocument.prototype.ExtractSectors = function (el) {
-        var attributes = [];
-        for (var i = 0; i < el.attributes.length; i++) {
-            var attribute = el.attributes[i];
-            var attributeSectorProperty = this.ExtractSectorProperty(attribute.nodeName);
+    }
+    ExtractSectors(el) {
+        const attributes = [];
+        for (let i = 0; i < el.attributes.length; i++) {
+            const attribute = el.attributes[i];
+            const attributeSectorProperty = this.ExtractSectorProperty(attribute.nodeName);
             if (attributeSectorProperty != null)
                 attributes.push([attributeSectorProperty, attribute.nodeValue, el.getAttribute('d-sector-container-' + attributeSectorProperty)]);
         }
         return (attributes);
-    };
-    DrapoDocument.prototype.ExtractSectorProperty = function (property) {
-        var parse = this.Application.Parser.ParseProperty(property);
+    }
+    ExtractSectorProperty(property) {
+        const parse = this.Application.Parser.ParseProperty(property);
         if (parse.length != 4)
             return (null);
         if (parse[0] != 'd')
@@ -231,549 +130,308 @@ var DrapoDocument = (function () {
         if ((parse[1].toLowerCase() != 'sector') || (parse[2] != 'default'))
             return (null);
         return (parse[3]);
-    };
-    DrapoDocument.prototype.ResolveChildren = function (elStart) {
-        return __awaiter(this, void 0, void 0, function () {
-            var elsSector, sector, sectorChildren, i, elSector, sectorChildParent, i, elChild, childSector, url, urlSector, urlResolved, _a, container, childContainer, dataPath, contextItem, item, html, _b;
-            return __generator(this, function (_c) {
-                switch (_c.label) {
-                    case 0:
-                        elsSector = elStart == null ? this.Application.Searcher.FindAllByAttribute('d-sector') : this.Application.Searcher.FindAllByAttributeFromParent('d-sector', elStart);
-                        if (elsSector.length === 0)
-                            return [2];
-                        sector = this.GetSector(elStart);
-                        sectorChildren = [];
-                        for (i = 0; i < elsSector.length; i++) {
-                            elSector = elsSector[i];
-                            sectorChildParent = this.GetSectorParent(elSector);
-                            if (sector === sectorChildParent)
-                                sectorChildren.push(elSector);
+    }
+    ResolveChildren(elStart) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const elsSector = elStart == null ? this.Application.Searcher.FindAllByAttribute('d-sector') : this.Application.Searcher.FindAllByAttributeFromParent('d-sector', elStart);
+            if (elsSector.length === 0)
+                return;
+            const sector = this.GetSector(elStart);
+            const sectorChildren = [];
+            for (let i = 0; i < elsSector.length; i++) {
+                const elSector = elsSector[i];
+                const sectorChildParent = this.GetSectorParent(elSector);
+                if (sector === sectorChildParent)
+                    sectorChildren.push(elSector);
+            }
+            for (let i = 0; i < sectorChildren.length; i++) {
+                const elChild = sectorChildren[i];
+                let childSector = elChild.getAttribute('d-sector');
+                if (childSector == "@") {
+                    childSector = this.CreateGuid();
+                    elChild.setAttribute('d-sector', childSector);
+                }
+                if (this.IsSectorAlreadyLoaded(childSector))
+                    continue;
+                this.MarkSectorAsLoaded(childSector);
+                const url = elChild.getAttribute('d-sector-url');
+                if ((url != null) && (elChild.children.length > 0))
+                    continue;
+                const urlSector = this.GetSectorParent(elChild);
+                const urlResolved = url != null ? yield this.Application.Storage.ResolveDataUrlMustaches(null, urlSector, url, null) : null;
+                let container = null;
+                let childContainer = elChild.getAttribute('d-container');
+                if (childContainer !== null) {
+                    if (this.Application.Parser.IsMustache(childContainer)) {
+                        const dataPath = this.Application.Parser.ParseMustache(childContainer);
+                        const contextItem = yield this.Application.Solver.CreateContextItemFromPath(childSector, dataPath);
+                        let item = yield this.Application.Solver.ResolveItemDataPathObject(childSector, contextItem, dataPath);
+                        if ((item === null) || (item === '')) {
+                            item = this.Application.Document.CreateGuid();
+                            yield this.Application.Solver.UpdateItemDataPathObject(childSector, contextItem, null, dataPath, item);
                         }
-                        i = 0;
-                        _c.label = 1;
-                    case 1:
-                        if (!(i < sectorChildren.length)) return [3, 16];
-                        elChild = sectorChildren[i];
-                        childSector = elChild.getAttribute('d-sector');
-                        if (childSector == "@") {
-                            childSector = this.CreateGuid();
-                            elChild.setAttribute('d-sector', childSector);
-                        }
-                        if (this.IsSectorAlreadyLoaded(childSector))
-                            return [3, 15];
-                        this.MarkSectorAsLoaded(childSector);
-                        url = elChild.getAttribute('d-sector-url');
-                        if ((url != null) && (elChild.children.length > 0))
-                            return [3, 15];
-                        urlSector = this.GetSectorParent(elChild);
-                        if (!(url != null)) return [3, 3];
-                        return [4, this.Application.Storage.ResolveDataUrlMustaches(null, urlSector, url, null)];
-                    case 2:
-                        _a = _c.sent();
-                        return [3, 4];
-                    case 3:
-                        _a = null;
-                        _c.label = 4;
-                    case 4:
-                        urlResolved = _a;
-                        container = null;
-                        childContainer = elChild.getAttribute('d-container');
-                        if (!(childContainer !== null)) return [3, 10];
-                        if (!this.Application.Parser.IsMustache(childContainer)) return [3, 9];
-                        dataPath = this.Application.Parser.ParseMustache(childContainer);
-                        return [4, this.Application.Solver.CreateContextItemFromPath(childSector, dataPath)];
-                    case 5:
-                        contextItem = _c.sent();
-                        return [4, this.Application.Solver.ResolveItemDataPathObject(childSector, contextItem, dataPath)];
-                    case 6:
-                        item = _c.sent();
-                        if (!((item === null) || (item === ''))) return [3, 8];
-                        item = this.Application.Document.CreateGuid();
-                        return [4, this.Application.Solver.UpdateItemDataPathObject(childSector, contextItem, null, dataPath, item)];
-                    case 7:
-                        _c.sent();
-                        _c.label = 8;
-                    case 8:
                         container = item.toString();
-                        return [3, 10];
-                    case 9:
+                    }
+                    else {
                         if (childContainer == "@") {
                             childContainer = this.CreateGuid();
                             elChild.setAttribute('d-container', childContainer);
                         }
                         container = childContainer;
-                        _c.label = 10;
-                    case 10:
-                        if (!(urlResolved != null)) return [3, 12];
-                        return [4, this.Application.Server.GetViewHTML(urlResolved)];
-                    case 11:
-                        _b = _c.sent();
-                        return [3, 13];
-                    case 12:
-                        _b = null;
-                        _c.label = 13;
-                    case 13:
-                        html = _b;
-                        return [4, this.LoadChildSectorInternal(urlResolved, html, childSector, elChild, null, true, false, container)];
-                    case 14:
-                        _c.sent();
-                        _c.label = 15;
-                    case 15:
-                        i++;
-                        return [3, 1];
-                    case 16: return [2];
+                    }
                 }
-            });
+                const html = urlResolved != null ? yield this.Application.Server.GetViewHTML(urlResolved) : null;
+                yield this.LoadChildSectorInternal(urlResolved, html, childSector, elChild, null, true, false, container);
+            }
         });
-    };
-    DrapoDocument.prototype.LoadChildSectorInternal = function (url, data, sector, elSector, title, canRoute, canLoadDefaultSectors, container) {
-        if (title === void 0) { title = null; }
-        if (canRoute === void 0) { canRoute = true; }
-        if (canLoadDefaultSectors === void 0) { canLoadDefaultSectors = false; }
-        if (container === void 0) { container = null; }
-        return __awaiter(this, void 0, void 0, function () {
-            var content, elContentParent, route, sectorParent, divChildSectorLoaded, divElement, sectors, i, sectorInfo, sectorName, sectorUrl, sectorContainer, elSectorContent, onload;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        this.Application.Log.WriteVerbose('Document - ResolveChildResponse - Started - Sector {0}', sector);
-                        if (!(container !== null)) return [3, 2];
-                        return [4, this.Application.SectorContainerHandler.Switch(sector, container)];
-                    case 1:
-                        if (_a.sent())
-                            return [2];
-                        content = this.Application.Parser.ParseDocumentContent(data);
-                        elContentParent = document.createElement('div');
-                        elContentParent.innerHTML = this.EnsureHTML(content);
-                        elSector.appendChild(elContentParent.children[0]);
-                        return [3, 4];
-                    case 2:
-                        if (!(data != null)) return [3, 4];
-                        return [4, this.ReplaceSectorData(elSector, data)];
-                    case 3:
-                        _a.sent();
-                        _a.label = 4;
-                    case 4:
-                        route = ((canRoute) && (url != null)) ? elSector.getAttribute('d-route') : 'false';
-                        if (!((route == null) || (route != 'false'))) return [3, 6];
-                        return [4, this.Application.Router.Route(url, sector, title)];
-                    case 5:
-                        _a.sent();
-                        _a.label = 6;
-                    case 6:
-                        sectorParent = this.GetSectorParent(elSector);
-                        return [4, this.Application.Debugger.AddSectorUpdate(sector, sectorParent, url)];
-                    case 7:
-                        _a.sent();
-                        return [4, this.AddSectorHierarchy(sector, sectorParent)];
-                    case 8:
-                        _a.sent();
-                        return [4, this.AddSectorFriends(sector, elSector.getAttribute('d-sector-friend'))];
-                    case 9:
-                        _a.sent();
-                        if (!canLoadDefaultSectors) return [3, 14];
-                        divChildSectorLoaded = elSector.children;
-                        divElement = divChildSectorLoaded.length > 0 ? divChildSectorLoaded[0] : null;
-                        sectors = divElement != null ? this.ExtractSectors(divElement) : [];
-                        i = 0;
-                        _a.label = 10;
-                    case 10:
-                        if (!(i < sectors.length)) return [3, 14];
-                        sectorInfo = sectors[i];
-                        sectorName = sectorInfo[0];
-                        sectorUrl = sectorInfo[1];
-                        sectorContainer = sectorInfo[2];
-                        return [4, this.AddSectorHierarchy(sectorName, sector)];
-                    case 11:
-                        _a.sent();
-                        this.StartUpdate(sectorName);
-                        return [4, this.LoadChildSector(sectorName, sectorUrl, null, true, false, sectorContainer)];
-                    case 12:
-                        _a.sent();
-                        _a.label = 13;
-                    case 13:
-                        i++;
-                        return [3, 10];
-                    case 14:
-                        if (data == '')
-                            return [2];
-                        elSectorContent = container !== null ? elSector.children[elSector.children.length - 1] : elSector;
-                        return [4, this.Application.Storage.ResolveData(false, elSectorContent)];
-                    case 15:
-                        _a.sent();
-                        return [4, this.Application.ControlFlow.ResolveControlFlowSector(elSectorContent)];
-                    case 16:
-                        _a.sent();
-                        return [4, this.Application.ComponentHandler.ResolveComponents(elSectorContent)];
-                    case 17:
-                        _a.sent();
-                        return [4, this.Application.Storage.ResolveData(true, elSectorContent)];
-                    case 18:
-                        _a.sent();
-                        return [4, this.Application.Barber.ResolveMustaches(elSectorContent)];
-                    case 19:
-                        _a.sent();
-                        return [4, this.ResolveChildren(elSectorContent)];
-                    case 20:
-                        _a.sent();
-                        return [4, this.Application.Storage.LoadDataDelayedAndNotify()];
-                    case 21:
-                        _a.sent();
-                        onload = elSector.getAttribute("d-on-load");
-                        if (!(onload != null)) return [3, 23];
-                        return [4, this.Application.FunctionHandler.ResolveFunctionWithoutContext(sector, elSector, onload)];
-                    case 22:
-                        _a.sent();
-                        _a.label = 23;
-                    case 23: return [4, this.TryOnAuthorizationRequest()];
-                    case 24:
-                        _a.sent();
-                        if (container !== null)
-                            this.InitializeSectorElementDetach(elSectorContent);
-                        return [4, this.Application.ComponentHandler.UnloadComponentInstancesDetached(sector)];
-                    case 25:
-                        _a.sent();
-                        return [2];
+    }
+    LoadChildSectorInternal(url, data, sector, elSector, title = null, canRoute = true, canLoadDefaultSectors = false, container = null) {
+        return __awaiter(this, void 0, void 0, function* () {
+            this.Application.Log.WriteVerbose('Document - ResolveChildResponse - Started - Sector {0}', sector);
+            if (container !== null) {
+                if (yield this.Application.SectorContainerHandler.Switch(sector, container))
+                    return;
+                const content = this.Application.Parser.ParseDocumentContent(data);
+                const elContentParent = document.createElement('div');
+                elContentParent.innerHTML = this.EnsureHTML(content);
+                elSector.appendChild(elContentParent.children[0]);
+            }
+            else {
+                if (data != null)
+                    yield this.ReplaceSectorData(elSector, data);
+            }
+            const route = ((canRoute) && (url != null)) ? elSector.getAttribute('d-route') : 'false';
+            if ((route == null) || (route != 'false'))
+                yield this.Application.Router.Route(url, sector, title);
+            const sectorParent = this.GetSectorParent(elSector);
+            yield this.Application.Debugger.AddSectorUpdate(sector, sectorParent, url);
+            yield this.AddSectorHierarchy(sector, sectorParent);
+            yield this.AddSectorFriends(sector, elSector.getAttribute('d-sector-friend'));
+            if (canLoadDefaultSectors) {
+                const divChildSectorLoaded = elSector.children;
+                const divElement = divChildSectorLoaded.length > 0 ? divChildSectorLoaded[0] : null;
+                const sectors = divElement != null ? this.ExtractSectors(divElement) : [];
+                for (let i = 0; i < sectors.length; i++) {
+                    const sectorInfo = sectors[i];
+                    const sectorName = sectorInfo[0];
+                    const sectorUrl = sectorInfo[1];
+                    const sectorContainer = sectorInfo[2];
+                    yield this.AddSectorHierarchy(sectorName, sector);
+                    this.StartUpdate(sectorName);
+                    yield this.LoadChildSector(sectorName, sectorUrl, null, true, false, sectorContainer);
                 }
-            });
+            }
+            if (data == '')
+                return;
+            const elSectorContent = container !== null ? elSector.children[elSector.children.length - 1] : elSector;
+            yield this.Application.Storage.ResolveData(false, elSectorContent);
+            yield this.Application.ControlFlow.ResolveControlFlowSector(elSectorContent);
+            yield this.Application.ComponentHandler.ResolveComponents(elSectorContent);
+            yield this.Application.Storage.ResolveData(true, elSectorContent);
+            yield this.Application.Barber.ResolveMustaches(elSectorContent);
+            yield this.ResolveChildren(elSectorContent);
+            yield this.Application.Storage.LoadDataDelayedAndNotify();
+            const onload = elSector.getAttribute("d-on-load");
+            if (onload != null)
+                yield this.Application.FunctionHandler.ResolveFunctionWithoutContext(sector, elSector, onload);
+            yield this.TryOnAuthorizationRequest();
+            if (container !== null)
+                this.InitializeSectorElementDetach(elSectorContent);
+            yield this.Application.ComponentHandler.UnloadComponentInstancesDetached(sector);
         });
-    };
-    DrapoDocument.prototype.ReplaceSectorData = function (elChildSector, data) {
-        return __awaiter(this, void 0, void 0, function () {
-            var content, attributes, templateUrl, template, templateUrlContent, templateContent, elSectorTemplate;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        if (data === null) {
-                            this.SetHTML(elChildSector, '');
-                            return [2, (false)];
-                        }
-                        content = this.Application.Parser.ParseDocumentContent(data);
-                        attributes = this.Application.Parser.ParseElementAttributes(content);
-                        templateUrl = this.Application.Solver.Get(attributes, 'd-templateurl');
-                        if (templateUrl === null) {
-                            this.SetHTML(elChildSector, content);
-                            return [2, (true)];
-                        }
-                        template = this.Application.Solver.Get(attributes, 'd-template');
-                        if (template === null)
-                            template = 'template';
-                        return [4, this.Application.Server.GetViewHTML(templateUrl)];
-                    case 1:
-                        templateUrlContent = _a.sent();
-                        templateContent = this.Application.Parser.ParseDocumentContent(templateUrlContent);
-                        this.SetHTML(elChildSector, templateContent);
-                        elSectorTemplate = this.Application.Searcher.FindByAttributeAndValueFromParent('d-template', template, elChildSector);
-                        if (elSectorTemplate == null)
-                            this.SetHTML(elChildSector, content);
-                        else
-                            this.SetHTML(elSectorTemplate, content);
-                        return [2, (true)];
-                }
-            });
+    }
+    ReplaceSectorData(elChildSector, data) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (data === null) {
+                this.SetHTML(elChildSector, '');
+                return (false);
+            }
+            const content = this.Application.Parser.ParseDocumentContent(data);
+            const attributes = this.Application.Parser.ParseElementAttributes(content);
+            const templateUrl = this.Application.Solver.Get(attributes, 'd-templateurl');
+            if (templateUrl === null) {
+                this.SetHTML(elChildSector, content);
+                return (true);
+            }
+            let template = this.Application.Solver.Get(attributes, 'd-template');
+            if (template === null)
+                template = 'template';
+            const templateUrlContent = yield this.Application.Server.GetViewHTML(templateUrl);
+            const templateContent = this.Application.Parser.ParseDocumentContent(templateUrlContent);
+            this.SetHTML(elChildSector, templateContent);
+            const elSectorTemplate = this.Application.Searcher.FindByAttributeAndValueFromParent('d-template', template, elChildSector);
+            if (elSectorTemplate == null)
+                this.SetHTML(elChildSector, content);
+            else
+                this.SetHTML(elSectorTemplate, content);
+            return (true);
         });
-    };
-    DrapoDocument.prototype.ResolveWindow = function (elWindow) {
-        return __awaiter(this, void 0, void 0, function () {
-            var sector;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        sector = this.Application.Document.GetSector(elWindow);
-                        this.Application.Document.StartUpdate(sector);
-                        return [4, this.Application.Storage.ResolveData(false, elWindow)];
-                    case 1:
-                        _a.sent();
-                        return [4, this.Application.ControlFlow.ResolveControlFlowSector(elWindow, false)];
-                    case 2:
-                        _a.sent();
-                        return [4, this.Application.ComponentHandler.ResolveComponents(elWindow)];
-                    case 3:
-                        _a.sent();
-                        return [4, this.Application.Storage.ResolveData(true, elWindow)];
-                    case 4:
-                        _a.sent();
-                        return [4, this.Application.Barber.ResolveMustaches(elWindow)];
-                    case 5:
-                        _a.sent();
-                        return [2];
-                }
-            });
+    }
+    ResolveWindow(elWindow) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const sector = this.Application.Document.GetSector(elWindow);
+            this.Application.Document.StartUpdate(sector);
+            yield this.Application.Storage.ResolveData(false, elWindow);
+            yield this.Application.ControlFlow.ResolveControlFlowSector(elWindow, false);
+            yield this.Application.ComponentHandler.ResolveComponents(elWindow);
+            yield this.Application.Storage.ResolveData(true, elWindow);
+            yield this.Application.Barber.ResolveMustaches(elWindow);
         });
-    };
-    DrapoDocument.prototype.ResolveComponentDynamicSector = function (el) {
-        return __awaiter(this, void 0, void 0, function () {
-            var elSector, isSectorGuid, sectorParent, sector;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        elSector = el.getAttribute('d-sector');
-                        if (elSector == null)
-                            return [2];
-                        isSectorGuid = elSector == '@';
-                        if ((!isSectorGuid) && (this.Application.Document.IsSectorReady(elSector)))
-                            return [2];
-                        sectorParent = this.GetSectorParent(el);
-                        sector = isSectorGuid ? this.CreateGuid() : elSector;
-                        if (isSectorGuid)
-                            el.setAttribute('d-sector', sector);
-                        return [4, this.AddSectorHierarchy(sector, sectorParent)];
-                    case 1:
-                        _a.sent();
-                        return [4, this.AddSectorFriends(sector, el.getAttribute('d-sector-friend'))];
-                    case 2:
-                        _a.sent();
-                        this.MarkSectorAsLoaded(sector);
-                        return [4, this.Application.Storage.ResolveData(true, el)];
-                    case 3:
-                        _a.sent();
-                        return [2];
-                }
-            });
+    }
+    ResolveComponentDynamicSector(el) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const elSector = el.getAttribute('d-sector');
+            if (elSector == null)
+                return;
+            const isSectorGuid = elSector == '@';
+            if ((!isSectorGuid) && (this.Application.Document.IsSectorReady(elSector)))
+                return;
+            const sectorParent = this.GetSectorParent(el);
+            const sector = isSectorGuid ? this.CreateGuid() : elSector;
+            if (isSectorGuid)
+                el.setAttribute('d-sector', sector);
+            yield this.AddSectorHierarchy(sector, sectorParent);
+            yield this.AddSectorFriends(sector, el.getAttribute('d-sector-friend'));
+            this.MarkSectorAsLoaded(sector);
+            yield this.Application.Storage.ResolveData(true, el);
         });
-    };
-    DrapoDocument.prototype.ResolveComponentUpdate = function (el, context) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4, this.Application.Storage.ResolveData(false, el)];
-                    case 1:
-                        _a.sent();
-                        return [4, this.Application.ControlFlow.ResolveControlFlowSector(el)];
-                    case 2:
-                        _a.sent();
-                        return [4, this.Application.ComponentHandler.ResolveComponentsElement(el, context, true, true)];
-                    case 3:
-                        _a.sent();
-                        return [4, this.Application.Storage.ResolveData(true, el)];
-                    case 4:
-                        _a.sent();
-                        return [4, this.Application.Barber.ResolveMustaches(el, null, false)];
-                    case 5:
-                        _a.sent();
-                        return [2];
-                }
-            });
+    }
+    ResolveComponentUpdate(el, context) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield this.Application.Storage.ResolveData(false, el);
+            yield this.Application.ControlFlow.ResolveControlFlowSector(el);
+            yield this.Application.ComponentHandler.ResolveComponentsElement(el, context, true, true);
+            yield this.Application.Storage.ResolveData(true, el);
+            yield this.Application.Barber.ResolveMustaches(el, null, false);
         });
-    };
-    DrapoDocument.prototype.RemoveElement = function (el, checkSector) {
-        if (checkSector === void 0) { checkSector = true; }
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        if (el.parentNode)
-                            el.parentNode.removeChild(el);
-                        if (!checkSector) return [3, 2];
-                        return [4, this.RemoveElementIteration(el)];
-                    case 1:
-                        _a.sent();
-                        _a.label = 2;
-                    case 2: return [2];
-                }
-            });
+    }
+    RemoveElement(el, checkSector = true) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (el.parentNode)
+                el.parentNode.removeChild(el);
+            if (checkSector)
+                yield this.RemoveElementIteration(el);
         });
-    };
-    DrapoDocument.prototype.RemoveElementIteration = function (el) {
-        return __awaiter(this, void 0, void 0, function () {
-            var sector, children, i;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        sector = el.getAttribute('d-sector');
-                        if (!(sector != null)) return [3, 2];
-                        return [4, this.RemoveSectorData(sector)];
-                    case 1:
-                        _a.sent();
-                        return [3, 6];
-                    case 2:
-                        children = [].slice.call(el.children);
-                        i = 0;
-                        _a.label = 3;
-                    case 3:
-                        if (!(i < children.length)) return [3, 6];
-                        return [4, this.RemoveElementIteration(children[i])];
-                    case 4:
-                        _a.sent();
-                        _a.label = 5;
-                    case 5:
-                        i++;
-                        return [3, 3];
-                    case 6: return [2];
-                }
-            });
+    }
+    RemoveElementIteration(el) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const sector = el.getAttribute('d-sector');
+            if (sector != null) {
+                yield this.RemoveSectorData(sector);
+            }
+            else {
+                const children = [].slice.call(el.children);
+                for (let i = 0; i < children.length; i++)
+                    yield this.RemoveElementIteration(children[i]);
+            }
         });
-    };
-    DrapoDocument.prototype.RemoveSectorData = function (sector) {
-        return __awaiter(this, void 0, void 0, function () {
-            var sectors, i;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        sectors = this.GetSectorChildren(sector);
-                        i = 0;
-                        _a.label = 1;
-                    case 1:
-                        if (!(i < sectors.length)) return [3, 4];
-                        return [4, this.RemoveSectorData(sectors[i])];
-                    case 2:
-                        _a.sent();
-                        _a.label = 3;
-                    case 3:
-                        i++;
-                        return [3, 1];
-                    case 4:
-                        this.CleanSectorMetadataInternal(sector);
-                        return [4, this.Application.Storage.RemoveBySector(sector)];
-                    case 5:
-                        _a.sent();
-                        this.Application.SectorContainerHandler.RemoveBySector(sector);
-                        this.Application.ComponentHandler.UnloadComponentInstances(sector);
-                        return [2];
-                }
-            });
+    }
+    RemoveSectorData(sector) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const sectors = this.GetSectorChildren(sector);
+            for (let i = 0; i < sectors.length; i++)
+                yield this.RemoveSectorData(sectors[i]);
+            this.CleanSectorMetadataInternal(sector);
+            yield this.Application.Storage.RemoveBySector(sector);
+            this.Application.SectorContainerHandler.RemoveBySector(sector);
+            this.Application.ComponentHandler.UnloadComponentInstances(sector);
         });
-    };
-    DrapoDocument.prototype.LoadChildSector = function (sectorName, url, title, canRoute, canLoadDefaultSectors, container) {
-        if (title === void 0) { title = null; }
-        if (canRoute === void 0) { canRoute = true; }
-        if (canLoadDefaultSectors === void 0) { canLoadDefaultSectors = false; }
-        if (container === void 0) { container = null; }
-        return __awaiter(this, void 0, void 0, function () {
-            var elsSector, elSector, i, el, urlResolved, _a, html, _b;
-            return __generator(this, function (_c) {
-                switch (_c.label) {
-                    case 0:
-                        if (this.IsSectorAlreadyLoaded(sectorName))
-                            return [2, (false)];
-                        this.MarkSectorAsLoaded(sectorName);
-                        elsSector = this.Application.Searcher.FindAllByAttributeAndValue('d-sector', sectorName);
-                        elSector = null;
-                        for (i = elsSector.length - 1; i >= 0; i--) {
-                            el = elsSector[i];
-                            if (this.IsElementDetached(el))
-                                continue;
-                            elSector = el;
-                            break;
-                        }
-                        if (elSector == null) {
-                            this.Application.Log.WriteVerbose('Document - LoadChildSector - Missing Sector - {0}', sectorName);
-                            return [2, (false)];
-                        }
-                        if (!((url === null) || (url === ''))) return [3, 1];
-                        _a = '';
-                        return [3, 3];
-                    case 1: return [4, this.Application.Storage.ResolveDataUrlMustaches(null, null, url, null)];
-                    case 2:
-                        _a = _c.sent();
-                        _c.label = 3;
-                    case 3:
-                        urlResolved = _a;
-                        if (!((urlResolved === null) || (urlResolved === ''))) return [3, 4];
-                        _b = '';
-                        return [3, 6];
-                    case 4: return [4, this.Application.Server.GetViewHTML(urlResolved)];
-                    case 5:
-                        _b = _c.sent();
-                        _c.label = 6;
-                    case 6:
-                        html = _b;
-                        return [4, this.LoadChildSectorInternal(url, html, sectorName, elSector, title, canRoute, canLoadDefaultSectors, container)];
-                    case 7:
-                        _c.sent();
-                        return [2, (true)];
-                }
-            });
+    }
+    LoadChildSector(sectorName, url, title = null, canRoute = true, canLoadDefaultSectors = false, container = null) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (this.IsSectorAlreadyLoaded(sectorName))
+                return (false);
+            this.MarkSectorAsLoaded(sectorName);
+            const elsSector = this.Application.Searcher.FindAllByAttributeAndValue('d-sector', sectorName);
+            let elSector = null;
+            for (let i = elsSector.length - 1; i >= 0; i--) {
+                const el = elsSector[i];
+                if (this.IsElementDetached(el))
+                    continue;
+                elSector = el;
+                break;
+            }
+            if (elSector == null) {
+                this.Application.Log.WriteVerbose('Document - LoadChildSector - Missing Sector - {0}', sectorName);
+                return (false);
+            }
+            const urlResolved = ((url === null) || (url === '')) ? '' : yield this.Application.Storage.ResolveDataUrlMustaches(null, null, url, null);
+            const html = ((urlResolved === null) || (urlResolved === '')) ? '' : yield this.Application.Server.GetViewHTML(urlResolved);
+            yield this.LoadChildSectorInternal(url, html, sectorName, elSector, title, canRoute, canLoadDefaultSectors, container);
+            return (true);
         });
-    };
-    DrapoDocument.prototype.LoadChildSectorContent = function (sectorName, content) {
-        return __awaiter(this, void 0, void 0, function () {
-            var elSector;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        if (this.IsSectorAlreadyLoaded(sectorName))
-                            return [2, (false)];
-                        this.MarkSectorAsLoaded(sectorName);
-                        elSector = this.Application.Searcher.FindByAttributeAndValue('d-sector', sectorName);
-                        if (elSector == null) {
-                            this.Application.Log.WriteVerbose('Document - LoadChildSectorContent - Missing Sector - {0}', sectorName);
-                            return [2, (false)];
-                        }
-                        return [4, this.LoadChildSectorInternal(null, content, sectorName, elSector, null, false, false, null)];
-                    case 1:
-                        _a.sent();
-                        return [2, (true)];
-                }
-            });
+    }
+    LoadChildSectorContent(sectorName, content) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (this.IsSectorAlreadyLoaded(sectorName))
+                return (false);
+            this.MarkSectorAsLoaded(sectorName);
+            const elSector = this.Application.Searcher.FindByAttributeAndValue('d-sector', sectorName);
+            if (elSector == null) {
+                this.Application.Log.WriteVerbose('Document - LoadChildSectorContent - Missing Sector - {0}', sectorName);
+                return (false);
+            }
+            yield this.LoadChildSectorInternal(null, content, sectorName, elSector, null, false, false, null);
+            return (true);
         });
-    };
-    DrapoDocument.prototype.LoadChildSectorDefault = function (sectorName) {
-        return __awaiter(this, void 0, void 0, function () {
-            var elSector, url, urlSector, urlResolved;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        elSector = this.Application.Searcher.FindByAttributeAndValue('d-sector', sectorName);
-                        if (elSector == null) {
-                            this.Application.Log.WriteVerbose('Document - LoadChildSectorDefault - Missing Sector - {0}', sectorName);
-                            return [2, (false)];
-                        }
-                        if (elSector.children.length == 0)
-                            return [2, (false)];
-                        url = elSector.getAttribute('d-sector-url');
-                        if ((url === null))
-                            url = '';
-                        urlSector = this.GetSectorParent(elSector);
-                        return [4, this.Application.Storage.ResolveDataUrlMustaches(null, urlSector, url, null)];
-                    case 1:
-                        urlResolved = _a.sent();
-                        return [4, this.LoadChildSector(sectorName, urlResolved, null, false, false)];
-                    case 2: return [2, (_a.sent())];
-                }
-            });
+    }
+    LoadChildSectorDefault(sectorName) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const elSector = this.Application.Searcher.FindByAttributeAndValue('d-sector', sectorName);
+            if (elSector == null) {
+                this.Application.Log.WriteVerbose('Document - LoadChildSectorDefault - Missing Sector - {0}', sectorName);
+                return (false);
+            }
+            if (elSector.children.length == 0)
+                return (false);
+            let url = elSector.getAttribute('d-sector-url');
+            if ((url === null))
+                url = '';
+            const urlSector = this.GetSectorParent(elSector);
+            const urlResolved = yield this.Application.Storage.ResolveDataUrlMustaches(null, urlSector, url, null);
+            return (yield this.LoadChildSector(sectorName, urlResolved, null, false, false));
         });
-    };
-    DrapoDocument.prototype.ReplaceDocument = function (data) {
+    }
+    ReplaceDocument(data) {
         this.Application.Log.WriteVerbose('Document - ReplaceDocument - Data - {0}', data);
-        var head = this.ExtractHeadInnerHtml(data);
+        const head = this.ExtractHeadInnerHtml(data);
         if (head != null)
             this.SetHTML(document.head, head);
-        var body = this.ExtractBodyInnerHtml(data);
+        const body = this.ExtractBodyInnerHtml(data);
         if (body != null)
             this.SetHTML(document.body, body);
-    };
-    DrapoDocument.prototype.ReplaceElement = function (el, elNew) {
-        var parent = el.parentElement;
+    }
+    ReplaceElement(el, elNew) {
+        const parent = el.parentElement;
         if (parent != null)
             parent.replaceChild(elNew, el);
-    };
-    DrapoDocument.prototype.Show = function (el) {
-        var elCurrent = el;
+    }
+    Show(el) {
+        let elCurrent = el;
         if ((elCurrent.tagName === 'SPAN') && (el.children.length == 1)) {
-            var elChild = el.children[0];
+            const elChild = el.children[0];
             if ((elChild.tagName === 'OPTION') || (elChild.tagName === 'OPTGROUP'))
                 elCurrent = elChild;
         }
         this.ShowInternal(elCurrent);
         return (elCurrent);
-    };
-    DrapoDocument.prototype.ShowInternal = function (el) {
-        var display = el.style.display;
+    }
+    ShowInternal(el) {
+        const display = el.style.display;
         if (display === 'none')
             el.style.display = '';
-        var style = el.getAttribute('style');
+        const style = el.getAttribute('style');
         if (style === '')
             el.removeAttribute('style');
-    };
-    DrapoDocument.prototype.Hide = function (el) {
-        var isOption = el.tagName === 'OPTION';
-        var isOptGroup = ((!isOption) && (el.tagName === 'OPTGROUP'));
-        var elParent = el.parentElement;
-        var hasParent = elParent != null;
-        var isParentOptGroup = ((isOption) && (hasParent) && (elParent.tagName === 'OPTGROUP'));
+    }
+    Hide(el) {
+        const isOption = el.tagName === 'OPTION';
+        const isOptGroup = ((!isOption) && (el.tagName === 'OPTGROUP'));
+        const elParent = el.parentElement;
+        const hasParent = elParent != null;
+        const isParentOptGroup = ((isOption) && (hasParent) && (elParent.tagName === 'OPTGROUP'));
         if (((isOption) && (!isParentOptGroup)) || (isOptGroup)) {
-            var elWrap = ((hasParent) && (elParent.tagName === 'SPAN')) ? elParent : this.Wrap(el, 'SPAN');
+            const elWrap = ((hasParent) && (elParent.tagName === 'SPAN')) ? elParent : this.Wrap(el, 'SPAN');
             this.HideInternal(elWrap);
             return (elWrap);
         }
@@ -781,79 +439,79 @@ var DrapoDocument = (function () {
             this.HideInternal(el);
             return (el);
         }
-    };
-    DrapoDocument.prototype.HideInternal = function (el) {
+    }
+    HideInternal(el) {
         el.style.display = 'none';
-    };
-    DrapoDocument.prototype.GetWrapper = function (el) {
+    }
+    GetWrapper(el) {
         if (el.tagName !== 'span')
             return (null);
         if (el.children.length !== 1)
             return (null);
         return el.children[0];
-    };
-    DrapoDocument.prototype.Wrap = function (el, tagName) {
-        var wrapper = document.createElement(tagName);
+    }
+    Wrap(el, tagName) {
+        const wrapper = document.createElement(tagName);
         el.parentNode.insertBefore(wrapper, el);
         wrapper.appendChild(el);
         return (wrapper);
-    };
-    DrapoDocument.prototype.GetElementAttributes = function (el) {
-        var attributes = [];
-        for (var i = 0; i < el.attributes.length; i++) {
-            var attribute = el.attributes[i];
+    }
+    GetElementAttributes(el) {
+        const attributes = [];
+        for (let i = 0; i < el.attributes.length; i++) {
+            const attribute = el.attributes[i];
             attributes.push([attribute.nodeName, attribute.nodeValue]);
         }
         return (attributes);
-    };
-    DrapoDocument.prototype.GetElementAttributesFilteredPrefix = function (el, prefix) {
+    }
+    GetElementAttributesFilteredPrefix(el, prefix) {
         if ((prefix === null) || (prefix === ''))
             return (this.GetElementAttributes(el));
-        var attributes = [];
-        var length = prefix.length;
-        for (var i = 0; i < el.attributes.length; i++) {
-            var attribute = el.attributes[i];
-            var name_1 = attribute.nodeName;
-            if (name_1.length < length)
+        const attributes = [];
+        const length = prefix.length;
+        for (let i = 0; i < el.attributes.length; i++) {
+            const attribute = el.attributes[i];
+            const name = attribute.nodeName;
+            if (name.length < length)
                 continue;
-            if (name_1.substring(0, length) !== prefix)
+            if (name.substring(0, length) !== prefix)
                 continue;
-            attributes.push([name_1.substring(length), attribute.nodeValue]);
+            attributes.push([name.substring(length), attribute.nodeValue]);
         }
         return (attributes);
-    };
-    DrapoDocument.prototype.SetElementAttributes = function (el, attributes) {
-        for (var i = 0; i < attributes.length; i++) {
-            var attribute = attributes[i];
+    }
+    SetElementAttributes(el, attributes) {
+        for (let i = 0; i < attributes.length; i++) {
+            const attribute = attributes[i];
             el.setAttribute(attribute[0], attribute[1]);
         }
-    };
-    DrapoDocument.prototype.ExtractHeadInnerHtml = function (data) {
-        var index = data.indexOf('<head>');
+    }
+    ExtractHeadInnerHtml(data) {
+        const index = data.indexOf('<head>');
         if (index < 0)
             return (null);
-        var indexEnd = data.indexOf('</head>');
-        var head = data.substr(index + 6, indexEnd - (index + 6));
-        var headWithoutFramework = this.RemoveFramework(head);
+        const indexEnd = data.indexOf('</head>');
+        const head = data.substr(index + 6, indexEnd - (index + 6));
+        const headWithoutFramework = this.RemoveFramework(head);
         return (headWithoutFramework);
-    };
-    DrapoDocument.prototype.RemoveFramework = function (data) {
-        var indexScript = 0;
+    }
+    RemoveFramework(data) {
+        let indexScript = 0;
         while ((indexScript = data.indexOf('<script', indexScript)) >= 0) {
-            var indexScriptEnd = data.indexOf('</script>', indexScript);
+            const indexScriptEnd = data.indexOf('</script>', indexScript);
             if (indexScriptEnd > indexScript) {
-                var script = data.substring(indexScript, indexScriptEnd + 9);
+                const script = data.substring(indexScript, indexScriptEnd + 9);
                 if (script.indexOf('drapo.js') >= 0)
                     return (data.replace(script, ''));
             }
             indexScript = indexScriptEnd;
         }
         return (data);
-    };
-    DrapoDocument.prototype.ExtractBodyInnerHtml = function (data) {
-        var index = data.indexOf('<body>');
+    }
+    ExtractBodyInnerHtml(data) {
+        let index = data.indexOf('<body>');
         if (index >= 0) {
-            var indexEnd = data.indexOf('</body>');
+            const indexEnd = data.indexOf('</body>');
             return (data.substr(index + 6, indexEnd - (index + 6)));
         }
         index = data.indexOf('<div');
@@ -861,166 +519,140 @@ var DrapoDocument = (function () {
             return (data.substr(index));
         }
         return (null);
-    };
-    DrapoDocument.prototype.IsElementInserted = function (list, itemInsert) {
-        for (var i = 0; i < list.length; i++) {
+    }
+    IsElementInserted(list, itemInsert) {
+        for (let i = 0; i < list.length; i++) {
             if (list[i] == itemInsert)
                 return (false);
         }
         list.push(itemInsert);
         return (true);
-    };
-    DrapoDocument.prototype.IsElementAttached = function (el) {
-        var elc = el;
+    }
+    IsElementAttached(el) {
+        let elc = el;
         while (elc != null) {
             if (elc.tagName === 'BODY')
                 return (true);
             elc = elc.parentElement;
         }
         return (false);
-    };
-    DrapoDocument.prototype.IsElementInsideControlFlow = function (el) {
+    }
+    IsElementInsideControlFlow(el) {
         if (el.getAttribute == null)
             return (false);
         if (el.tagName === 'BODY')
             return (false);
-        var dfor = el.getAttribute('d-for');
+        const dfor = el.getAttribute('d-for');
         if (dfor != null)
             return (true);
-        var elParent = el.parentElement;
+        const elParent = el.parentElement;
         if (elParent == null)
             return (true);
         return (this.IsElementInsideControlFlow(elParent));
-    };
-    DrapoDocument.prototype.IsElementInsideControlFlowOrContext = function (el) {
+    }
+    IsElementInsideControlFlowOrContext(el) {
         if (el.getAttribute == null)
             return (false);
         if (el.tagName === 'BODY')
             return (false);
-        var dfor = el.getAttribute('d-for');
+        const dfor = el.getAttribute('d-for');
         if (dfor != null)
             return (true);
-        var elPrevious = el.previousElementSibling;
+        const elPrevious = el.previousElementSibling;
         if (elPrevious != null)
             return (this.IsElementInsideControlFlowOrContext(elPrevious));
-        var elParent = el.parentElement;
+        const elParent = el.parentElement;
         if (elParent == null)
             return (true);
         return (this.IsElementInsideControlFlowOrContext(elParent));
-    };
-    DrapoDocument.prototype.IsElementPreprocessed = function (el) {
+    }
+    IsElementPreprocessed(el) {
         if (el.getAttribute == null)
             return (false);
-        var pre = el.getAttribute('d-pre');
+        const pre = el.getAttribute('d-pre');
         if (pre === 'true')
             return (true);
-        var elParent = el.parentElement;
+        const elParent = el.parentElement;
         if (elParent == null)
             return (false);
         return (this.IsElementPreprocessed(elParent));
-    };
-    DrapoDocument.prototype.RequestAuthorization = function (dataKey, type) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        this.Application.Observer.SubscribeAuthorization(dataKey, type);
-                        return [4, this.TryOnAuthorizationRequest()];
-                    case 1:
-                        _a.sent();
-                        return [2];
-                }
-            });
+    }
+    RequestAuthorization(dataKey, type) {
+        return __awaiter(this, void 0, void 0, function* () {
+            this.Application.Observer.SubscribeAuthorization(dataKey, type);
+            yield this.TryOnAuthorizationRequest();
         });
-    };
-    DrapoDocument.prototype.TryOnAuthorizationRequest = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var pendingAuthorizations;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        pendingAuthorizations = this.Application.Observer.GetPendingAuthorization();
-                        if (this._pendingAuthorizations === pendingAuthorizations)
-                            return [2, (false)];
-                        this._pendingAuthorizations = pendingAuthorizations;
-                        return [4, this.OnAuthorizationRequest()];
-                    case 1:
-                        _a.sent();
-                        return [2, (true)];
-                }
-            });
+    }
+    TryOnAuthorizationRequest() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const pendingAuthorizations = this.Application.Observer.GetPendingAuthorization();
+            if (this._pendingAuthorizations === pendingAuthorizations)
+                return (false);
+            this._pendingAuthorizations = pendingAuthorizations;
+            yield this.OnAuthorizationRequest();
+            return (true);
         });
-    };
-    DrapoDocument.prototype.OnAuthorizationRequest = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var onAuthorizationRequest;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4, this.Application.Config.GetOnAuthorizationRequest()];
-                    case 1:
-                        onAuthorizationRequest = _a.sent();
-                        if ((onAuthorizationRequest === null) || (onAuthorizationRequest === ''))
-                            return [2];
-                        return [4, this.Application.FunctionHandler.ResolveFunctionWithoutContext(null, null, onAuthorizationRequest)];
-                    case 2:
-                        _a.sent();
-                        return [2];
-                }
-            });
+    }
+    OnAuthorizationRequest() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const onAuthorizationRequest = yield this.Application.Config.GetOnAuthorizationRequest();
+            if ((onAuthorizationRequest === null) || (onAuthorizationRequest === ''))
+                return;
+            yield this.Application.FunctionHandler.ResolveFunctionWithoutContext(null, null, onAuthorizationRequest);
         });
-    };
-    DrapoDocument.prototype.IsSectorAlreadyLoaded = function (sector) {
-        for (var i = 0; i < this._sectorsLoaded.length; i++)
+    }
+    IsSectorAlreadyLoaded(sector) {
+        for (let i = 0; i < this._sectorsLoaded.length; i++)
             if (this._sectorsLoaded[i] === sector)
                 return (true);
         return (false);
-    };
-    DrapoDocument.prototype.MarkSectorAsLoaded = function (sector) {
+    }
+    MarkSectorAsLoaded(sector) {
         this._sectorsLoaded.push(sector);
-    };
-    DrapoDocument.prototype.InitializeSectorsLoaded = function () {
+    }
+    InitializeSectorsLoaded() {
         this._sectorsLoaded = [];
-    };
-    DrapoDocument.prototype.GetSectorParent = function (el) {
+    }
+    GetSectorParent(el) {
         return (this.GetSector(el.parentElement));
-    };
-    DrapoDocument.prototype.GetSector = function (el) {
+    }
+    GetSector(el) {
         if (el == null)
             return (null);
-        var sector = el.getAttribute('d-sector');
+        const sector = el.getAttribute('d-sector');
         if (sector != null)
             return (sector);
         return (this.GetSector(el.parentElement));
-    };
-    DrapoDocument.prototype.GetSectorElement = function (sector) {
+    }
+    GetSectorElement(sector) {
         return (this.Application.Searcher.FindByAttributeAndValue('d-sector', sector));
-    };
-    DrapoDocument.prototype.GetSectorElementInner = function (sector) {
-        var elSector = this.GetSectorElement(sector);
+    }
+    GetSectorElementInner(sector) {
+        const elSector = this.GetSectorElement(sector);
         if ((elSector == null) || (elSector.children.length == 0))
             return (null);
-        for (var i = elSector.children.length - 1; i >= 0; i--) {
-            var elSectorChild = elSector.children[i];
-            var detach = elSectorChild.getAttribute('d-detach');
+        for (let i = elSector.children.length - 1; i >= 0; i--) {
+            const elSectorChild = elSector.children[i];
+            const detach = elSectorChild.getAttribute('d-detach');
             if ((detach === null) || (detach === '') || (detach === 'active'))
                 return (elSectorChild);
         }
         return (null);
-    };
-    DrapoDocument.prototype.SetSectorElementInner = function (sector, el, canDetach) {
-        var elSector = this.GetSectorElement(sector);
+    }
+    SetSectorElementInner(sector, el, canDetach) {
+        const elSector = this.GetSectorElement(sector);
         if (elSector == null)
             return (null);
-        for (var i = elSector.children.length - 1; i >= 0; i--) {
-            var elSectorChild = elSector.children[i];
-            var detach = elSectorChild.getAttribute('d-detach');
+        for (let i = elSector.children.length - 1; i >= 0; i--) {
+            const elSectorChild = elSector.children[i];
+            const detach = elSectorChild.getAttribute('d-detach');
             if (detach == null) {
                 elSector.removeChild(elSectorChild);
             }
             else {
                 if (detach === 'active') {
-                    var elSectorChildDisplay = elSectorChild.style.display;
-                    var detachValue = ((elSectorChildDisplay != null) && (elSectorChildDisplay != '')) ? elSectorChildDisplay : 'empty';
+                    const elSectorChildDisplay = elSectorChild.style.display;
+                    const detachValue = ((elSectorChildDisplay != null) && (elSectorChildDisplay != '')) ? elSectorChildDisplay : 'empty';
                     elSectorChild.style.display = 'none';
                     elSectorChild.setAttribute('d-detach', detachValue);
                 }
@@ -1037,40 +669,39 @@ var DrapoDocument = (function () {
             if (el.parentElement == null)
                 elSector.appendChild(el);
         }
-    };
-    DrapoDocument.prototype.CreateHTMLElement = function (html, onlyLast) {
-        if (onlyLast === void 0) { onlyLast = false; }
+    }
+    CreateHTMLElement(html, onlyLast = false) {
         if (html == null)
             return (null);
-        var elContainer = document.createElement('div');
+        const elContainer = document.createElement('div');
         elContainer.innerHTML = this.EnsureHTML(html);
         if (onlyLast)
             return elContainer.children[elContainer.children.length - 1];
         return elContainer.children[0];
-    };
-    DrapoDocument.prototype.InitializeSectorElementDetach = function (el) {
+    }
+    InitializeSectorElementDetach(el) {
         if (this.CanDetachElement(el))
             return;
         el.setAttribute('d-detach', 'active');
-    };
-    DrapoDocument.prototype.CanDetachElement = function (el) {
+    }
+    CanDetachElement(el) {
         if (this.HasElementIframe(el))
             return (false);
         if (this.HasElementCantDetach(el))
             return (false);
         return (true);
-    };
-    DrapoDocument.prototype.IsElementDetached = function (el) {
+    }
+    IsElementDetached(el) {
         if (el.tagName === 'BODY')
             return (false);
-        var detach = el.getAttribute('d-detach');
+        const detach = el.getAttribute('d-detach');
         if ((detach !== null) && (detach !== '') && (detach != 'active'))
             return (true);
         if (el.parentElement == null)
             return (true);
         return (this.IsElementDetached(el.parentElement));
-    };
-    DrapoDocument.prototype.IsElementAlive = function (el) {
+    }
+    IsElementAlive(el) {
         if (el === null)
             return (false);
         if (el.tagName === 'BODY')
@@ -1078,8 +709,8 @@ var DrapoDocument = (function () {
         if (this.Application.SectorContainerHandler.IsElementContainerized(el))
             return (true);
         return (this.IsElementAlive(el.parentElement));
-    };
-    DrapoDocument.prototype.IsElementInsideComponent = function (el) {
+    }
+    IsElementInsideComponent(el) {
         if (el === null)
             return (false);
         if (el.tagName === 'BODY')
@@ -1087,170 +718,154 @@ var DrapoDocument = (function () {
         if (this.Application.ComponentHandler.IsComponent(el.tagName.toLowerCase()))
             return (true);
         return (this.IsElementInsideComponent(el.parentElement));
-    };
-    DrapoDocument.prototype.HasElementIframe = function (el) {
+    }
+    HasElementIframe(el) {
         if (el == null)
             return (false);
         if (el.tagName.toLowerCase() === 'iframe')
             return (true);
-        var children = [].slice.call(el.children);
-        for (var i = 0; i < children.length; i++) {
-            var child = children[i];
-            var hasChildIframe = this.HasElementIframe(child);
+        const children = [].slice.call(el.children);
+        for (let i = 0; i < children.length; i++) {
+            const child = children[i];
+            const hasChildIframe = this.HasElementIframe(child);
             if (hasChildIframe)
                 return (true);
         }
         return (false);
-    };
-    DrapoDocument.prototype.HasElementCantDetach = function (el) {
+    }
+    HasElementCantDetach(el) {
         if (el == null)
             return (false);
-        var detachable = el.getAttribute('d-detachable');
+        const detachable = el.getAttribute('d-detachable');
         if (detachable === 'false')
             return (true);
-        var children = [].slice.call(el.children);
-        for (var i = 0; i < children.length; i++) {
-            var child = children[i];
-            var hasElementCantDetach = this.HasElementCantDetach(child);
+        const children = [].slice.call(el.children);
+        for (let i = 0; i < children.length; i++) {
+            const child = children[i];
+            const hasElementCantDetach = this.HasElementCantDetach(child);
             if (hasElementCantDetach)
                 return (true);
         }
         return (false);
-    };
-    DrapoDocument.prototype.GetSectorImpersonate = function (el) {
+    }
+    GetSectorImpersonate(el) {
         if (el == null)
             return (null);
-        var sector = el.getAttribute('d-sector');
+        const sector = el.getAttribute('d-sector');
         if (sector != null)
             return (null);
-        var sectorImpersonate = el.getAttribute('d-sector-impersonate');
+        const sectorImpersonate = el.getAttribute('d-sector-impersonate');
         if (sectorImpersonate != null)
             return (sectorImpersonate);
         return (this.GetSectorImpersonate(el.parentElement));
-    };
-    DrapoDocument.prototype.IsSectorDynamic = function (el) {
-        return __awaiter(this, void 0, void 0, function () {
-            var sector;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4, this.GetSectorImpersonate(el)];
-                    case 1:
-                        sector = _a.sent();
-                        return [2, (this.Application.Parser.IsMustache(sector))];
-                }
-            });
+    }
+    IsSectorDynamic(el) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const sector = yield this.GetSectorImpersonate(el);
+            return (this.Application.Parser.IsMustache(sector));
         });
-    };
-    DrapoDocument.prototype.GetSectorResolved = function (el) {
-        return __awaiter(this, void 0, void 0, function () {
-            var sector, sectorImpersonate, sectorResolved;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        sector = this.GetSector(el);
-                        sectorImpersonate = this.GetSectorImpersonate(el);
-                        if (sectorImpersonate == null)
-                            return [2, (sector)];
-                        return [4, this.Application.Storage.ResolveDataUrlMustaches(null, sector, sectorImpersonate, null)];
-                    case 1:
-                        sectorResolved = _a.sent();
-                        return [2, (sectorResolved)];
-                }
-            });
+    }
+    GetSectorResolved(el) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const sector = this.GetSector(el);
+            const sectorImpersonate = this.GetSectorImpersonate(el);
+            if (sectorImpersonate == null)
+                return (sector);
+            const sectorResolved = yield this.Application.Storage.ResolveDataUrlMustaches(null, sector, sectorImpersonate, null);
+            return (sectorResolved);
         });
-    };
-    DrapoDocument.prototype.Clone = function (el) {
+    }
+    Clone(el) {
         if (el == null)
             return (null);
         return el.cloneNode(true);
-    };
-    DrapoDocument.prototype.Select = function (el) {
-        var eli = el;
+    }
+    Select(el) {
+        const eli = el;
         if (eli.select != null)
             eli.select();
-    };
-    DrapoDocument.prototype.GetValue = function (el) {
-        var eli = el;
+    }
+    GetValue(el) {
+        const eli = el;
         if (eli.value)
             return (eli.value);
         return ('');
-    };
-    DrapoDocument.prototype.SetValue = function (el, value) {
-        var eli = el;
+    }
+    SetValue(el, value) {
+        const eli = el;
         if (eli.value)
             eli.value = value;
-    };
-    DrapoDocument.prototype.GetText = function (el) {
+    }
+    GetText(el) {
         if (el.children.length > 0)
             return ('');
-        var eli = el;
+        const eli = el;
         if (eli.textContent)
             return (eli.textContent);
         return (eli.innerText);
-    };
-    DrapoDocument.prototype.SetText = function (el, value) {
+    }
+    SetText(el, value) {
         if (el.children.length > 0)
             return;
-        var eli = el;
+        const eli = el;
         if (eli.textContent)
             eli.textContent = value;
         else
             eli.innerText = value;
-    };
-    DrapoDocument.prototype.GetHTML = function (el) {
+    }
+    GetHTML(el) {
         return (el.innerHTML);
-    };
-    DrapoDocument.prototype.GetHTMLEncoded = function (html) {
-        var div = document.createElement('div');
-        var text = document.createTextNode(html);
+    }
+    GetHTMLEncoded(html) {
+        const div = document.createElement('div');
+        const text = document.createTextNode(html);
         div.appendChild(text);
-        var contentEncoded = div.innerHTML;
+        const contentEncoded = div.innerHTML;
         return (contentEncoded);
-    };
-    DrapoDocument.prototype.EnsureHTML = function (value) {
-        var valueHTML = value.replace(/<(?!area|br|col|embed|hr|img|input|link|meta|param)(([a-z][^\/\0>\x20\t\r\n\f]*)[^>]*)\/>/gi, "<$1></$2>");
+    }
+    EnsureHTML(value) {
+        const valueHTML = value.replace(/<(?!area|br|col|embed|hr|img|input|link|meta|param)(([a-z][^\/\0>\x20\t\r\n\f]*)[^>]*)\/>/gi, "<$1></$2>");
         return (valueHTML);
-    };
-    DrapoDocument.prototype.SetHTML = function (el, value) {
-        var valueHTML = this.EnsureHTML(value);
+    }
+    SetHTML(el, value) {
+        const valueHTML = this.EnsureHTML(value);
         el.innerHTML = valueHTML;
-    };
-    DrapoDocument.prototype.GetProperty = function (el, propertyName) {
-        var elAny = el;
+    }
+    GetProperty(el, propertyName) {
+        const elAny = el;
         return (elAny[propertyName]);
-    };
-    DrapoDocument.prototype.CreateGuid = function (isShort) {
-        if (isShort === void 0) { isShort = true; }
+    }
+    CreateGuid(isShort = true) {
         if (isShort)
             return (this.CreateGuidShort());
-        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-            var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+            const r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
             return v.toString(16);
         });
-    };
-    DrapoDocument.prototype.CreateGuidShort = function () {
-        var guid = this.CreateGuidShortInternal();
+    }
+    CreateGuidShort() {
+        let guid = this.CreateGuidShortInternal();
         while (guid === this._lastGuid)
             guid = this.CreateGuidShortInternal();
         this._lastGuid = guid;
         return (guid);
-    };
-    DrapoDocument.prototype.CreateGuidShortInternal = function () {
-        var date = new Date();
-        var hexa = date.getTime().toString(16);
+    }
+    CreateGuidShortInternal() {
+        const date = new Date();
+        const hexa = date.getTime().toString(16);
         if (hexa.length <= 8)
             return (hexa);
         return (hexa.substr(hexa.length - 8));
-    };
-    DrapoDocument.prototype.EnsureElementHasID = function (el) {
-        var id = el.getAttribute('d-id');
+    }
+    EnsureElementHasID(el) {
+        let id = el.getAttribute('d-id');
         if (id != null)
             return (id);
         id = this.CreateGuid();
         el.setAttribute('d-id', id);
         return (id);
-    };
-    DrapoDocument.prototype.ApplyNodeDifferences = function (parent, nodeOld, nodeNew, isHTML) {
+    }
+    ApplyNodeDifferences(parent, nodeOld, nodeNew, isHTML) {
         if (!nodeOld) {
             parent.appendChild(nodeNew);
         }
@@ -1266,27 +881,27 @@ var DrapoDocument = (function () {
             this.ApplyNodeEventsDifferences(nodeOld, nodeNew);
             this.ApplyNodeSpecialDifferences(nodeOld, nodeNew);
             this.ApplyNodeAttributesDifferences(nodeOld, nodeNew);
-            var childrenOld = nodeOld != null ? [].slice.call(nodeOld.children) : [];
-            var childrenNew = nodeNew != null ? [].slice.call(nodeNew.children) : [];
-            var lengthOld = childrenOld.length;
-            var lengthNew = childrenNew.length;
+            const childrenOld = nodeOld != null ? [].slice.call(nodeOld.children) : [];
+            const childrenNew = nodeNew != null ? [].slice.call(nodeNew.children) : [];
+            const lengthOld = childrenOld.length;
+            const lengthNew = childrenNew.length;
             if ((lengthOld === 0) && (lengthNew === 0)) {
                 if (nodeOld.textContent !== nodeNew.textContent)
                     nodeOld.textContent = nodeNew.textContent;
             }
             else {
-                for (var i = 0; i < lengthNew || i < lengthOld; i++) {
+                for (let i = 0; i < lengthNew || i < lengthOld; i++) {
                     this.ApplyNodeDifferences(nodeOld, childrenOld[i], childrenNew[i], isHTML);
                 }
             }
         }
-    };
-    DrapoDocument.prototype.ApplyNodeDifferencesRenderClass = function (nodeOld, nodeNew) {
-        var className = nodeNew.className;
+    }
+    ApplyNodeDifferencesRenderClass(nodeOld, nodeNew) {
+        const className = nodeNew.className;
         if (nodeOld.className !== className)
             nodeOld.className = className;
-    };
-    DrapoDocument.prototype.IsNodeDifferentType = function (nodeOld, nodeNew) {
+    }
+    IsNodeDifferentType(nodeOld, nodeNew) {
         if ((typeof nodeOld) !== (typeof nodeNew))
             return (true);
         if ((nodeOld.nodeType) !== (nodeNew.nodeType))
@@ -1294,307 +909,272 @@ var DrapoDocument = (function () {
         if ((nodeOld.tagName) !== (nodeNew.tagName))
             return (true);
         return (false);
-    };
-    DrapoDocument.prototype.ApplyNodeEventsDifferences = function (nodeOld, nodeNew) {
+    }
+    ApplyNodeEventsDifferences(nodeOld, nodeNew) {
         this.Application.EventHandler.SyncNodeEventsDifferences(nodeOld, nodeNew);
-    };
-    DrapoDocument.prototype.ApplyNodeSpecialDifferences = function (nodeOld, nodeNew) {
-        var tag = nodeOld.tagName.toLowerCase();
+    }
+    ApplyNodeSpecialDifferences(nodeOld, nodeNew) {
+        const tag = nodeOld.tagName.toLowerCase();
         if (tag === "input")
             this.ApplyNodeSpecialDifferencesInput(nodeOld, nodeNew);
         else if (tag === "select")
             this.ApplyNodeSpecialDifferencesSelect(nodeOld, nodeNew);
         else if (tag === "textarea")
             this.ApplyNodeSpecialDifferencesTextarea(nodeOld, nodeNew);
-    };
-    DrapoDocument.prototype.ApplyNodeSpecialDifferencesInput = function (nodeOld, nodeNew) {
-        var type = nodeOld.type;
+    }
+    ApplyNodeSpecialDifferencesInput(nodeOld, nodeNew) {
+        const type = nodeOld.type;
         if (((type == 'checkbox')) && (nodeOld.checked !== nodeNew.checked))
             nodeOld.checked = nodeNew.checked;
         if (((type == 'text') || (type == 'password')) && (nodeOld.value !== nodeNew.value))
             nodeOld.value = nodeNew.value;
-    };
-    DrapoDocument.prototype.ApplyNodeSpecialDifferencesSelect = function (nodeOld, nodeNew) {
+    }
+    ApplyNodeSpecialDifferencesSelect(nodeOld, nodeNew) {
         if (nodeOld.value !== nodeNew.value)
             nodeOld.value = nodeNew.value;
-    };
-    DrapoDocument.prototype.ApplyNodeSpecialDifferencesTextarea = function (nodeOld, nodeNew) {
+    }
+    ApplyNodeSpecialDifferencesTextarea(nodeOld, nodeNew) {
         if (nodeOld.value !== nodeNew.value)
             nodeOld.value = nodeNew.value;
-    };
-    DrapoDocument.prototype.ApplyNodeAttributesDifferences = function (nodeOld, nodeNew) {
-        var attributesOld = this.ExtactNodeAttributes(nodeOld);
-        var attributesNew = this.ExtactNodeAttributes(nodeNew);
-        for (var i = 0; i < attributesNew.length; i++) {
-            var attribute = attributesNew[i];
-            var name_2 = attribute[0];
-            var valueNew = attribute[1];
-            var valueOld = this.ExtractNodeAttributeValue(attributesOld, name_2);
+    }
+    ApplyNodeAttributesDifferences(nodeOld, nodeNew) {
+        const attributesOld = this.ExtactNodeAttributes(nodeOld);
+        const attributesNew = this.ExtactNodeAttributes(nodeNew);
+        for (let i = 0; i < attributesNew.length; i++) {
+            const attribute = attributesNew[i];
+            const name = attribute[0];
+            const valueNew = attribute[1];
+            const valueOld = this.ExtractNodeAttributeValue(attributesOld, name);
             if (valueNew === valueOld)
                 continue;
-            if ((name_2 === 'class') && (this.Application.Validator.IsValidatorInterface(nodeOld)))
+            if ((name === 'class') && (this.Application.Validator.IsValidatorInterface(nodeOld)))
                 continue;
-            nodeOld.setAttribute(name_2, valueNew);
+            nodeOld.setAttribute(name, valueNew);
         }
-        for (var i = 0; i < attributesOld.length; i++) {
-            var attribute = attributesOld[i];
-            var name_3 = attribute[0];
-            var valueNew = this.ExtractNodeAttributeValue(attributesNew, name_3);
+        for (let i = 0; i < attributesOld.length; i++) {
+            const attribute = attributesOld[i];
+            const name = attribute[0];
+            const valueNew = this.ExtractNodeAttributeValue(attributesNew, name);
             if (valueNew !== null)
                 continue;
-            nodeOld.removeAttribute(name_3);
+            nodeOld.removeAttribute(name);
         }
-    };
-    DrapoDocument.prototype.ExtactNodeAttributes = function (node) {
-        var attributes = [];
-        var nodeAttributes = node.attributes;
-        var length = nodeAttributes.length;
-        for (var i = 0; i < length; i++) {
-            var nodeAttribute = nodeAttributes[i];
+    }
+    ExtactNodeAttributes(node) {
+        const attributes = [];
+        const nodeAttributes = node.attributes;
+        const length = nodeAttributes.length;
+        for (let i = 0; i < length; i++) {
+            const nodeAttribute = nodeAttributes[i];
             attributes.push([nodeAttribute.name, nodeAttribute.value]);
         }
         return (attributes);
-    };
-    DrapoDocument.prototype.ExtractNodeAttributeValue = function (attributes, name) {
-        for (var i = attributes.length - 1; i >= 0; i--)
+    }
+    ExtractNodeAttributeValue(attributes, name) {
+        for (let i = attributes.length - 1; i >= 0; i--)
             if (attributes[i][0] === name)
                 return (attributes[i][1]);
         return (null);
-    };
-    DrapoDocument.prototype.Contains = function (element) {
+    }
+    Contains(element) {
         return (document.documentElement.contains(element));
-    };
-    DrapoDocument.prototype.ExtractQueryString = function (canUseRouter) {
-        var url = canUseRouter ? document.location.href : this.Application.Router.GetLastRouteUrl();
+    }
+    ExtractQueryString(canUseRouter) {
+        let url = canUseRouter ? document.location.href : this.Application.Router.GetLastRouteUrl();
         if (url == null)
             url = document.location.href;
         return (this.Application.Parser.ParseQueryString(url));
-    };
-    DrapoDocument.prototype.Sleep = function (timeout) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                return [2, new Promise(function (resolve) { return setTimeout(resolve, timeout); })];
-            });
+    }
+    Sleep(timeout) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return new Promise((resolve) => setTimeout(resolve, timeout));
         });
-    };
-    DrapoDocument.prototype.WaitForMessage = function (retry, interval) {
-        if (retry === void 0) { retry = 1000; }
-        if (interval === void 0) { interval = 50; }
-        return __awaiter(this, void 0, void 0, function () {
-            var i;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        i = 0;
-                        _a.label = 1;
-                    case 1:
-                        if (!(i < retry)) return [3, 4];
-                        if (this.Message != null)
-                            return [2, (this.Message)];
-                        return [4, this.Application.Document.Sleep(interval)];
-                    case 2:
-                        _a.sent();
-                        _a.label = 3;
-                    case 3:
-                        i++;
-                        return [3, 1];
-                    case 4: return [2, (null)];
-                }
-            });
+    }
+    WaitForMessage(retry = 1000, interval = 50) {
+        return __awaiter(this, void 0, void 0, function* () {
+            for (let i = 0; i < retry; i++) {
+                if (this.Message != null)
+                    return (this.Message);
+                yield this.Application.Document.Sleep(interval);
+            }
+            return (null);
         });
-    };
-    DrapoDocument.prototype.AddSectorHierarchy = function (sector, sectorParent) {
-        return __awaiter(this, void 0, void 0, function () {
-            var i, sectorHierarchyCurrent, sectorHierarchy;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        i = 0;
-                        _a.label = 1;
-                    case 1:
-                        if (!(i < this._sectorHierarchy.length)) return [3, 4];
-                        sectorHierarchyCurrent = this._sectorHierarchy[i];
-                        if (sectorHierarchyCurrent[0] !== sector)
-                            return [3, 3];
-                        sectorHierarchyCurrent[1] = sectorParent;
-                        return [4, this.Application.Debugger.NotifySectors()];
-                    case 2:
-                        _a.sent();
-                        return [2];
-                    case 3:
-                        i++;
-                        return [3, 1];
-                    case 4:
-                        sectorHierarchy = [sector, sectorParent];
-                        this._sectorHierarchy.push(sectorHierarchy);
-                        return [4, this.Application.Debugger.NotifySectors()];
-                    case 5:
-                        _a.sent();
-                        return [2];
-                }
-            });
+    }
+    AddSectorHierarchy(sector, sectorParent) {
+        return __awaiter(this, void 0, void 0, function* () {
+            for (let i = 0; i < this._sectorHierarchy.length; i++) {
+                const sectorHierarchyCurrent = this._sectorHierarchy[i];
+                if (sectorHierarchyCurrent[0] !== sector)
+                    continue;
+                sectorHierarchyCurrent[1] = sectorParent;
+                yield this.Application.Debugger.NotifySectors();
+                return;
+            }
+            const sectorHierarchy = [sector, sectorParent];
+            this._sectorHierarchy.push(sectorHierarchy);
+            yield this.Application.Debugger.NotifySectors();
         });
-    };
-    DrapoDocument.prototype.GetSectorAndChildren = function (sector) {
-        var sectors = [];
+    }
+    GetSectorAndChildren(sector) {
+        const sectors = [];
         sectors.push(sector);
-        for (var i = 0; i < this._sectorHierarchy.length; i++) {
-            var sectorHierarchy = this._sectorHierarchy[i];
+        for (let i = 0; i < this._sectorHierarchy.length; i++) {
+            const sectorHierarchy = this._sectorHierarchy[i];
             if (sectorHierarchy[1] !== sector)
                 continue;
-            var sectorChild = sectorHierarchy[0];
+            const sectorChild = sectorHierarchy[0];
             sectors.push(sectorChild);
-            var sectorChildren = this.GetSectorHierarchyChildren(sectorChild);
-            for (var j = 0; j < sectorChildren.length; j++)
+            const sectorChildren = this.GetSectorHierarchyChildren(sectorChild);
+            for (let j = 0; j < sectorChildren.length; j++)
                 sectors.push(sectorChildren[j]);
         }
         return (sectors);
-    };
-    DrapoDocument.prototype.GetSectorChildren = function (sector) {
-        var sectors = [];
-        for (var i = 0; i < this._sectorHierarchy.length; i++) {
-            var sectorHierarchy = this._sectorHierarchy[i];
+    }
+    GetSectorChildren(sector) {
+        const sectors = [];
+        for (let i = 0; i < this._sectorHierarchy.length; i++) {
+            const sectorHierarchy = this._sectorHierarchy[i];
             if (sectorHierarchy[1] !== sector)
                 continue;
-            var sectorChild = sectorHierarchy[0];
+            const sectorChild = sectorHierarchy[0];
             sectors.push(sectorChild);
         }
         return (sectors);
-    };
-    DrapoDocument.prototype.GetSectorHierarchyChildren = function (sector) {
-        var sectors = [];
-        for (var i = 0; i < this._sectorHierarchy.length; i++) {
-            var sectorHierarchy = this._sectorHierarchy[i];
+    }
+    GetSectorHierarchyChildren(sector) {
+        const sectors = [];
+        for (let i = 0; i < this._sectorHierarchy.length; i++) {
+            const sectorHierarchy = this._sectorHierarchy[i];
             if (sectorHierarchy[1] !== sector)
                 continue;
-            var sectorChild = sectorHierarchy[0];
+            const sectorChild = sectorHierarchy[0];
             sectors.push(sectorChild);
-            var sectorChildren = this.GetSectorHierarchyChildren(sectorChild);
-            for (var j = 0; j < sectorChildren.length; j++)
+            const sectorChildren = this.GetSectorHierarchyChildren(sectorChild);
+            for (let j = 0; j < sectorChildren.length; j++)
                 sectors.push(sectorChildren[j]);
         }
         return (sectors);
-    };
-    DrapoDocument.prototype.IsSectorReady = function (sector) {
+    }
+    IsSectorReady(sector) {
         if (sector == null)
             return (true);
-        for (var i = 0; i < this._sectorHierarchy.length; i++) {
-            var sectorHierarchy = this._sectorHierarchy[i];
+        for (let i = 0; i < this._sectorHierarchy.length; i++) {
+            const sectorHierarchy = this._sectorHierarchy[i];
             if (sectorHierarchy[0] === sector)
                 return (true);
         }
         return (false);
-    };
-    DrapoDocument.prototype.GetSectorHierarchyParents = function (sector) {
-        var sectors = [sector];
-        for (var i = 0; i < this._sectorHierarchy.length; i++) {
-            var sectorHierarchy = this._sectorHierarchy[i];
+    }
+    GetSectorHierarchyParents(sector) {
+        const sectors = [sector];
+        for (let i = 0; i < this._sectorHierarchy.length; i++) {
+            const sectorHierarchy = this._sectorHierarchy[i];
             if (sectorHierarchy[0] !== sector)
                 continue;
-            var sectorParent = sectorHierarchy[1];
+            const sectorParent = sectorHierarchy[1];
             if (sectorParent == null)
                 continue;
-            var sectorParents = this.GetSectorHierarchyParents(sectorParent);
-            for (var j = 0; j < sectorParents.length; j++)
+            const sectorParents = this.GetSectorHierarchyParents(sectorParent);
+            for (let j = 0; j < sectorParents.length; j++)
                 sectors.push(sectorParents[j]);
         }
         return (sectors);
-    };
-    DrapoDocument.prototype.AppendSectorHierarchyBySector = function (sectorHierarchy, sector) {
-        for (var i = 0; i < this._sectorHierarchy.length; i++) {
-            var sectorHierarchyCurrent = this._sectorHierarchy[i];
+    }
+    AppendSectorHierarchyBySector(sectorHierarchy, sector) {
+        for (let i = 0; i < this._sectorHierarchy.length; i++) {
+            const sectorHierarchyCurrent = this._sectorHierarchy[i];
             if (sectorHierarchyCurrent[0] !== sector)
                 continue;
             sectorHierarchy.push([sector, sectorHierarchyCurrent[1]]);
             break;
         }
-    };
-    DrapoDocument.prototype.AddSectorHierarchys = function (sectorHierarchys) {
-        for (var i = 0; i < sectorHierarchys.length; i++)
+    }
+    AddSectorHierarchys(sectorHierarchys) {
+        for (let i = 0; i < sectorHierarchys.length; i++)
             this._sectorHierarchy.push(sectorHierarchys[i]);
-    };
-    DrapoDocument.prototype.AppendSectorFriendsBySector = function (sectorFriends, sector) {
-        for (var i = 0; i < this._sectorFriends.length; i++) {
-            var sectorFriend = this._sectorFriends[i];
+    }
+    AppendSectorFriendsBySector(sectorFriends, sector) {
+        for (let i = 0; i < this._sectorFriends.length; i++) {
+            const sectorFriend = this._sectorFriends[i];
             if (sectorFriend[0] !== sector)
                 continue;
             sectorFriends.push([sector, this.Application.Solver.CloneArrayString(sectorFriend[1])]);
             break;
         }
-    };
-    DrapoDocument.prototype.AddSectorFriendsRange = function (sectorFriends) {
-        for (var i = 0; i < sectorFriends.length; i++)
+    }
+    AddSectorFriendsRange(sectorFriends) {
+        for (let i = 0; i < sectorFriends.length; i++)
             this._sectorFriends.push(sectorFriends[i]);
-    };
-    DrapoDocument.prototype.IsSystemKey = function (key) {
+    }
+    IsSystemKey(key) {
         return ((key.length > 2) && (key[0] == '_') && (key[1] == '_'));
-    };
-    DrapoDocument.prototype.IsHiddenKey = function (key) {
+    }
+    IsHiddenKey(key) {
         return ((key.length > 1) && (key[0] == '_'));
-    };
-    DrapoDocument.prototype.GetSectors = function () {
-        var sectors = [];
+    }
+    GetSectors() {
+        const sectors = [];
         sectors.push('');
-        for (var i = 0; i < this._sectorHierarchy.length; i++) {
-            var sectorHierarchy = this._sectorHierarchy[i];
-            var sector = sectorHierarchy[0];
+        for (let i = 0; i < this._sectorHierarchy.length; i++) {
+            const sectorHierarchy = this._sectorHierarchy[i];
+            const sector = sectorHierarchy[0];
             if (this.IsSystemKey(sector))
                 continue;
             sectors.push(sector);
         }
         return (sectors);
-    };
-    DrapoDocument.prototype.IsEqualSector = function (sector1, sector2) {
-        var sector1Root = this.IsSectorRoot(sector1);
-        var sector2Root = this.IsSectorRoot(sector2);
+    }
+    IsEqualSector(sector1, sector2) {
+        const sector1Root = this.IsSectorRoot(sector1);
+        const sector2Root = this.IsSectorRoot(sector2);
         if ((sector1Root) && (sector2Root))
             return (true);
         if ((sector1Root) || (sector2Root))
             return (false);
         return (sector1 === sector2);
-    };
-    DrapoDocument.prototype.IsSectorRoot = function (sector) {
+    }
+    IsSectorRoot(sector) {
         return ((sector === null) || (sector === ''));
-    };
-    DrapoDocument.prototype.CleanSectorMetadata = function (sector) {
+    }
+    CleanSectorMetadata(sector) {
         if (sector == null)
             return;
-        var sectorChildren = this.GetSectorAndChildren(sector);
-        for (var i = 0; i < sectorChildren.length; i++)
+        const sectorChildren = this.GetSectorAndChildren(sector);
+        for (let i = 0; i < sectorChildren.length; i++)
             this.CleanSectorMetadataInternal(sectorChildren[i]);
-    };
-    DrapoDocument.prototype.CleanSectorMetadataInternal = function (sector) {
-        for (var i = this._sectorFriends.length - 1; i >= 0; i--) {
-            var sectorFriends = this._sectorFriends[i];
+    }
+    CleanSectorMetadataInternal(sector) {
+        for (let i = this._sectorFriends.length - 1; i >= 0; i--) {
+            const sectorFriends = this._sectorFriends[i];
             if (sectorFriends[0] !== sector)
                 continue;
             this._sectorFriends.splice(i, 1);
             break;
         }
-        for (var i = this._sectorHierarchy.length - 1; i >= 0; i--) {
-            var sectorHierarchy = this._sectorHierarchy[i];
+        for (let i = this._sectorHierarchy.length - 1; i >= 0; i--) {
+            const sectorHierarchy = this._sectorHierarchy[i];
             if (sectorHierarchy[0] !== sector)
                 continue;
             this._sectorHierarchy.splice(i, 1);
         }
-    };
-    DrapoDocument.prototype.GetSectorsAllowed = function (sector) {
+    }
+    GetSectorsAllowed(sector) {
         if (sector == null)
             return (null);
-        var sectors = this.GetSectorHierarchyParents(sector);
-        for (var i = 0; i < sectors.length; i++) {
-            var sectorCurrent = sectors[i];
-            var sectorCurrentFriends = this.GetSectorFriends(sectorCurrent);
+        const sectors = this.GetSectorHierarchyParents(sector);
+        for (let i = 0; i < sectors.length; i++) {
+            const sectorCurrent = sectors[i];
+            const sectorCurrentFriends = this.GetSectorFriends(sectorCurrent);
             if (sectorCurrentFriends == null)
                 continue;
-            for (var j = 0; j < sectorCurrentFriends.length; j++) {
-                var sectorCurrentFriend = sectorCurrentFriends[j];
+            for (let j = 0; j < sectorCurrentFriends.length; j++) {
+                const sectorCurrentFriend = sectorCurrentFriends[j];
                 if (this.Application.Solver.Contains(sectors, sectorCurrentFriend))
                     continue;
                 sectors.push(sectorCurrentFriend);
-                var sectorCurrentFriendChildren = this.GetSectorHierarchyChildren(sectorCurrentFriend);
-                for (var k = 0; k < sectorCurrentFriendChildren.length; k++) {
-                    var sectorCurrentFriendChild = sectorCurrentFriendChildren[k];
+                const sectorCurrentFriendChildren = this.GetSectorHierarchyChildren(sectorCurrentFriend);
+                for (let k = 0; k < sectorCurrentFriendChildren.length; k++) {
+                    const sectorCurrentFriendChild = sectorCurrentFriendChildren[k];
                     if (this.Application.Solver.Contains(sectors, sectorCurrentFriendChild))
                         continue;
                     sectors.push(sectorCurrentFriendChild);
@@ -1602,313 +1182,205 @@ var DrapoDocument = (function () {
             }
         }
         return (sectors);
-    };
-    DrapoDocument.prototype.IsSectorAllowed = function (sector, sectors) {
+    }
+    IsSectorAllowed(sector, sectors) {
         if (sector == null)
             return (true);
         if (sectors == null)
             return (true);
-        for (var i = 0; i < sectors.length; i++)
+        for (let i = 0; i < sectors.length; i++)
             if (sectors[i] == sector)
                 return (true);
         return (false);
-    };
-    DrapoDocument.prototype.AddSectorFriends = function (sector, sectorFriendsText) {
-        return __awaiter(this, void 0, void 0, function () {
-            var friends, i, sectorFriend, i, sectorFriendsCurrent, sectorFriends;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        if (sectorFriendsText == null)
-                            return [2];
-                        friends = this.Application.Parser.ParseTags(sectorFriendsText);
-                        i = 0;
-                        _a.label = 1;
-                    case 1:
-                        if (!(i < friends.length)) return [3, 4];
-                        if (!this.Application.Parser.IsMustache(friends[i])) return [3, 3];
-                        return [4, this.Application.Storage.RetrieveDataValue(sector, friends[i])];
-                    case 2:
-                        sectorFriend = _a.sent();
-                        friends.splice(i, 1);
-                        friends.push(sectorFriend);
-                        _a.label = 3;
-                    case 3:
-                        i++;
-                        return [3, 1];
-                    case 4:
-                        for (i = 0; i < this._sectorFriends.length; i++) {
-                            sectorFriendsCurrent = this._sectorFriends[i];
-                            if (sectorFriendsCurrent[0] !== sector)
-                                continue;
-                            sectorFriendsCurrent[1] = friends;
-                            return [2];
-                        }
-                        sectorFriends = [sector, friends];
-                        this._sectorFriends.push(sectorFriends);
-                        return [2];
+    }
+    AddSectorFriends(sector, sectorFriendsText) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (sectorFriendsText == null)
+                return;
+            const friends = this.Application.Parser.ParseTags(sectorFriendsText);
+            for (let i = 0; i < friends.length; i++) {
+                if (this.Application.Parser.IsMustache(friends[i])) {
+                    const sectorFriend = yield this.Application.Storage.RetrieveDataValue(sector, friends[i]);
+                    friends.splice(i, 1);
+                    friends.push(sectorFriend);
                 }
-            });
+            }
+            for (let i = 0; i < this._sectorFriends.length; i++) {
+                const sectorFriendsCurrent = this._sectorFriends[i];
+                if (sectorFriendsCurrent[0] !== sector)
+                    continue;
+                sectorFriendsCurrent[1] = friends;
+                return;
+            }
+            const sectorFriends = [sector, friends];
+            this._sectorFriends.push(sectorFriends);
         });
-    };
-    DrapoDocument.prototype.GetSectorFriends = function (sector) {
-        for (var i = 0; i < this._sectorFriends.length; i++) {
-            var sectorFriends = this._sectorFriends[i];
+    }
+    GetSectorFriends(sector) {
+        for (let i = 0; i < this._sectorFriends.length; i++) {
+            const sectorFriends = this._sectorFriends[i];
             if (sectorFriends[0] === sector)
                 return (sectorFriends[1]);
         }
         return (null);
-    };
-    DrapoDocument.prototype.CollectSector = function (sector) {
-        return __awaiter(this, void 0, void 0, function () {
-            var i, sectorHierarchy, sectorCurrent;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        i = this._sectorHierarchy.length - 1;
-                        _a.label = 1;
-                    case 1:
-                        if (!(i >= 0)) return [3, 5];
-                        sectorHierarchy = this._sectorHierarchy[i];
-                        if (sectorHierarchy[1] !== sector)
-                            return [3, 4];
-                        sectorCurrent = sectorHierarchy[0];
-                        return [4, this.CollectSector(sectorCurrent)];
-                    case 2:
-                        _a.sent();
-                        if (this.Application.Searcher.FindByAttributeAndValue('d-sector', sectorCurrent) !== null)
-                            return [3, 4];
-                        return [4, this.Application.SectorContainerHandler.UnloadSector(sectorCurrent)];
-                    case 3:
-                        _a.sent();
-                        _a.label = 4;
-                    case 4:
-                        i--;
-                        return [3, 1];
-                    case 5: return [2];
-                }
-            });
+    }
+    CollectSector(sector) {
+        return __awaiter(this, void 0, void 0, function* () {
+            for (let i = this._sectorHierarchy.length - 1; i >= 0; i--) {
+                const sectorHierarchy = this._sectorHierarchy[i];
+                if (sectorHierarchy[1] !== sector)
+                    continue;
+                const sectorCurrent = sectorHierarchy[0];
+                yield this.CollectSector(sectorCurrent);
+                if (this.Application.Searcher.FindByAttributeAndValue('d-sector', sectorCurrent) !== null)
+                    continue;
+                yield this.Application.SectorContainerHandler.UnloadSector(sectorCurrent);
+            }
         });
-    };
-    DrapoDocument.prototype.IsFirstChild = function (el) {
+    }
+    IsFirstChild(el) {
         return (this.GetIndex(el) === 0);
-    };
-    DrapoDocument.prototype.IsLastChild = function (el) {
+    }
+    IsLastChild(el) {
         return (this.GetNextAll(el).length === 0);
-    };
-    DrapoDocument.prototype.GetIndex = function (el) {
-        var elParent = el.parentElement;
+    }
+    GetIndex(el) {
+        const elParent = el.parentElement;
         if (elParent == null)
             return (-1);
-        for (var i = 0; i < elParent.children.length; i++)
+        for (let i = 0; i < elParent.children.length; i++)
             if (el === elParent.children[i])
                 return (i);
         return (-1);
-    };
-    DrapoDocument.prototype.GetNextAll = function (el) {
-        var elParent = el.parentElement;
+    }
+    GetNextAll(el) {
+        const elParent = el.parentElement;
         if (elParent == null)
             return ([]);
-        var els = [];
-        var found = false;
-        for (var i = 0; i < elParent.children.length; i++) {
-            var elChild = elParent.children[i];
+        const els = [];
+        let found = false;
+        for (let i = 0; i < elParent.children.length; i++) {
+            const elChild = elParent.children[i];
             if (el === elChild)
                 found = true;
             else if (found)
                 els.push(elChild);
         }
         return (els);
-    };
-    DrapoDocument.prototype.ReceiveMessage = function (message) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        if (!(message.Action === 'execute')) return [3, 2];
-                        return [4, this.ExecuteMessage(message)];
-                    case 1:
-                        _a.sent();
-                        return [3, 5];
-                    case 2:
-                        if (!(message.Action === 'update')) return [3, 4];
-                        return [4, this.UpdateMessage(message)];
-                    case 3:
-                        _a.sent();
-                        return [3, 5];
-                    case 4:
-                        this.Message = message;
-                        _a.label = 5;
-                    case 5: return [2];
-                }
-            });
+    }
+    ReceiveMessage(message) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (message.Action === 'execute')
+                yield this.ExecuteMessage(message);
+            else if (message.Action === 'update')
+                yield this.UpdateMessage(message);
+            else
+                this.Message = message;
         });
-    };
-    DrapoDocument.prototype.ExecuteMessage = function (message) {
-        return __awaiter(this, void 0, void 0, function () {
-            var storageItem, valueFunction;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        if (!!this.Application.IsLoaded) return [3, 2];
-                        return [4, this.Sleep(50)];
-                    case 1:
-                        _a.sent();
-                        return [3, 0];
-                    case 2: return [4, this.Application.Storage.RetrieveDataItem(message.DataKey, message.Sector)];
-                    case 3:
-                        storageItem = _a.sent();
-                        if (storageItem === null)
-                            return [2];
-                        if (!storageItem.IsTypeValue)
-                            return [2];
-                        valueFunction = storageItem.Data;
-                        return [4, this.Application.FunctionHandler.ResolveFunctionWithoutContext(message.Sector, null, valueFunction)];
-                    case 4:
-                        _a.sent();
-                        return [2];
-                }
-            });
+    }
+    ExecuteMessage(message) {
+        return __awaiter(this, void 0, void 0, function* () {
+            while (!this.Application.IsLoaded)
+                yield this.Sleep(50);
+            const storageItem = yield this.Application.Storage.RetrieveDataItem(message.DataKey, message.Sector);
+            if (storageItem === null)
+                return;
+            if (!storageItem.IsTypeValue)
+                return;
+            const valueFunction = storageItem.Data;
+            yield this.Application.FunctionHandler.ResolveFunctionWithoutContext(message.Sector, null, valueFunction);
         });
-    };
-    DrapoDocument.prototype.UpdateMessage = function (message) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4, this.Application.Storage.UpdateData(message.DataKey, message.Sector, message.Data)];
-                    case 1:
-                        _a.sent();
-                        return [2];
-                }
-            });
+    }
+    UpdateMessage(message) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield this.Application.Storage.UpdateData(message.DataKey, message.Sector, message.Data);
         });
-    };
-    DrapoDocument.prototype.GetClipboard = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var value, _a;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
-                    case 0:
-                        _b.trys.push([0, 2, , 3]);
-                        return [4, this.GetClipboardValueAsync()];
-                    case 1:
-                        value = _b.sent();
-                        if (value !== null)
-                            return [2, (value)];
-                        return [2, (this.GetClipboardValueExecCommand())];
-                    case 2:
-                        _a = _b.sent();
-                        return [2, ('')];
-                    case 3: return [2];
-                }
-            });
+    }
+    GetClipboard() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const value = yield this.GetClipboardValueAsync();
+                if (value !== null)
+                    return (value);
+                return (this.GetClipboardValueExecCommand());
+            }
+            catch (_a) {
+                return ('');
+            }
         });
-    };
-    DrapoDocument.prototype.GetClipboardValueAsync = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var clipboard, value;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        clipboard = navigator.clipboard;
-                        if (clipboard == null)
-                            return [2, (null)];
-                        if (!clipboard.readText)
-                            return [2, (null)];
-                        return [4, clipboard.readText()];
-                    case 1:
-                        value = _a.sent();
-                        return [2, (value)];
-                }
-            });
+    }
+    GetClipboardValueAsync() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const clipboard = navigator.clipboard;
+            if (clipboard == null)
+                return (null);
+            if (!clipboard.readText)
+                return (null);
+            const value = yield clipboard.readText();
+            return (value);
         });
-    };
-    DrapoDocument.prototype.GetClipboardValueExecCommand = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var el, value;
-            return __generator(this, function (_a) {
-                el = document.createElement('textarea');
-                document.body.appendChild(el);
-                el.select();
-                document.execCommand('paste');
-                value = el.value;
-                document.body.removeChild(el);
-                return [2, (value)];
-            });
+    }
+    GetClipboardValueExecCommand() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const el = document.createElement('textarea');
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('paste');
+            const value = el.value;
+            document.body.removeChild(el);
+            return (value);
         });
-    };
-    DrapoDocument.prototype.SetClipboard = function (value) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4, this.SetClipboardEvent(value)];
-                    case 1:
-                        if (_a.sent())
-                            return [2, (true)];
-                        return [4, this.SetClipboardTextArea(value)];
-                    case 2: return [2, (_a.sent())];
-                }
-            });
+    }
+    SetClipboard(value) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (yield this.SetClipboardEvent(value))
+                return (true);
+            return (yield this.SetClipboardTextArea(value));
         });
-    };
-    DrapoDocument.prototype.SetClipboardEvent = function (value) {
-        return __awaiter(this, void 0, void 0, function () {
-            var result, listener;
-            return __generator(this, function (_a) {
-                result = false;
-                listener = function (ev) {
-                    if (!ev.clipboardData)
-                        return (false);
-                    ev.preventDefault();
-                    ev.clipboardData.setData('text/plain', value);
-                    result = true;
-                    return (true);
-                };
-                try {
-                    document.addEventListener('copy', listener);
-                    document.execCommand('copy');
-                }
-                catch (_b) {
-                    return [2, (false)];
-                }
-                finally {
-                    document.removeEventListener('copy', listener);
-                }
-                return [2, (result)];
-            });
+    }
+    SetClipboardEvent(value) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let result = false;
+            const listener = (ev) => {
+                if (!ev.clipboardData)
+                    return (false);
+                ev.preventDefault();
+                ev.clipboardData.setData('text/plain', value);
+                result = true;
+                return (true);
+            };
+            try {
+                document.addEventListener('copy', listener);
+                document.execCommand('copy');
+            }
+            catch (_a) {
+                return (false);
+            }
+            finally {
+                document.removeEventListener('copy', listener);
+            }
+            return (result);
         });
-    };
-    DrapoDocument.prototype.SetClipboardTextArea = function (value) {
-        return __awaiter(this, void 0, void 0, function () {
-            var el, result;
-            return __generator(this, function (_a) {
-                el = document.createElement('textarea');
-                el.setAttribute('style', 'width:1px;height:0px;border:0;opacity:0;');
-                el.value = value;
-                document.body.appendChild(el);
-                el.select();
-                result = document.execCommand('copy');
-                document.body.removeChild(el);
-                return [2, (result)];
-            });
+    }
+    SetClipboardTextArea(value) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const el = document.createElement('textarea');
+            el.setAttribute('style', 'width:1px;height:0px;border:0;opacity:0;');
+            el.value = value;
+            document.body.appendChild(el);
+            el.select();
+            const result = document.execCommand('copy');
+            document.body.removeChild(el);
+            return (result);
         });
-    };
-    DrapoDocument.prototype.StartUnitTest = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var elUnitTest;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        elUnitTest = this.Application.Searcher.FindByAttributeAndValue('d-id', '__drapoUnitTest');
-                        if ((elUnitTest == null))
-                            return [2];
-                        return [4, this.Application.EventHandler.TriggerClick(elUnitTest)];
-                    case 1:
-                        _a.sent();
-                        return [2];
-                }
-            });
+    }
+    StartUnitTest() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const elUnitTest = this.Application.Searcher.FindByAttributeAndValue('d-id', '__drapoUnitTest');
+            if ((elUnitTest == null))
+                return;
+            yield this.Application.EventHandler.TriggerClick(elUnitTest);
         });
-    };
-    return DrapoDocument;
-}());
+    }
+}
+//# sourceMappingURL=DrapoDocument.js.map

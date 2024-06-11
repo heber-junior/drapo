@@ -1,6 +1,6 @@
 "use strict";
-var DrapoViewport = (function () {
-    function DrapoViewport() {
+class DrapoViewport {
+    constructor() {
         this._busy = false;
         this._sector = null;
         this._dataKey = null;
@@ -27,255 +27,155 @@ var DrapoViewport = (function () {
         this._scrollTop = null;
         this._isActive = false;
     }
-    Object.defineProperty(DrapoViewport.prototype, "Busy", {
-        get: function () {
-            return (this._busy);
-        },
-        set: function (value) {
-            this._busy = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoViewport.prototype, "Sector", {
-        get: function () {
-            return (this._sector);
-        },
-        set: function (value) {
-            this._sector = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoViewport.prototype, "DataKey", {
-        get: function () {
-            return (this._dataKey);
-        },
-        set: function (value) {
-            this._dataKey = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoViewport.prototype, "Key", {
-        get: function () {
-            return (this._key);
-        },
-        set: function (value) {
-            this._key = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoViewport.prototype, "DataKeyIteratorRange", {
-        get: function () {
-            return (this._dataKeyIteratorRange);
-        },
-        set: function (value) {
-            this._dataKeyIteratorRange = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoViewport.prototype, "Data", {
-        get: function () {
-            return (this._data);
-        },
-        set: function (value) {
-            this._data = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoViewport.prototype, "Element", {
-        get: function () {
-            return (this._el);
-        },
-        set: function (value) {
-            this._el = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoViewport.prototype, "ElementTemplate", {
-        get: function () {
-            return (this._elTemplate);
-        },
-        set: function (value) {
-            this._elTemplate = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoViewport.prototype, "ElementBallonBefore", {
-        get: function () {
-            return (this._elBallonBefore);
-        },
-        set: function (value) {
-            this._elBallonBefore = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoViewport.prototype, "ElementBallonAfter", {
-        get: function () {
-            return (this._elBallonAfter);
-        },
-        set: function (value) {
-            this._elBallonAfter = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoViewport.prototype, "ElementScroll", {
-        get: function () {
-            return (this._elScroll);
-        },
-        set: function (value) {
-            this._elScroll = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoViewport.prototype, "HeightScroll", {
-        get: function () {
-            return (this._heightScroll);
-        },
-        set: function (value) {
-            this._heightScroll = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoViewport.prototype, "HeightScrollScroll", {
-        get: function () {
-            return (this._heightScrollScroll);
-        },
-        set: function (value) {
-            this._heightScrollScroll = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoViewport.prototype, "HeightBefore", {
-        get: function () {
-            return (this._heightBefore);
-        },
-        set: function (value) {
-            this._heightBefore = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoViewport.prototype, "HeightAfter", {
-        get: function () {
-            return (this._heightAfter);
-        },
-        set: function (value) {
-            this._heightAfter = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoViewport.prototype, "HeightItem", {
-        get: function () {
-            return (this._heightItem);
-        },
-        set: function (value) {
-            this._heightItem = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoViewport.prototype, "HeightBallonBefore", {
-        get: function () {
-            return (this._heightBallonBefore);
-        },
-        set: function (value) {
-            this._heightBallonBefore = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoViewport.prototype, "HeightBallonAfter", {
-        get: function () {
-            return (this._heightBallonAfter);
-        },
-        set: function (value) {
-            this._heightBallonAfter = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoViewport.prototype, "DataStart", {
-        get: function () {
-            return (this._dataStart);
-        },
-        set: function (value) {
-            this._dataStart = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoViewport.prototype, "DataEnd", {
-        get: function () {
-            return (this._dataEnd);
-        },
-        set: function (value) {
-            this._dataEnd = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoViewport.prototype, "DataLength", {
-        get: function () {
-            return (this._dataLength);
-        },
-        set: function (value) {
-            this._dataLength = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoViewport.prototype, "Factor", {
-        get: function () {
-            return (this._factor);
-        },
-        set: function (value) {
-            this._factor = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoViewport.prototype, "EventScrollTimeout", {
-        get: function () {
-            return (this._eventScrollTimeout);
-        },
-        set: function (value) {
-            this._eventScrollTimeout = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoViewport.prototype, "ScrollTop", {
-        get: function () {
-            return (this._scrollTop);
-        },
-        set: function (value) {
-            this._scrollTop = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoViewport.prototype, "IsActive", {
-        get: function () {
-            return (this._isActive);
-        },
-        set: function (value) {
-            this._isActive = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    return DrapoViewport;
-}());
+    get Busy() {
+        return (this._busy);
+    }
+    set Busy(value) {
+        this._busy = value;
+    }
+    get Sector() {
+        return (this._sector);
+    }
+    set Sector(value) {
+        this._sector = value;
+    }
+    get DataKey() {
+        return (this._dataKey);
+    }
+    set DataKey(value) {
+        this._dataKey = value;
+    }
+    get Key() {
+        return (this._key);
+    }
+    set Key(value) {
+        this._key = value;
+    }
+    get DataKeyIteratorRange() {
+        return (this._dataKeyIteratorRange);
+    }
+    set DataKeyIteratorRange(value) {
+        this._dataKeyIteratorRange = value;
+    }
+    get Data() {
+        return (this._data);
+    }
+    set Data(value) {
+        this._data = value;
+    }
+    get Element() {
+        return (this._el);
+    }
+    set Element(value) {
+        this._el = value;
+    }
+    get ElementTemplate() {
+        return (this._elTemplate);
+    }
+    set ElementTemplate(value) {
+        this._elTemplate = value;
+    }
+    get ElementBallonBefore() {
+        return (this._elBallonBefore);
+    }
+    set ElementBallonBefore(value) {
+        this._elBallonBefore = value;
+    }
+    get ElementBallonAfter() {
+        return (this._elBallonAfter);
+    }
+    set ElementBallonAfter(value) {
+        this._elBallonAfter = value;
+    }
+    get ElementScroll() {
+        return (this._elScroll);
+    }
+    set ElementScroll(value) {
+        this._elScroll = value;
+    }
+    get HeightScroll() {
+        return (this._heightScroll);
+    }
+    set HeightScroll(value) {
+        this._heightScroll = value;
+    }
+    get HeightScrollScroll() {
+        return (this._heightScrollScroll);
+    }
+    set HeightScrollScroll(value) {
+        this._heightScrollScroll = value;
+    }
+    get HeightBefore() {
+        return (this._heightBefore);
+    }
+    set HeightBefore(value) {
+        this._heightBefore = value;
+    }
+    get HeightAfter() {
+        return (this._heightAfter);
+    }
+    set HeightAfter(value) {
+        this._heightAfter = value;
+    }
+    get HeightItem() {
+        return (this._heightItem);
+    }
+    set HeightItem(value) {
+        this._heightItem = value;
+    }
+    get HeightBallonBefore() {
+        return (this._heightBallonBefore);
+    }
+    set HeightBallonBefore(value) {
+        this._heightBallonBefore = value;
+    }
+    get HeightBallonAfter() {
+        return (this._heightBallonAfter);
+    }
+    set HeightBallonAfter(value) {
+        this._heightBallonAfter = value;
+    }
+    get DataStart() {
+        return (this._dataStart);
+    }
+    set DataStart(value) {
+        this._dataStart = value;
+    }
+    get DataEnd() {
+        return (this._dataEnd);
+    }
+    set DataEnd(value) {
+        this._dataEnd = value;
+    }
+    get DataLength() {
+        return (this._dataLength);
+    }
+    set DataLength(value) {
+        this._dataLength = value;
+    }
+    get Factor() {
+        return (this._factor);
+    }
+    set Factor(value) {
+        this._factor = value;
+    }
+    get EventScrollTimeout() {
+        return (this._eventScrollTimeout);
+    }
+    set EventScrollTimeout(value) {
+        this._eventScrollTimeout = value;
+    }
+    get ScrollTop() {
+        return (this._scrollTop);
+    }
+    set ScrollTop(value) {
+        this._scrollTop = value;
+    }
+    get IsActive() {
+        return (this._isActive);
+    }
+    set IsActive(value) {
+        this._isActive = value;
+    }
+}
+//# sourceMappingURL=DrapoViewport.js.map

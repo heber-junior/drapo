@@ -1,6 +1,6 @@
 "use strict";
-var DrapoQueryCondition = (function () {
-    function DrapoQueryCondition() {
+class DrapoQueryCondition {
+    constructor() {
         this._sourceLeft = null;
         this._columnLeft = null;
         this._valueLeft = null;
@@ -12,108 +12,68 @@ var DrapoQueryCondition = (function () {
         this._isSearchStartRight = false;
         this._isSearchEndRight = false;
     }
-    Object.defineProperty(DrapoQueryCondition.prototype, "SourceLeft", {
-        get: function () {
-            return (this._sourceLeft);
-        },
-        set: function (value) {
-            this._sourceLeft = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoQueryCondition.prototype, "ColumnLeft", {
-        get: function () {
-            return (this._columnLeft);
-        },
-        set: function (value) {
-            this._columnLeft = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoQueryCondition.prototype, "ValueLeft", {
-        get: function () {
-            return (this._valueLeft);
-        },
-        set: function (value) {
-            this._valueLeft = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoQueryCondition.prototype, "Comparator", {
-        get: function () {
-            return (this._comparator);
-        },
-        set: function (value) {
-            this._comparator = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoQueryCondition.prototype, "SourceRight", {
-        get: function () {
-            return (this._sourceRight);
-        },
-        set: function (value) {
-            this._sourceRight = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoQueryCondition.prototype, "ColumnRight", {
-        get: function () {
-            return (this._columnRight);
-        },
-        set: function (value) {
-            this._columnRight = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoQueryCondition.prototype, "ValueRight", {
-        get: function () {
-            return (this._valueRight);
-        },
-        set: function (value) {
-            this._valueRight = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoQueryCondition.prototype, "IsNullRight", {
-        get: function () {
-            return (this._isNullRight);
-        },
-        set: function (value) {
-            this._isNullRight = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoQueryCondition.prototype, "IsSearchStartRight", {
-        get: function () {
-            return (this._isSearchStartRight);
-        },
-        set: function (value) {
-            this._isSearchStartRight = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoQueryCondition.prototype, "IsSearchEndRight", {
-        get: function () {
-            return (this._isSearchEndRight);
-        },
-        set: function (value) {
-            this._isSearchEndRight = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    DrapoQueryCondition.prototype.Clone = function () {
-        var clone = new DrapoQueryCondition();
+    get SourceLeft() {
+        return (this._sourceLeft);
+    }
+    set SourceLeft(value) {
+        this._sourceLeft = value;
+    }
+    get ColumnLeft() {
+        return (this._columnLeft);
+    }
+    set ColumnLeft(value) {
+        this._columnLeft = value;
+    }
+    get ValueLeft() {
+        return (this._valueLeft);
+    }
+    set ValueLeft(value) {
+        this._valueLeft = value;
+    }
+    get Comparator() {
+        return (this._comparator);
+    }
+    set Comparator(value) {
+        this._comparator = value;
+    }
+    get SourceRight() {
+        return (this._sourceRight);
+    }
+    set SourceRight(value) {
+        this._sourceRight = value;
+    }
+    get ColumnRight() {
+        return (this._columnRight);
+    }
+    set ColumnRight(value) {
+        this._columnRight = value;
+    }
+    get ValueRight() {
+        return (this._valueRight);
+    }
+    set ValueRight(value) {
+        this._valueRight = value;
+    }
+    get IsNullRight() {
+        return (this._isNullRight);
+    }
+    set IsNullRight(value) {
+        this._isNullRight = value;
+    }
+    get IsSearchStartRight() {
+        return (this._isSearchStartRight);
+    }
+    set IsSearchStartRight(value) {
+        this._isSearchStartRight = value;
+    }
+    get IsSearchEndRight() {
+        return (this._isSearchEndRight);
+    }
+    set IsSearchEndRight(value) {
+        this._isSearchEndRight = value;
+    }
+    Clone() {
+        const clone = new DrapoQueryCondition();
         clone.SourceLeft = this.SourceLeft;
         clone.ColumnLeft = this.ColumnLeft;
         clone.ValueLeft = this.ValueLeft;
@@ -125,6 +85,6 @@ var DrapoQueryCondition = (function () {
         clone.IsSearchStartRight = this.IsSearchStartRight;
         clone.IsSearchEndRight = this.IsSearchEndRight;
         return (clone);
-    };
-    return DrapoQueryCondition;
-}());
+    }
+}
+//# sourceMappingURL=DrapoQueryCondition.js.map

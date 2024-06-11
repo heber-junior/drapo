@@ -1,7 +1,42 @@
 "use strict";
-var DrapoServerRequest = (function () {
-    function DrapoServerRequest(verb, url, headers, body, extractHeaders, binary) {
-        if (binary === void 0) { binary = false; }
+class DrapoServerRequest {
+    get Verb() {
+        return (this._verb);
+    }
+    set Verb(value) {
+        this._verb = value;
+    }
+    get Url() {
+        return (this._url);
+    }
+    set Url(value) {
+        this._url = value;
+    }
+    get Headers() {
+        return (this._headers);
+    }
+    set Headers(value) {
+        this._headers = value;
+    }
+    get Body() {
+        return (this._body);
+    }
+    set Body(value) {
+        this._body = value;
+    }
+    get ExtractHeaders() {
+        return (this._extractHeaders);
+    }
+    set ExtractHeaders(value) {
+        this._extractHeaders = value;
+    }
+    set Binary(value) {
+        this._binary = value;
+    }
+    get Binary() {
+        return (this._binary);
+    }
+    constructor(verb, url, headers, body, extractHeaders, binary = false) {
         this._verb = 'GET';
         this._url = null;
         this._headers = [];
@@ -15,65 +50,5 @@ var DrapoServerRequest = (function () {
         this._extractHeaders = extractHeaders;
         this._binary = binary;
     }
-    Object.defineProperty(DrapoServerRequest.prototype, "Verb", {
-        get: function () {
-            return (this._verb);
-        },
-        set: function (value) {
-            this._verb = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoServerRequest.prototype, "Url", {
-        get: function () {
-            return (this._url);
-        },
-        set: function (value) {
-            this._url = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoServerRequest.prototype, "Headers", {
-        get: function () {
-            return (this._headers);
-        },
-        set: function (value) {
-            this._headers = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoServerRequest.prototype, "Body", {
-        get: function () {
-            return (this._body);
-        },
-        set: function (value) {
-            this._body = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoServerRequest.prototype, "ExtractHeaders", {
-        get: function () {
-            return (this._extractHeaders);
-        },
-        set: function (value) {
-            this._extractHeaders = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoServerRequest.prototype, "Binary", {
-        get: function () {
-            return (this._binary);
-        },
-        set: function (value) {
-            this._binary = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    return DrapoServerRequest;
-}());
+}
+//# sourceMappingURL=DrapoServerRequest.js.map

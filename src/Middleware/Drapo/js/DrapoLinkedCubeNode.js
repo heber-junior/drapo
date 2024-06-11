@@ -1,9 +1,9 @@
 "use strict";
-var DrapoLinkedCubeNode = (function () {
-    function DrapoLinkedCubeNode() {
+class DrapoLinkedCubeNode {
+    constructor() {
         this.Value = null;
         this.Context = null;
         this.Next = null;
     }
-    return DrapoLinkedCubeNode;
-}());
+}
+//# sourceMappingURL=DrapoLinkedCubeNode.js.map

@@ -1,118 +1,78 @@
 "use strict";
-var DrapoDrag = (function () {
-    function DrapoDrag() {
+class DrapoDrag {
+    get Code() {
+        return (this._code);
+    }
+    set Code(value) {
+        this._code = value;
+    }
+    get Action() {
+        return (this._action);
+    }
+    set Action(value) {
+        this._action = value;
+    }
+    get Item() {
+        return (this._contextItem);
+    }
+    set Item(value) {
+        this._contextItem = value;
+    }
+    get Tags() {
+        return (this._tags);
+    }
+    set Tags(value) {
+        this._tags = value;
+    }
+    get Notify() {
+        return (this._notify);
+    }
+    set Notify(value) {
+        this._notify = value;
+    }
+    get OnBefore() {
+        return (this._onBefore);
+    }
+    set OnBefore(value) {
+        this._onBefore = value;
+    }
+    get OnAfter() {
+        return (this._onAfter);
+    }
+    set OnAfter(value) {
+        this._onAfter = value;
+    }
+    get DataKey() {
+        return (this._dataKey);
+    }
+    set DataKey(value) {
+        this._dataKey = value;
+    }
+    get Sector() {
+        return (this._sector);
+    }
+    set Sector(value) {
+        this._sector = value;
+    }
+    get Custom() {
+        return (this._custom);
+    }
+    set Custom(value) {
+        this._custom = value;
+    }
+    constructor() {
         this._action = 'move';
         this._tags = [];
     }
-    Object.defineProperty(DrapoDrag.prototype, "Code", {
-        get: function () {
-            return (this._code);
-        },
-        set: function (value) {
-            this._code = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoDrag.prototype, "Action", {
-        get: function () {
-            return (this._action);
-        },
-        set: function (value) {
-            this._action = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoDrag.prototype, "Item", {
-        get: function () {
-            return (this._contextItem);
-        },
-        set: function (value) {
-            this._contextItem = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoDrag.prototype, "Tags", {
-        get: function () {
-            return (this._tags);
-        },
-        set: function (value) {
-            this._tags = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoDrag.prototype, "Notify", {
-        get: function () {
-            return (this._notify);
-        },
-        set: function (value) {
-            this._notify = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoDrag.prototype, "OnBefore", {
-        get: function () {
-            return (this._onBefore);
-        },
-        set: function (value) {
-            this._onBefore = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoDrag.prototype, "OnAfter", {
-        get: function () {
-            return (this._onAfter);
-        },
-        set: function (value) {
-            this._onAfter = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoDrag.prototype, "DataKey", {
-        get: function () {
-            return (this._dataKey);
-        },
-        set: function (value) {
-            this._dataKey = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoDrag.prototype, "Sector", {
-        get: function () {
-            return (this._sector);
-        },
-        set: function (value) {
-            this._sector = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoDrag.prototype, "Custom", {
-        get: function () {
-            return (this._custom);
-        },
-        set: function (value) {
-            this._custom = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    DrapoDrag.prototype.IsMatch = function (tags) {
-        for (var i = 0; i < tags.length; i++) {
-            var tag = tags[i];
-            for (var j = 0; j < this._tags.length; j++) {
+    IsMatch(tags) {
+        for (let i = 0; i < tags.length; i++) {
+            const tag = tags[i];
+            for (let j = 0; j < this._tags.length; j++) {
                 if (this._tags[j] === tag)
                     return (true);
             }
         }
         return (false);
-    };
-    return DrapoDrag;
-}());
+    }
+}
+//# sourceMappingURL=DrapoDrag.js.map

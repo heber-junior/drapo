@@ -1,157 +1,97 @@
 "use strict";
-var DrapoResize = (function () {
-    function DrapoResize() {
+class DrapoResize {
+    get Code() {
+        return (this._code);
+    }
+    set Code(value) {
+        this._code = value;
+    }
+    get Item() {
+        return (this._contextItem);
+    }
+    set Item(value) {
+        this._contextItem = value;
+    }
+    get Element() {
+        return (this._element);
+    }
+    set Element(value) {
+        this._element = value;
+    }
+    get Parent() {
+        return (this._parent);
+    }
+    set Parent(value) {
+        this._parent = value;
+    }
+    get Container() {
+        return (this._container);
+    }
+    set Container(value) {
+        this._container = value;
+    }
+    get Model() {
+        return (this._model);
+    }
+    set Model(value) {
+        this._model = value;
+    }
+    get Location() {
+        return (this._location);
+    }
+    set Location(value) {
+        this._location = value;
+    }
+    get Type() {
+        return (this._type);
+    }
+    set Type(value) {
+        this._type = value;
+    }
+    get Unit() {
+        return (this._unit);
+    }
+    set Unit(value) {
+        this._unit = value;
+    }
+    get Class() {
+        return (this._class);
+    }
+    set Class(value) {
+        this._class = value;
+    }
+    get Preview() {
+        return (this._preview);
+    }
+    set Preview(value) {
+        this._preview = value;
+    }
+    get SizeStart() {
+        return (this._sizeStart);
+    }
+    set SizeStart(value) {
+        this._sizeStart = value;
+    }
+    get UnitStart() {
+        return (this._unitStart);
+    }
+    set UnitStart(value) {
+        this._unitStart = value;
+    }
+    get EventStartValue() {
+        return (this._eventStartValue);
+    }
+    set EventStartValue(value) {
+        this._eventStartValue = value;
+    }
+    get EventCurrentValue() {
+        return (this._eventCurrentValue);
+    }
+    set EventCurrentValue(value) {
+        this._eventCurrentValue = value;
+    }
+    constructor() {
         this.Unit = 'px';
     }
-    Object.defineProperty(DrapoResize.prototype, "Code", {
-        get: function () {
-            return (this._code);
-        },
-        set: function (value) {
-            this._code = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoResize.prototype, "Item", {
-        get: function () {
-            return (this._contextItem);
-        },
-        set: function (value) {
-            this._contextItem = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoResize.prototype, "Element", {
-        get: function () {
-            return (this._element);
-        },
-        set: function (value) {
-            this._element = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoResize.prototype, "Parent", {
-        get: function () {
-            return (this._parent);
-        },
-        set: function (value) {
-            this._parent = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoResize.prototype, "Container", {
-        get: function () {
-            return (this._container);
-        },
-        set: function (value) {
-            this._container = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoResize.prototype, "Model", {
-        get: function () {
-            return (this._model);
-        },
-        set: function (value) {
-            this._model = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoResize.prototype, "Location", {
-        get: function () {
-            return (this._location);
-        },
-        set: function (value) {
-            this._location = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoResize.prototype, "Type", {
-        get: function () {
-            return (this._type);
-        },
-        set: function (value) {
-            this._type = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoResize.prototype, "Unit", {
-        get: function () {
-            return (this._unit);
-        },
-        set: function (value) {
-            this._unit = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoResize.prototype, "Class", {
-        get: function () {
-            return (this._class);
-        },
-        set: function (value) {
-            this._class = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoResize.prototype, "Preview", {
-        get: function () {
-            return (this._preview);
-        },
-        set: function (value) {
-            this._preview = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoResize.prototype, "SizeStart", {
-        get: function () {
-            return (this._sizeStart);
-        },
-        set: function (value) {
-            this._sizeStart = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoResize.prototype, "UnitStart", {
-        get: function () {
-            return (this._unitStart);
-        },
-        set: function (value) {
-            this._unitStart = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoResize.prototype, "EventStartValue", {
-        get: function () {
-            return (this._eventStartValue);
-        },
-        set: function (value) {
-            this._eventStartValue = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoResize.prototype, "EventCurrentValue", {
-        get: function () {
-            return (this._eventCurrentValue);
-        },
-        set: function (value) {
-            this._eventCurrentValue = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    return DrapoResize;
-}());
+}
+//# sourceMappingURL=DrapoResize.js.map

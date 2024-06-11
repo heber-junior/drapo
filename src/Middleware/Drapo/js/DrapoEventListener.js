@@ -1,39 +1,27 @@
 "use strict";
-var DrapoEventListener = (function () {
-    function DrapoEventListener() {
+class DrapoEventListener {
+    constructor() {
         this._eventType = null;
         this._eventNamespace = null;
         this._function = null;
     }
-    Object.defineProperty(DrapoEventListener.prototype, "EventType", {
-        get: function () {
-            return (this._eventType);
-        },
-        set: function (value) {
-            this._eventType = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoEventListener.prototype, "EventNamespace", {
-        get: function () {
-            return (this._eventNamespace);
-        },
-        set: function (value) {
-            this._eventNamespace = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoEventListener.prototype, "Function", {
-        get: function () {
-            return (this._function);
-        },
-        set: function (value) {
-            this._function = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    return DrapoEventListener;
-}());
+    get EventType() {
+        return (this._eventType);
+    }
+    set EventType(value) {
+        this._eventType = value;
+    }
+    get EventNamespace() {
+        return (this._eventNamespace);
+    }
+    set EventNamespace(value) {
+        this._eventNamespace = value;
+    }
+    get Function() {
+        return (this._function);
+    }
+    set Function(value) {
+        this._function = value;
+    }
+}
+//# sourceMappingURL=DrapoEventListener.js.map

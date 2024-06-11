@@ -8,35 +8,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (g && (g = 0, op[0] && (_ = 0)), _) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+class DrapoObserver {
+    get Application() {
+        return (this._application);
     }
-};
-var DrapoObserver = (function () {
-    function DrapoObserver(application) {
+    get IsEnabledNotifyIncremental() {
+        return (this._IsEnabledNotifyIncremental);
+    }
+    set IsEnabledNotifyIncremental(value) {
+        this._IsEnabledNotifyIncremental = value;
+    }
+    constructor(application) {
         this._dataBarberDataKeys = [];
         this._dataBarberFields = [];
         this._dataBarberElements = [];
@@ -65,67 +47,50 @@ var DrapoObserver = (function () {
         this._lockedData = [];
         this._application = application;
     }
-    Object.defineProperty(DrapoObserver.prototype, "Application", {
-        get: function () {
-            return (this._application);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoObserver.prototype, "IsEnabledNotifyIncremental", {
-        get: function () {
-            return (this._IsEnabledNotifyIncremental);
-        },
-        set: function (value) {
-            this._IsEnabledNotifyIncremental = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    DrapoObserver.prototype.GetBarberDataKeyIndex = function (dataKey) {
-        for (var i = 0; i < this._dataBarberDataKeys.length; i++) {
+    GetBarberDataKeyIndex(dataKey) {
+        for (let i = 0; i < this._dataBarberDataKeys.length; i++) {
             if (this._dataBarberDataKeys[i] == dataKey)
                 return (i);
         }
         return (null);
-    };
-    DrapoObserver.prototype.GetForDataKeyIndex = function (dataKey) {
-        for (var i = 0; i < this._dataForDataKey.length; i++) {
+    }
+    GetForDataKeyIndex(dataKey) {
+        for (let i = 0; i < this._dataForDataKey.length; i++) {
             if (this._dataForDataKey[i] == dataKey)
                 return (i);
         }
         return (null);
-    };
-    DrapoObserver.prototype.GetDataIncrementalKeyIndex = function (dataKey) {
-        for (var i = 0; i < this._dataIncrementalKey.length; i++) {
+    }
+    GetDataIncrementalKeyIndex(dataKey) {
+        for (let i = 0; i < this._dataIncrementalKey.length; i++) {
             if (this._dataIncrementalKey[i] == dataKey)
                 return (i);
         }
         return (null);
-    };
-    DrapoObserver.prototype.CreateBarberDataKeyIndex = function (dataKey) {
-        var index = this._dataBarberDataKeys.push(dataKey);
+    }
+    CreateBarberDataKeyIndex(dataKey) {
+        const index = this._dataBarberDataKeys.push(dataKey);
         this._dataBarberFields.push([]);
         this._dataBarberElements.push([]);
         return (index - 1);
-    };
-    DrapoObserver.prototype.CreateForDataKeyIndex = function (dataKey) {
-        var index = this._dataForDataKey.push(dataKey);
+    }
+    CreateForDataKeyIndex(dataKey) {
+        const index = this._dataForDataKey.push(dataKey);
         this._dataForElement.push([]);
         return (index - 1);
-    };
-    DrapoObserver.prototype.CreateDataIncrementalKeyIndex = function (dataKey) {
-        var index = this._dataIncrementalKey.push(dataKey);
+    }
+    CreateDataIncrementalKeyIndex(dataKey) {
+        const index = this._dataIncrementalKey.push(dataKey);
         this._dataIncrementalElements.push([]);
         return (index - 1);
-    };
-    DrapoObserver.prototype.SubscribeBarber = function (element, dataKey, dataFields) {
-        var dataKeyIndex = this.GetBarberDataKeyIndex(dataKey);
+    }
+    SubscribeBarber(element, dataKey, dataFields) {
+        let dataKeyIndex = this.GetBarberDataKeyIndex(dataKey);
         if (dataKeyIndex == null)
             dataKeyIndex = this.CreateBarberDataKeyIndex(dataKey);
-        var dataBarberFields = this._dataBarberFields[dataKeyIndex];
-        var elements = this._dataBarberElements[dataKeyIndex];
-        for (var i = 0; i < dataBarberFields.length; i++) {
+        const dataBarberFields = this._dataBarberFields[dataKeyIndex];
+        const elements = this._dataBarberElements[dataKeyIndex];
+        for (let i = 0; i < dataBarberFields.length; i++) {
             if (!this.IsEqualDataFields(dataBarberFields[i], dataFields))
                 continue;
             if (elements[i] !== element)
@@ -135,52 +100,51 @@ var DrapoObserver = (function () {
         dataBarberFields.push(dataFields);
         elements.push(element);
         return (true);
-    };
-    DrapoObserver.prototype.UnsubscribeBarber = function (dataKey) {
-        var dataKeyIndex = this.GetBarberDataKeyIndex(dataKey);
+    }
+    UnsubscribeBarber(dataKey) {
+        const dataKeyIndex = this.GetBarberDataKeyIndex(dataKey);
         if (dataKeyIndex === null)
             return;
         this._dataBarberDataKeys.splice(dataKeyIndex, 1);
         this._dataBarberElements.splice(dataKeyIndex, 1);
         this._dataBarberFields.splice(dataKeyIndex, 1);
-    };
-    DrapoObserver.prototype.SubscribeFor = function (elementForTemplate, dataKey) {
-        var dataKeyIndex = this.GetForDataKeyIndex(dataKey);
+    }
+    SubscribeFor(elementForTemplate, dataKey) {
+        let dataKeyIndex = this.GetForDataKeyIndex(dataKey);
         if (dataKeyIndex == null)
             dataKeyIndex = this.CreateForDataKeyIndex(dataKey);
         this._dataForElement[dataKeyIndex].push(elementForTemplate);
-    };
-    DrapoObserver.prototype.SubscribeStorage = function (dataKey, dataFields, dataReferenceKey, type) {
-        if (type === void 0) { type = DrapoStorageLinkType.Reload; }
-        var dataField = ((dataFields != null) && (dataFields.length > 0)) ? dataFields[0] : null;
-        var dataKeyIndex = this.GetStorageKeyIndex(dataKey);
+    }
+    SubscribeStorage(dataKey, dataFields, dataReferenceKey, type = DrapoStorageLinkType.Reload) {
+        const dataField = ((dataFields != null) && (dataFields.length > 0)) ? dataFields[0] : null;
+        let dataKeyIndex = this.GetStorageKeyIndex(dataKey);
         if (dataKeyIndex == null)
             dataKeyIndex = this.CreateStorageDataKeyIndex(dataKey);
-        var dataStorageFields = this._dataStorageKeyFields[dataKeyIndex];
-        var dataReferenceKeys = this._dataStorageKeyReferenceKey[dataKeyIndex];
-        var dataTypes = this._dataStorageType[dataKeyIndex];
-        for (var i = 0; i < dataStorageFields.length; i++) {
+        const dataStorageFields = this._dataStorageKeyFields[dataKeyIndex];
+        const dataReferenceKeys = this._dataStorageKeyReferenceKey[dataKeyIndex];
+        const dataTypes = this._dataStorageType[dataKeyIndex];
+        for (let i = 0; i < dataStorageFields.length; i++) {
             if ((dataStorageFields[i] === dataField) && (dataReferenceKeys[i] === dataReferenceKey))
                 return;
         }
         dataStorageFields.push(dataField);
         dataReferenceKeys.push(dataReferenceKey);
         dataTypes.push(type);
-    };
-    DrapoObserver.prototype.UnsubscribeStorage = function (dataKey) {
+    }
+    UnsubscribeStorage(dataKey) {
         this.UnsubscribeStorageReferenceKey(dataKey);
-        var dataKeyIndex = this.GetStorageKeyIndex(dataKey);
+        const dataKeyIndex = this.GetStorageKeyIndex(dataKey);
         if (dataKeyIndex === null)
             return;
         this._dataStorageKey.splice(dataKeyIndex, 1);
         this._dataStorageKeyFields.splice(dataKeyIndex, 1);
         this._dataStorageKeyReferenceKey.splice(dataKeyIndex, 1);
         this._dataStorageType.splice(dataKeyIndex, 1);
-    };
-    DrapoObserver.prototype.UnsubscribeStorageReferenceKey = function (dataKey) {
-        for (var i = this._dataStorageKey.length - 1; i >= 0; i--) {
-            var references = this._dataStorageKeyReferenceKey[i];
-            for (var j = references.length - 1; j >= 0; j--) {
+    }
+    UnsubscribeStorageReferenceKey(dataKey) {
+        for (let i = this._dataStorageKey.length - 1; i >= 0; i--) {
+            const references = this._dataStorageKeyReferenceKey[i];
+            for (let j = references.length - 1; j >= 0; j--) {
                 if (references[j] !== dataKey)
                     continue;
                 this._dataStorageKeyFields[i].splice(j, 1);
@@ -194,10 +158,9 @@ var DrapoObserver = (function () {
             this._dataStorageKeyReferenceKey.splice(i, 1);
             this._dataStorageType.splice(i, 1);
         }
-    };
-    DrapoObserver.prototype.UnsubscribeFor = function (dataKey, elementForTemplate) {
-        if (elementForTemplate === void 0) { elementForTemplate = null; }
-        var dataKeyIndex = this.GetForDataKeyIndex(dataKey);
+    }
+    UnsubscribeFor(dataKey, elementForTemplate = null) {
+        const dataKeyIndex = this.GetForDataKeyIndex(dataKey);
         if (dataKeyIndex == null)
             return;
         if (elementForTemplate === null) {
@@ -205,407 +168,258 @@ var DrapoObserver = (function () {
             this._dataForElement.splice(dataKeyIndex, 1);
             return;
         }
-        var dataElements = this._dataForElement[dataKeyIndex];
-        for (var i = dataElements.length - 1; i >= 0; i--) {
-            var dataElementParent = dataElements[i];
+        const dataElements = this._dataForElement[dataKeyIndex];
+        for (let i = dataElements.length - 1; i >= 0; i--) {
+            const dataElementParent = dataElements[i];
             if (dataElementParent != elementForTemplate)
                 continue;
             this._dataForElement[dataKeyIndex].splice(i, 1);
         }
-    };
-    DrapoObserver.prototype.Notify = function (dataKey, dataIndex, dataFields, canUseDifference, canNotifyStorage, notifyStorageDataKey) {
-        if (canUseDifference === void 0) { canUseDifference = true; }
-        if (canNotifyStorage === void 0) { canNotifyStorage = true; }
-        if (notifyStorageDataKey === void 0) { notifyStorageDataKey = null; }
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        if (this.IsLocked(dataKey))
-                            return [2];
-                        return [4, this.Application.Debugger.AddNotify(dataKey)];
-                    case 1:
-                        _a.sent();
-                        if (!canNotifyStorage) return [3, 3];
-                        return [4, this.NotifyStorage(dataKey, dataFields, notifyStorageDataKey)];
-                    case 2:
-                        _a.sent();
-                        _a.label = 3;
-                    case 3: return [4, this.NotifyFor(dataKey, dataIndex, dataFields, canUseDifference)];
-                    case 4:
-                        _a.sent();
-                        return [4, this.NotifyBarber(dataKey, dataFields)];
-                    case 5:
-                        _a.sent();
-                        return [4, this.NotifyLink(dataKey, dataFields)];
-                    case 6:
-                        _a.sent();
-                        return [4, this.NotifyComponent(dataKey, dataFields)];
-                    case 7:
-                        _a.sent();
-                        return [4, this.Application.Storage.FireEventOnNotify(dataKey)];
-                    case 8:
-                        _a.sent();
-                        return [2];
-                }
-            });
+    }
+    Notify(dataKey, dataIndex, dataFields, canUseDifference = true, canNotifyStorage = true, notifyStorageDataKey = null) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (this.IsLocked(dataKey))
+                return;
+            yield this.Application.Debugger.AddNotify(dataKey);
+            if (canNotifyStorage)
+                yield this.NotifyStorage(dataKey, dataFields, notifyStorageDataKey);
+            yield this.NotifyFor(dataKey, dataIndex, dataFields, canUseDifference);
+            yield this.NotifyBarber(dataKey, dataFields);
+            yield this.NotifyLink(dataKey, dataFields);
+            yield this.NotifyComponent(dataKey, dataFields);
+            yield this.Application.Storage.FireEventOnNotify(dataKey);
         });
-    };
-    DrapoObserver.prototype.NotifyFor = function (dataKey, dataIndex, dataFields, canUseDifference, type) {
-        if (canUseDifference === void 0) { canUseDifference = true; }
-        if (type === void 0) { type = DrapoStorageLinkType.Render; }
-        return __awaiter(this, void 0, void 0, function () {
-            var index, dataElements, i, dataElement, elParent;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        index = this.GetForDataKeyIndex(dataKey);
-                        if (index === null)
-                            return [2];
-                        dataElements = this._dataForElement[index];
-                        i = dataElements.length - 1;
-                        _a.label = 1;
-                    case 1:
-                        if (!(i >= 0)) return [3, 6];
-                        dataElement = dataElements[i];
-                        if (!(dataElement.parentElement === null)) return [3, 2];
-                        dataElements.splice(i, 1);
-                        return [3, 5];
-                    case 2:
-                        if (!!this.Application.SectorContainerHandler.IsElementContainerized(dataElement)) return [3, 5];
-                        elParent = dataElement.parentElement;
-                        return [4, this.Application.ControlFlow.ResolveControlFlowForElement(dataElement, false, canUseDifference, type)];
-                    case 3:
-                        _a.sent();
-                        return [4, this.Application.ComponentHandler.ResolveComponents(elParent)];
-                    case 4:
-                        _a.sent();
-                        _a.label = 5;
-                    case 5:
-                        i--;
-                        return [3, 1];
-                    case 6: return [2];
+    }
+    NotifyFor(dataKey, dataIndex, dataFields, canUseDifference = true, type = DrapoStorageLinkType.Render) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const index = this.GetForDataKeyIndex(dataKey);
+            if (index === null)
+                return;
+            const dataElements = this._dataForElement[index];
+            for (let i = dataElements.length - 1; i >= 0; i--) {
+                const dataElement = dataElements[i];
+                if (dataElement.parentElement === null) {
+                    dataElements.splice(i, 1);
                 }
-            });
-        });
-    };
-    DrapoObserver.prototype.NotifyBarber = function (dataKey, dataFields) {
-        return __awaiter(this, void 0, void 0, function () {
-            var dataKeyIndex, dataField, dataElements, dataBarberFields, i, element, dataBarberFieldsCurrent, sector;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        dataKeyIndex = this.GetBarberDataKeyIndex(dataKey);
-                        if (dataKeyIndex === null)
-                            return [2];
-                        dataField = ((dataFields != null) && (dataFields.length > 0)) ? dataFields[0] : null;
-                        dataElements = this._dataBarberElements[dataKeyIndex];
-                        dataBarberFields = this._dataBarberFields[dataKeyIndex];
-                        i = dataElements.length - 1;
-                        _a.label = 1;
-                    case 1:
-                        if (!(i >= 0)) return [3, 5];
-                        element = dataElements[i];
-                        if (!this.Application.Document.IsElementAttached(element)) return [3, 3];
-                        dataBarberFieldsCurrent = dataBarberFields[i];
-                        if (!this.IsCompatibleDataFields(dataFields, dataBarberFieldsCurrent))
-                            return [3, 4];
-                        sector = this.Application.Document.GetSector(element);
-                        return [4, this.Application.Barber.ResolveFilter(element, sector, dataField == null, dataKey, dataField)];
-                    case 2:
-                        _a.sent();
-                        return [3, 4];
-                    case 3:
-                        if (!this.Application.SectorContainerHandler.IsElementContainerized(element)) {
-                            dataElements.splice(i, 1);
-                            dataBarberFields.splice(i, 1);
-                        }
-                        _a.label = 4;
-                    case 4:
-                        i--;
-                        return [3, 1];
-                    case 5: return [2];
+                else if (!this.Application.SectorContainerHandler.IsElementContainerized(dataElement)) {
+                    const elParent = dataElement.parentElement;
+                    yield this.Application.ControlFlow.ResolveControlFlowForElement(dataElement, false, canUseDifference, type);
+                    yield this.Application.ComponentHandler.ResolveComponents(elParent);
                 }
-            });
+            }
         });
-    };
-    DrapoObserver.prototype.NotifyStorage = function (dataKey, dataFields, notifyStorageDataKey) {
-        if (notifyStorageDataKey === void 0) { notifyStorageDataKey = null; }
-        return __awaiter(this, void 0, void 0, function () {
-            var dataKeyIndex, dataField, dataStorageFields, dataReferenceKeys, dataTypes, i, dataReferenceKey, type, sectors, j;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        dataKeyIndex = this.GetStorageKeyIndex(dataKey);
-                        if (dataKeyIndex == null)
-                            return [2];
-                        dataField = ((dataFields != null) && (dataFields.length > 0)) ? dataFields[0] : null;
-                        dataStorageFields = this._dataStorageKeyFields[dataKeyIndex];
-                        dataReferenceKeys = this._dataStorageKeyReferenceKey[dataKeyIndex];
-                        dataTypes = this._dataStorageType[dataKeyIndex];
-                        i = 0;
-                        _a.label = 1;
-                    case 1:
-                        if (!(i < dataStorageFields.length)) return [3, 14];
-                        if ((dataField != null) && (dataStorageFields[i] != null) && (dataStorageFields[i] !== dataField))
-                            return [3, 13];
-                        dataReferenceKey = dataReferenceKeys[i];
-                        if ((notifyStorageDataKey != null) && (dataReferenceKey === notifyStorageDataKey))
-                            return [3, 13];
-                        type = dataTypes[i];
-                        if (!(type == DrapoStorageLinkType.Reload)) return [3, 6];
-                        sectors = this.Application.Storage.GetSectors(dataReferenceKey);
-                        j = 0;
-                        _a.label = 2;
-                    case 2:
-                        if (!(j < sectors.length)) return [3, 5];
-                        return [4, this.Application.Storage.ReloadData(dataReferenceKey, sectors[j], true, false)];
-                    case 3:
-                        _a.sent();
-                        _a.label = 4;
-                    case 4:
-                        j++;
-                        return [3, 2];
-                    case 5: return [3, 13];
-                    case 6:
-                        if (!(type == DrapoStorageLinkType.RenderClass)) return [3, 8];
-                        return [4, this.NotifyStorageRenderClass(dataReferenceKey)];
-                    case 7:
-                        _a.sent();
-                        return [3, 13];
-                    case 8:
-                        if (!(type == DrapoStorageLinkType.Pointer)) return [3, 11];
-                        return [4, this.Application.Storage.UpdatePointerStorageItems(dataKey, dataReferenceKey)];
-                    case 9:
-                        _a.sent();
-                        return [4, this.Application.Observer.Notify(dataReferenceKey, null, null, true, true, dataKey)];
-                    case 10:
-                        _a.sent();
-                        return [3, 13];
-                    case 11: return [4, this.Application.Observer.Notify(dataReferenceKey, null, null)];
-                    case 12:
-                        _a.sent();
-                        _a.label = 13;
-                    case 13:
-                        i++;
-                        return [3, 1];
-                    case 14: return [2];
+    }
+    NotifyBarber(dataKey, dataFields) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const dataKeyIndex = this.GetBarberDataKeyIndex(dataKey);
+            if (dataKeyIndex === null)
+                return;
+            const dataField = ((dataFields != null) && (dataFields.length > 0)) ? dataFields[0] : null;
+            const dataElements = this._dataBarberElements[dataKeyIndex];
+            const dataBarberFields = this._dataBarberFields[dataKeyIndex];
+            for (let i = dataElements.length - 1; i >= 0; i--) {
+                const element = dataElements[i];
+                if (this.Application.Document.IsElementAttached(element)) {
+                    const dataBarberFieldsCurrent = dataBarberFields[i];
+                    if (!this.IsCompatibleDataFields(dataFields, dataBarberFieldsCurrent))
+                        continue;
+                    const sector = this.Application.Document.GetSector(element);
+                    yield this.Application.Barber.ResolveFilter(element, sector, dataField == null, dataKey, dataField);
                 }
-            });
-        });
-    };
-    DrapoObserver.prototype.NotifyStorageRenderClass = function (dataKey) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4, this.NotifyFor(dataKey, null, null, true, DrapoStorageLinkType.RenderClass)];
-                    case 1:
-                        _a.sent();
-                        return [2];
+                else if (!this.Application.SectorContainerHandler.IsElementContainerized(element)) {
+                    dataElements.splice(i, 1);
+                    dataBarberFields.splice(i, 1);
                 }
-            });
+            }
         });
-    };
-    DrapoObserver.prototype.SubscribeIncremental = function (el, dataKey) {
-        var dataKeyIndex = this.GetDataIncrementalKeyIndex(dataKey);
+    }
+    NotifyStorage(dataKey, dataFields, notifyStorageDataKey = null) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const dataKeyIndex = this.GetStorageKeyIndex(dataKey);
+            if (dataKeyIndex == null)
+                return;
+            const dataField = ((dataFields != null) && (dataFields.length > 0)) ? dataFields[0] : null;
+            const dataStorageFields = this._dataStorageKeyFields[dataKeyIndex];
+            const dataReferenceKeys = this._dataStorageKeyReferenceKey[dataKeyIndex];
+            const dataTypes = this._dataStorageType[dataKeyIndex];
+            for (let i = 0; i < dataStorageFields.length; i++) {
+                if ((dataField != null) && (dataStorageFields[i] != null) && (dataStorageFields[i] !== dataField))
+                    continue;
+                const dataReferenceKey = dataReferenceKeys[i];
+                if ((notifyStorageDataKey != null) && (dataReferenceKey === notifyStorageDataKey))
+                    continue;
+                const type = dataTypes[i];
+                if (type == DrapoStorageLinkType.Reload) {
+                    const sectors = this.Application.Storage.GetSectors(dataReferenceKey);
+                    for (let j = 0; j < sectors.length; j++)
+                        yield this.Application.Storage.ReloadData(dataReferenceKey, sectors[j], true, false);
+                }
+                else if (type == DrapoStorageLinkType.RenderClass) {
+                    yield this.NotifyStorageRenderClass(dataReferenceKey);
+                }
+                else if (type == DrapoStorageLinkType.Pointer) {
+                    yield this.Application.Storage.UpdatePointerStorageItems(dataKey, dataReferenceKey);
+                    yield this.Application.Observer.Notify(dataReferenceKey, null, null, true, true, dataKey);
+                }
+                else {
+                    yield this.Application.Observer.Notify(dataReferenceKey, null, null);
+                }
+            }
+        });
+    }
+    NotifyStorageRenderClass(dataKey) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield this.NotifyFor(dataKey, null, null, true, DrapoStorageLinkType.RenderClass);
+        });
+    }
+    SubscribeIncremental(el, dataKey) {
+        let dataKeyIndex = this.GetDataIncrementalKeyIndex(dataKey);
         if (dataKeyIndex == null)
             dataKeyIndex = this.CreateDataIncrementalKeyIndex(dataKey);
         this._dataIncrementalElements[dataKeyIndex].push(el);
-    };
-    DrapoObserver.prototype.NotifyIncremental = function (dataKey) {
-        return __awaiter(this, void 0, void 0, function () {
-            var dataKeyIndex, elements, i, element;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        if (!this.IsEnabledNotifyIncremental)
-                            return [2];
-                        dataKeyIndex = this.GetDataIncrementalKeyIndex(dataKey);
-                        if (dataKeyIndex == null)
-                            return [2];
-                        elements = this._dataIncrementalElements[dataKeyIndex];
-                        i = elements.length - 1;
-                        _a.label = 1;
-                    case 1:
-                        if (!(i >= 0)) return [3, 5];
-                        if (i >= elements.length)
-                            return [3, 4];
-                        element = elements[i];
-                        if (!(element.parentElement === null)) return [3, 2];
-                        elements.splice(i, 1);
-                        return [3, 4];
-                    case 2: return [4, this.Application.ControlFlow.ResolveControlFlowForElement(element, true)];
-                    case 3:
-                        _a.sent();
-                        _a.label = 4;
-                    case 4:
-                        i--;
-                        return [3, 1];
-                    case 5: return [2];
-                }
-            });
+    }
+    NotifyIncremental(dataKey) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (!this.IsEnabledNotifyIncremental)
+                return;
+            const dataKeyIndex = this.GetDataIncrementalKeyIndex(dataKey);
+            if (dataKeyIndex == null)
+                return;
+            const elements = this._dataIncrementalElements[dataKeyIndex];
+            for (let i = elements.length - 1; i >= 0; i--) {
+                if (i >= elements.length)
+                    continue;
+                const element = elements[i];
+                if (element.parentElement === null)
+                    elements.splice(i, 1);
+                else
+                    yield this.Application.ControlFlow.ResolveControlFlowForElement(element, true);
+            }
         });
-    };
-    DrapoObserver.prototype.SubscribeDelay = function (el, dataKey, dataFields) {
-        var dataKeyIndex = this.GetDelayKeyIndex(dataKey);
+    }
+    SubscribeDelay(el, dataKey, dataFields) {
+        let dataKeyIndex = this.GetDelayKeyIndex(dataKey);
         if (dataKeyIndex == null) {
             dataKeyIndex = this._dataDelayKey.push(dataKey) - 1;
             this._dataDelayField.push([]);
             this._dataDelayElements.push([]);
         }
-        var dataField = ((dataFields != null) && (dataFields.length > 0)) ? dataFields[0] : null;
-        var dataFieldIndex = this.GetDelayFieldKeyIndex(dataKeyIndex, dataField);
+        const dataField = ((dataFields != null) && (dataFields.length > 0)) ? dataFields[0] : null;
+        let dataFieldIndex = this.GetDelayFieldKeyIndex(dataKeyIndex, dataField);
         if (dataFieldIndex == null) {
             dataFieldIndex = this._dataDelayField[dataKeyIndex].push(dataField) - 1;
             this._dataDelayElements[dataKeyIndex].push([]);
         }
         this._dataDelayElements[dataKeyIndex][dataFieldIndex].push(el);
-    };
-    DrapoObserver.prototype.NotifyDelay = function (dataKey, dataFields) {
-        return __awaiter(this, void 0, void 0, function () {
-            var dataKeyIndex, dataField, dataFieldIndex, elements, i, element, sector;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        dataKeyIndex = this.GetDelayKeyIndex(dataKey);
-                        if (dataKeyIndex == null)
-                            return [2];
-                        dataField = ((dataFields != null) && (dataFields.length > 0)) ? dataFields[0] : null;
-                        dataFieldIndex = this.GetDelayFieldKeyIndex(dataKeyIndex, dataField);
-                        if (dataFieldIndex == null)
-                            return [2];
-                        elements = this._dataDelayElements[dataKeyIndex][dataFieldIndex];
-                        i = 0;
-                        _a.label = 1;
-                    case 1:
-                        if (!(i < elements.length)) return [3, 4];
-                        element = elements[i];
-                        if (element === null)
-                            return [3, 3];
-                        this.SubscribeBarber(element, dataKey, dataFields);
-                        sector = this.Application.Document.GetSector(element);
-                        return [4, this.Application.Barber.ResolveElementDelayed(element, sector, dataKey, dataField)];
-                    case 2:
-                        _a.sent();
-                        _a.label = 3;
-                    case 3:
-                        i++;
-                        return [3, 1];
-                    case 4:
-                        this._dataDelayField[dataKeyIndex].splice(dataFieldIndex, 1);
-                        this._dataDelayElements[dataKeyIndex].splice(dataFieldIndex, 1);
-                        return [2];
-                }
-            });
+    }
+    NotifyDelay(dataKey, dataFields) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const dataKeyIndex = this.GetDelayKeyIndex(dataKey);
+            if (dataKeyIndex == null)
+                return;
+            const dataField = ((dataFields != null) && (dataFields.length > 0)) ? dataFields[0] : null;
+            const dataFieldIndex = this.GetDelayFieldKeyIndex(dataKeyIndex, dataField);
+            if (dataFieldIndex == null)
+                return;
+            const elements = this._dataDelayElements[dataKeyIndex][dataFieldIndex];
+            for (let i = 0; i < elements.length; i++) {
+                const element = elements[i];
+                if (element === null)
+                    continue;
+                this.SubscribeBarber(element, dataKey, dataFields);
+                const sector = this.Application.Document.GetSector(element);
+                yield this.Application.Barber.ResolveElementDelayed(element, sector, dataKey, dataField);
+            }
+            this._dataDelayField[dataKeyIndex].splice(dataFieldIndex, 1);
+            this._dataDelayElements[dataKeyIndex].splice(dataFieldIndex, 1);
         });
-    };
-    DrapoObserver.prototype.SubscribeAuthorization = function (dataKey, type) {
+    }
+    SubscribeAuthorization(dataKey, type) {
         if (this.HasDataKeyAuthorization(dataKey))
             return;
         this._dataAuthorizationKey.push(dataKey);
         this._dataAuthorizationType.push(type);
-    };
-    DrapoObserver.prototype.HasDataKeyAuthorization = function (dataKey) {
+    }
+    HasDataKeyAuthorization(dataKey) {
         return (this.GetDataKeyAuthorizationIndex(dataKey) >= 0);
-    };
-    DrapoObserver.prototype.GetDataKeyAuthorizationIndex = function (dataKey) {
-        for (var i = 0; i < this._dataAuthorizationKey.length; i++)
+    }
+    GetDataKeyAuthorizationIndex(dataKey) {
+        for (let i = 0; i < this._dataAuthorizationKey.length; i++)
             if (this._dataAuthorizationKey[i] == dataKey)
                 return (i);
         return (-1);
-    };
-    DrapoObserver.prototype.NotifyAuthorization = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var i, dataKey, type;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        i = this._dataAuthorizationKey.length - 1;
-                        _a.label = 1;
-                    case 1:
-                        if (!(i >= 0)) return [3, 6];
-                        dataKey = this._dataAuthorizationKey[i];
-                        type = this._dataAuthorizationType[i];
-                        this._dataAuthorizationKey.splice(i, 1);
-                        this._dataAuthorizationType.splice(i, 1);
-                        this.Application.Document.ResetPendingAuthorizations(this.GetPendingAuthorization());
-                        if (!(type === 'notify')) return [3, 3];
-                        return [4, this.Application.Storage.ReloadData(dataKey, null)];
-                    case 2:
-                        _a.sent();
-                        return [3, 5];
-                    case 3:
-                        if (!(type === 'initialize')) return [3, 5];
-                        return [4, this.Application.Storage.RetrieveDataItem(dataKey, null)];
-                    case 4:
-                        _a.sent();
-                        _a.label = 5;
-                    case 5:
-                        i--;
-                        return [3, 1];
-                    case 6:
-                        this.Application.Document.ResetPendingAuthorizations();
-                        return [2];
-                }
-            });
+    }
+    NotifyAuthorization() {
+        return __awaiter(this, void 0, void 0, function* () {
+            for (let i = this._dataAuthorizationKey.length - 1; i >= 0; i--) {
+                const dataKey = this._dataAuthorizationKey[i];
+                const type = this._dataAuthorizationType[i];
+                this._dataAuthorizationKey.splice(i, 1);
+                this._dataAuthorizationType.splice(i, 1);
+                this.Application.Document.ResetPendingAuthorizations(this.GetPendingAuthorization());
+                if (type === 'notify')
+                    yield this.Application.Storage.ReloadData(dataKey, null);
+                else if (type === 'initialize')
+                    yield this.Application.Storage.RetrieveDataItem(dataKey, null);
+            }
+            this.Application.Document.ResetPendingAuthorizations();
         });
-    };
-    DrapoObserver.prototype.HasPendingAuthorization = function () {
+    }
+    HasPendingAuthorization() {
         return (this.GetPendingAuthorization() > 0);
-    };
-    DrapoObserver.prototype.GetPendingAuthorization = function () {
+    }
+    GetPendingAuthorization() {
         return (this._dataAuthorizationKey.length);
-    };
-    DrapoObserver.prototype.HasDelayKeys = function () {
+    }
+    HasDelayKeys() {
         return (this._dataDelayKey.length > 0);
-    };
-    DrapoObserver.prototype.GetDelayKeys = function () {
+    }
+    GetDelayKeys() {
         return (this._dataDelayKey);
-    };
-    DrapoObserver.prototype.GetDelayFields = function (dataKey) {
-        var dataKeyIndex = this.GetDelayKeyIndex(dataKey);
+    }
+    GetDelayFields(dataKey) {
+        const dataKeyIndex = this.GetDelayKeyIndex(dataKey);
         if (dataKeyIndex == null)
             return (null);
         return (this._dataDelayField[dataKeyIndex]);
-    };
-    DrapoObserver.prototype.GetDelayKeyIndex = function (dataKey) {
-        var data = this._dataDelayKey;
-        for (var i = 0; i < data.length; i++) {
+    }
+    GetDelayKeyIndex(dataKey) {
+        const data = this._dataDelayKey;
+        for (let i = 0; i < data.length; i++) {
             if (data[i] == dataKey)
                 return (i);
         }
         return (null);
-    };
-    DrapoObserver.prototype.GetDelayFieldKeyIndex = function (dataKeyIndex, dataField) {
-        var data = this._dataDelayField[dataKeyIndex];
-        for (var i = 0; i < data.length; i++) {
+    }
+    GetDelayFieldKeyIndex(dataKeyIndex, dataField) {
+        const data = this._dataDelayField[dataKeyIndex];
+        for (let i = 0; i < data.length; i++) {
             if (data[i] == dataField)
                 return (i);
         }
         return (null);
-    };
-    DrapoObserver.prototype.GetStorageKeyIndex = function (dataKey) {
-        var data = this._dataStorageKey;
-        for (var i = 0; i < data.length; i++) {
+    }
+    GetStorageKeyIndex(dataKey) {
+        const data = this._dataStorageKey;
+        for (let i = 0; i < data.length; i++) {
             if (data[i] == dataKey)
                 return (i);
         }
         return (null);
-    };
-    DrapoObserver.prototype.CreateStorageDataKeyIndex = function (dataKey) {
-        var index = this._dataStorageKey.push(dataKey);
+    }
+    CreateStorageDataKeyIndex(dataKey) {
+        const index = this._dataStorageKey.push(dataKey);
         this._dataStorageKeyFields.push([]);
         this._dataStorageKeyReferenceKey.push([]);
         this._dataStorageType.push([]);
         return (index - 1);
-    };
-    DrapoObserver.prototype.SubscribeLink = function (dataKey, referenceKey, dataFields) {
-        if (dataFields === void 0) { dataFields = null; }
+    }
+    SubscribeLink(dataKey, referenceKey, dataFields = null) {
         if (referenceKey === null)
             return (false);
-        var index = this.GetLinkIndex(dataKey, referenceKey);
+        const index = this.GetLinkIndex(dataKey, referenceKey);
         if (index !== null) {
-            var linkDataFields = this._dataLinkDataFields[index];
+            const linkDataFields = this._dataLinkDataFields[index];
             if (linkDataFields == null)
                 return (false);
             if (this.IsEqualDataFields(linkDataFields, dataFields))
@@ -619,26 +433,25 @@ var DrapoObserver = (function () {
         this._dataLinkReferenceKey.push(referenceKey);
         this._dataLinkDataFields.push(dataFields);
         return (true);
-    };
-    DrapoObserver.prototype.SubscribeLinkMustache = function (mustache, referenceKey) {
-        var inserted = false;
-        var mustaches = this.Application.Parser.ParseMustaches(mustache);
-        for (var i = 0; i < mustaches.length; i++) {
-            var mustacheCurrent = mustaches[i];
-            var mustacheParts = this.Application.Parser.ParseMustache(mustacheCurrent);
-            var mustacheDataKey = this.Application.Solver.ResolveDataKey(mustacheParts);
-            var mustacheDataFields = this.Application.Solver.ResolveDataFields(mustacheParts);
+    }
+    SubscribeLinkMustache(mustache, referenceKey) {
+        let inserted = false;
+        const mustaches = this.Application.Parser.ParseMustaches(mustache);
+        for (let i = 0; i < mustaches.length; i++) {
+            const mustacheCurrent = mustaches[i];
+            const mustacheParts = this.Application.Parser.ParseMustache(mustacheCurrent);
+            const mustacheDataKey = this.Application.Solver.ResolveDataKey(mustacheParts);
+            const mustacheDataFields = this.Application.Solver.ResolveDataFields(mustacheParts);
             if (this.SubscribeLink(mustacheDataKey, referenceKey, mustacheDataFields))
                 inserted = true;
         }
         return (inserted);
-    };
-    DrapoObserver.prototype.UnsubscribeLink = function (dataKey, referenceKey) {
-        if (referenceKey === void 0) { referenceKey = null; }
+    }
+    UnsubscribeLink(dataKey, referenceKey = null) {
         if (referenceKey === null) {
-            var unsubscribed = false;
-            for (var i = 0; i < this._dataLinkDataKey.length; i++) {
-                var remove = false;
+            let unsubscribed = false;
+            for (let i = 0; i < this._dataLinkDataKey.length; i++) {
+                let remove = false;
                 if (this._dataLinkDataKey[i] === dataKey)
                     remove = true;
                 if ((!remove) && (this._dataLinkReferenceKey[i] === dataKey))
@@ -653,7 +466,7 @@ var DrapoObserver = (function () {
             return (unsubscribed);
         }
         else {
-            var index = this.GetLinkIndex(dataKey, referenceKey);
+            const index = this.GetLinkIndex(dataKey, referenceKey);
             if (index === null)
                 return (false);
             this._dataLinkDataKey.splice(index, 1);
@@ -661,77 +474,61 @@ var DrapoObserver = (function () {
             this._dataLinkDataFields.splice(index, 1);
             return (true);
         }
-    };
-    DrapoObserver.prototype.GetLinkIndex = function (dataKey, referenceKey) {
-        for (var i = 0; i < this._dataLinkDataKey.length; i++) {
-            var dataKeyLink = this._dataLinkDataKey[i];
+    }
+    GetLinkIndex(dataKey, referenceKey) {
+        for (let i = 0; i < this._dataLinkDataKey.length; i++) {
+            const dataKeyLink = this._dataLinkDataKey[i];
             if (dataKeyLink !== dataKey)
                 continue;
-            var referenceKeyLink = this._dataLinkReferenceKey[i];
+            const referenceKeyLink = this._dataLinkReferenceKey[i];
             if (referenceKeyLink === referenceKey)
                 return (i);
         }
         return (null);
-    };
-    DrapoObserver.prototype.NotifyLink = function (dataKey, dataFields) {
-        return __awaiter(this, void 0, void 0, function () {
-            var i, dataKeyLink, referenceKeyLink;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        i = 0;
-                        _a.label = 1;
-                    case 1:
-                        if (!(i < this._dataLinkDataKey.length)) return [3, 4];
-                        dataKeyLink = this._dataLinkDataKey[i];
-                        if ((dataKeyLink !== dataKey) || (!this.IsCompatibleDataFields(dataFields, this._dataLinkDataFields[i])))
-                            return [3, 3];
-                        referenceKeyLink = this._dataLinkReferenceKey[i];
-                        return [4, this.Notify(referenceKeyLink, null, null)];
-                    case 2:
-                        _a.sent();
-                        _a.label = 3;
-                    case 3:
-                        i++;
-                        return [3, 1];
-                    case 4: return [2];
-                }
-            });
+    }
+    NotifyLink(dataKey, dataFields) {
+        return __awaiter(this, void 0, void 0, function* () {
+            for (let i = 0; i < this._dataLinkDataKey.length; i++) {
+                const dataKeyLink = this._dataLinkDataKey[i];
+                if ((dataKeyLink !== dataKey) || (!this.IsCompatibleDataFields(dataFields, this._dataLinkDataFields[i])))
+                    continue;
+                const referenceKeyLink = this._dataLinkReferenceKey[i];
+                yield this.Notify(referenceKeyLink, null, null);
+            }
         });
-    };
-    DrapoObserver.prototype.Unsubscribe = function (dataKey) {
+    }
+    Unsubscribe(dataKey) {
         this.UnsubscribeStorage(dataKey);
         this.UnsubscribeFor(dataKey);
         this.UnsubscribeBarber(dataKey);
         this.UnsubscribeLink(dataKey);
         this.UnsubscribeComponent(dataKey);
-    };
-    DrapoObserver.prototype.UnsubscribeDetached = function (sector) {
+    }
+    UnsubscribeDetached(sector) {
         this.UnsubscribeComponentDetached(sector);
-    };
-    DrapoObserver.prototype.GetComponentDataKeyIndex = function (dataKey) {
-        var data = this._dataComponentKey;
-        for (var i = 0; i < data.length; i++) {
+    }
+    GetComponentDataKeyIndex(dataKey) {
+        const data = this._dataComponentKey;
+        for (let i = 0; i < data.length; i++) {
             if (data[i] == dataKey)
                 return (i);
         }
         return (null);
-    };
-    DrapoObserver.prototype.CreateComponentDataKeyIndex = function (dataKey) {
-        var index = this._dataComponentKey.push(dataKey);
+    }
+    CreateComponentDataKeyIndex(dataKey) {
+        const index = this._dataComponentKey.push(dataKey);
         this._dataComponentField.push([]);
         this._dataComponentElements.push([]);
         this._dataComponentFunction.push([]);
         this._dataComponentElementsFocus.push([]);
         return (index - 1);
-    };
-    DrapoObserver.prototype.SubscribeComponent = function (value, el, notifyFunction, elFocus) {
-        if (elFocus === void 0) { elFocus = null; }
-        var dataKey = null;
-        var dataFields = null;
-        var elComponentFocus = null;
+    }
+    SubscribeComponent(value, el, notifyFunction, elFocus = null) {
+        let dataKey = null;
+        let dataFields = null;
+        let elComponentFocus = null;
         if (this.Application.Parser.IsMustache(value)) {
-            var mustacheParts = this.Application.Parser.ParseMustache(value);
+            const mustacheParts = this.Application.Parser.ParseMustache(value);
             dataKey = this.Application.Solver.ResolveDataKey(mustacheParts);
             dataFields = this.Application.Solver.ResolveDataFields(mustacheParts);
             elComponentFocus = elFocus;
@@ -739,16 +536,16 @@ var DrapoObserver = (function () {
         else {
             dataKey = value;
         }
-        var dataKeyIndex = this.GetComponentDataKeyIndex(dataKey);
+        let dataKeyIndex = this.GetComponentDataKeyIndex(dataKey);
         if (dataKeyIndex == null)
             dataKeyIndex = this.CreateComponentDataKeyIndex(dataKey);
         this._dataComponentField[dataKeyIndex].push(dataFields);
         this._dataComponentElements[dataKeyIndex].push(el);
         this._dataComponentFunction[dataKeyIndex].push(notifyFunction);
         this._dataComponentElementsFocus[dataKeyIndex].push(elComponentFocus);
-    };
-    DrapoObserver.prototype.UnsubscribeComponent = function (dataKey) {
-        var dataKeyIndex = this.GetComponentDataKeyIndex(dataKey);
+    }
+    UnsubscribeComponent(dataKey) {
+        const dataKeyIndex = this.GetComponentDataKeyIndex(dataKey);
         if (dataKeyIndex == null)
             return;
         this._dataComponentKey.splice(dataKeyIndex, 1);
@@ -756,12 +553,12 @@ var DrapoObserver = (function () {
         this._dataComponentElements.splice(dataKeyIndex, 1);
         this._dataComponentFunction.splice(dataKeyIndex, 1);
         this._dataComponentElementsFocus.splice(dataKeyIndex, 1);
-    };
-    DrapoObserver.prototype.UnsubscribeComponentDetached = function (sector) {
-        for (var i = this._dataComponentKey.length - 1; i >= 0; i--) {
-            var dataComponentElements = this._dataComponentElements[i];
-            for (var j = dataComponentElements.length - 1; j >= 0; j--) {
-                var dataComponentElement = dataComponentElements[j];
+    }
+    UnsubscribeComponentDetached(sector) {
+        for (let i = this._dataComponentKey.length - 1; i >= 0; i--) {
+            const dataComponentElements = this._dataComponentElements[i];
+            for (let j = dataComponentElements.length - 1; j >= 0; j--) {
+                const dataComponentElement = dataComponentElements[j];
                 if (this.Application.Document.IsElementAttached(dataComponentElement))
                     continue;
                 dataComponentElements.splice(j, 1);
@@ -777,172 +574,139 @@ var DrapoObserver = (function () {
             this._dataComponentFunction.splice(i, 1);
             this._dataComponentElementsFocus.splice(i, 1);
         }
-    };
-    DrapoObserver.prototype.NotifyComponent = function (dataKey, dataFields) {
-        return __awaiter(this, void 0, void 0, function () {
-            var dataKeyIndex, dataComponentElements, dataComponentFunctions, i, dataComponentElement, dataComponentFunction, result;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        dataKeyIndex = this.GetComponentDataKeyIndex(dataKey);
-                        if (dataKeyIndex == null)
-                            return [2];
-                        dataComponentElements = this._dataComponentElements[dataKeyIndex];
-                        dataComponentFunctions = this._dataComponentFunction[dataKeyIndex];
-                        i = dataComponentElements.length - 1;
-                        _a.label = 1;
-                    case 1:
-                        if (!(i >= 0)) return [3, 7];
-                        dataComponentElement = dataComponentElements[i];
-                        if (!((this.Application.Document.IsElementAttached(dataComponentElement)) && (!this.Application.Document.IsElementDetached(dataComponentElement)))) return [3, 5];
-                        dataComponentFunction = dataComponentFunctions[i];
-                        return [4, dataComponentFunction.apply(null, [dataComponentElement, this.Application, dataFields])];
-                    case 2:
-                        result = _a.sent();
-                        if (!((result == null) || (result == true))) return [3, 4];
-                        return [4, this.Application.Document.ResolveComponentUpdate(dataComponentElement, null)];
-                    case 3:
-                        _a.sent();
-                        _a.label = 4;
-                    case 4: return [3, 6];
-                    case 5:
-                        if (!this.Application.SectorContainerHandler.IsElementContainerized(dataComponentElement)) {
-                            this._dataComponentField[dataKeyIndex].splice(i, 1);
-                            this._dataComponentElements[dataKeyIndex].splice(i, 1);
-                            this._dataComponentFunction[dataKeyIndex].splice(i, 1);
-                            this._dataComponentElementsFocus[dataKeyIndex].splice(i, 1);
-                        }
-                        _a.label = 6;
-                    case 6:
-                        i--;
-                        return [3, 1];
-                    case 7: return [2];
+    }
+    NotifyComponent(dataKey, dataFields) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const dataKeyIndex = this.GetComponentDataKeyIndex(dataKey);
+            if (dataKeyIndex == null)
+                return;
+            const dataComponentElements = this._dataComponentElements[dataKeyIndex];
+            const dataComponentFunctions = this._dataComponentFunction[dataKeyIndex];
+            for (let i = dataComponentElements.length - 1; i >= 0; i--) {
+                const dataComponentElement = dataComponentElements[i];
+                if ((this.Application.Document.IsElementAttached(dataComponentElement)) && (!this.Application.Document.IsElementDetached(dataComponentElement))) {
+                    const dataComponentFunction = dataComponentFunctions[i];
+                    const result = yield dataComponentFunction.apply(null, [dataComponentElement, this.Application, dataFields]);
+                    if ((result == null) || (result == true))
+                        yield this.Application.Document.ResolveComponentUpdate(dataComponentElement, null);
                 }
-            });
+                else if (!this.Application.SectorContainerHandler.IsElementContainerized(dataComponentElement)) {
+                    this._dataComponentField[dataKeyIndex].splice(i, 1);
+                    this._dataComponentElements[dataKeyIndex].splice(i, 1);
+                    this._dataComponentFunction[dataKeyIndex].splice(i, 1);
+                    this._dataComponentElementsFocus[dataKeyIndex].splice(i, 1);
+                }
+            }
         });
-    };
-    DrapoObserver.prototype.GetElementByModel = function (sector, model) {
+    }
+    GetElementByModel(sector, model) {
         if (!this.Application.Parser.IsMustacheOnly(model))
             return (null);
-        var mustacheParts = this.Application.Parser.ParseMustache(model);
-        var dataKey = this.Application.Solver.ResolveDataKey(mustacheParts);
-        var dataFields = this.Application.Solver.ResolveDataFields(mustacheParts);
-        var el = this.GetElementByModelComponent(sector, model, dataKey, dataFields);
+        const mustacheParts = this.Application.Parser.ParseMustache(model);
+        const dataKey = this.Application.Solver.ResolveDataKey(mustacheParts);
+        const dataFields = this.Application.Solver.ResolveDataFields(mustacheParts);
+        const el = this.GetElementByModelComponent(sector, model, dataKey, dataFields);
         if (el !== null)
             return (el);
         return (this.GetElementByModelBarber(sector, model, dataKey, dataFields));
-    };
-    DrapoObserver.prototype.GetElementByModelComponent = function (sector, model, dataKey, dataFields) {
-        var dataKeyIndex = this.GetComponentDataKeyIndex(dataKey);
+    }
+    GetElementByModelComponent(sector, model, dataKey, dataFields) {
+        const dataKeyIndex = this.GetComponentDataKeyIndex(dataKey);
         if (dataKeyIndex === null)
             return (null);
-        var componentDataFields = this._dataComponentField[dataKeyIndex];
-        var els = this._dataComponentElementsFocus[dataKeyIndex];
-        for (var i = els.length - 1; i >= 0; i--) {
-            var el = els[i];
+        const componentDataFields = this._dataComponentField[dataKeyIndex];
+        const els = this._dataComponentElementsFocus[dataKeyIndex];
+        for (let i = els.length - 1; i >= 0; i--) {
+            const el = els[i];
             if (el === null)
                 continue;
             if (el.parentElement == null)
                 continue;
-            var componentDataField = componentDataFields[i];
+            const componentDataField = componentDataFields[i];
             if (componentDataField == null)
                 continue;
-            var isEqual = this.Application.Solver.IsEqualStringArray(dataFields, componentDataField);
+            const isEqual = this.Application.Solver.IsEqualStringArray(dataFields, componentDataField);
             if (isEqual)
                 return (el);
         }
         return (null);
-    };
-    DrapoObserver.prototype.GetElementByModelBarber = function (sector, model, dataKey, dataFields) {
-        var dataKeyIndex = this.GetBarberDataKeyIndex(dataKey);
+    }
+    GetElementByModelBarber(sector, model, dataKey, dataFields) {
+        const dataKeyIndex = this.GetBarberDataKeyIndex(dataKey);
         if (dataKeyIndex === null)
             return;
-        var dataBarberElements = this._dataBarberElements[dataKeyIndex];
-        var dataBarberFields = this._dataBarberFields[dataKeyIndex];
-        for (var i = 0; i < dataBarberElements.length; i++) {
-            var element = dataBarberElements[i];
-            var sectorElement = this.Application.Document.GetSector(element);
+        const dataBarberElements = this._dataBarberElements[dataKeyIndex];
+        const dataBarberFields = this._dataBarberFields[dataKeyIndex];
+        for (let i = 0; i < dataBarberElements.length; i++) {
+            const element = dataBarberElements[i];
+            const sectorElement = this.Application.Document.GetSector(element);
             if (sectorElement !== sector)
                 continue;
-            var barberFields = dataBarberFields[i];
-            var isEqual = this.IsEqualDataFields(barberFields, dataFields);
+            const barberFields = dataBarberFields[i];
+            const isEqual = this.IsEqualDataFields(barberFields, dataFields);
             if (!isEqual)
                 continue;
             return (element);
         }
         return (null);
-    };
-    DrapoObserver.prototype.IsCompatibleDataFields = function (dataFields1, dataFields2) {
+    }
+    IsCompatibleDataFields(dataFields1, dataFields2) {
         if (dataFields1 == null)
             return (true);
         if (dataFields2 == null)
             return (true);
-        for (var i = 0; (i < dataFields1.length) && (i < dataFields2.length); i++)
+        for (let i = 0; (i < dataFields1.length) && (i < dataFields2.length); i++)
             if (dataFields1[i] != dataFields2[i])
                 return (false);
         return (true);
-    };
-    DrapoObserver.prototype.IsEqualDataFields = function (dataFields1, dataFields2) {
-        var isNull1 = dataFields1 == null;
-        var isNull2 = dataFields2 == null;
+    }
+    IsEqualDataFields(dataFields1, dataFields2) {
+        const isNull1 = dataFields1 == null;
+        const isNull2 = dataFields2 == null;
         if (isNull1 != isNull2)
             return (false);
         if (isNull1)
             return (true);
-        var length = dataFields1.length;
+        const length = dataFields1.length;
         if (length != dataFields2.length)
             return (false);
-        for (var i = 0; i < length; i++)
+        for (let i = 0; i < length; i++)
             if (dataFields1[i] != dataFields2[i])
                 return (false);
         return (true);
-    };
-    DrapoObserver.prototype.Lock = function (dataKey) {
-        for (var i = 0; i < this._lockedData.length; i++) {
-            var locked = this._lockedData[i];
+    }
+    Lock(dataKey) {
+        for (let i = 0; i < this._lockedData.length; i++) {
+            const locked = this._lockedData[i];
             if (locked[0] == dataKey)
                 return (false);
         }
         this._lockedData.push([dataKey, false]);
         return (true);
-    };
-    DrapoObserver.prototype.Unlock = function (dataKey, notify) {
-        return __awaiter(this, void 0, void 0, function () {
-            var i, locked;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        i = 0;
-                        _a.label = 1;
-                    case 1:
-                        if (!(i < this._lockedData.length)) return [3, 5];
-                        locked = this._lockedData[i];
-                        if (locked[0] !== dataKey)
-                            return [3, 4];
-                        this._lockedData.splice(i, 1);
-                        if (!((locked[1]) && (notify))) return [3, 3];
-                        return [4, this.Notify(dataKey, null, null)];
-                    case 2:
-                        _a.sent();
-                        _a.label = 3;
-                    case 3: return [2, (true)];
-                    case 4:
-                        i++;
-                        return [3, 1];
-                    case 5: return [2, (false)];
-                }
-            });
+    }
+    Unlock(dataKey, notify) {
+        return __awaiter(this, void 0, void 0, function* () {
+            for (let i = 0; i < this._lockedData.length; i++) {
+                const locked = this._lockedData[i];
+                if (locked[0] !== dataKey)
+                    continue;
+                this._lockedData.splice(i, 1);
+                if ((locked[1]) && (notify))
+                    yield this.Notify(dataKey, null, null);
+                return (true);
+            }
+            return (false);
         });
-    };
-    DrapoObserver.prototype.IsLocked = function (dataKey) {
-        for (var i = 0; i < this._lockedData.length; i++) {
-            var locked = this._lockedData[i];
+    }
+    IsLocked(dataKey) {
+        for (let i = 0; i < this._lockedData.length; i++) {
+            const locked = this._lockedData[i];
             if (locked[0] !== dataKey)
                 continue;
             locked[1] = true;
             return (true);
         }
         return (false);
-    };
-    return DrapoObserver;
-}());
+    }
+}
+//# sourceMappingURL=DrapoObserver.js.map

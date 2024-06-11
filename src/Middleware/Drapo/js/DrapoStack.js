@@ -1,19 +1,19 @@
 "use strict";
-var DrapoStack = (function () {
-    function DrapoStack() {
+class DrapoStack {
+    constructor() {
         this._data = [];
     }
-    DrapoStack.prototype.Peek = function () {
+    Peek() {
         if (this._data.length == 0)
             return (null);
         return (this._data[this._data.length - 1]);
-    };
-    DrapoStack.prototype.Push = function (item) {
+    }
+    Push(item) {
         this._data.push(item);
-    };
-    DrapoStack.prototype.Pop = function () {
-        var item = this._data.pop();
+    }
+    Pop() {
+        const item = this._data.pop();
         return (item !== null && item !== void 0 ? item : null);
-    };
-    return DrapoStack;
-}());
+    }
+}
+//# sourceMappingURL=DrapoStack.js.map

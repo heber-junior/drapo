@@ -1,18 +1,12 @@
 "use strict";
-var DrapoFormatter = (function () {
-    function DrapoFormatter(application) {
+class DrapoFormatter {
+    get Application() {
+        return (this._application);
+    }
+    constructor(application) {
         this._application = application;
     }
-    Object.defineProperty(DrapoFormatter.prototype, "Application", {
-        get: function () {
-            return (this._application);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    DrapoFormatter.prototype.Format = function (value, format, culture, applyTimezone) {
-        if (culture === void 0) { culture = null; }
-        if (applyTimezone === void 0) { applyTimezone = null; }
+    Format(value, format, culture = null, applyTimezone = null) {
         if ((value == null) || (value === ''))
             return ('');
         if (this.Application.Parser.IsBoolean(value))
@@ -20,23 +14,23 @@ var DrapoFormatter = (function () {
         if (this.Application.Parser.IsNumber(value))
             return (this.FormatNumber(this.Application.Parser.ParseNumber(value), format, culture));
         return (this.FormatDate(value, format, culture, applyTimezone == null ? true : applyTimezone));
-    };
-    DrapoFormatter.prototype.FormatDate = function (value, format, culture, applyTimezone) {
-        var date = this.Application.Parser.ParseDate(value);
+    }
+    FormatDate(value, format, culture, applyTimezone) {
+        const date = this.Application.Parser.ParseDate(value);
         if (date === null)
             return (value);
         if (applyTimezone) {
-            var timeZone = this.Application.Config.GetTimezone();
+            const timeZone = this.Application.Config.GetTimezone();
             if (timeZone != null)
                 date.setHours(date.getHours() + timeZone);
         }
-        var formatConverted = this.ConvertDateFormat(format, culture);
-        var formatTokens = this.Application.Parser.ParseFormat(formatConverted);
-        var dateFormatted = this.GetDateFormattedTokens(date, formatTokens, culture);
+        const formatConverted = this.ConvertDateFormat(format, culture);
+        const formatTokens = this.Application.Parser.ParseFormat(formatConverted);
+        const dateFormatted = this.GetDateFormattedTokens(date, formatTokens, culture);
         return (dateFormatted);
-    };
-    DrapoFormatter.prototype.ConvertDateFormat = function (format, culture) {
-        var formatConverted = format;
+    }
+    ConvertDateFormat(format, culture) {
+        let formatConverted = format;
         switch (format) {
             case "d":
             case "D":
@@ -49,17 +43,17 @@ var DrapoFormatter = (function () {
                 break;
         }
         return (formatConverted);
-    };
-    DrapoFormatter.prototype.GetDateFormattedTokens = function (date, formatTokens, culture) {
-        var dateCulture = '';
-        for (var i = 0; i < formatTokens.length; i++) {
-            var formatToken = formatTokens[i];
+    }
+    GetDateFormattedTokens(date, formatTokens, culture) {
+        let dateCulture = '';
+        for (let i = 0; i < formatTokens.length; i++) {
+            const formatToken = formatTokens[i];
             dateCulture = dateCulture + this.GetDateFormattedToken(date, formatToken, culture);
         }
         return (dateCulture);
-    };
-    DrapoFormatter.prototype.GetDateFormattedToken = function (date, formatToken, culture) {
-        var dateFormat = formatToken;
+    }
+    GetDateFormattedToken(date, formatToken, culture) {
+        let dateFormat = formatToken;
         switch (formatToken) {
             case 'YYYY':
             case 'yyyy':
@@ -67,7 +61,7 @@ var DrapoFormatter = (function () {
                 break;
             case 'YY':
             case 'yy':
-                var yearFull = date.getFullYear().toString();
+                const yearFull = date.getFullYear().toString();
                 dateFormat = yearFull.substring(2);
                 break;
             case 'M':
@@ -98,13 +92,13 @@ var DrapoFormatter = (function () {
                 dateFormat = this.Application.Globalization.GetDayOfWeekName(date.getDay(), culture);
                 break;
             case 'h':
-                var hours = date.getHours();
+                let hours = date.getHours();
                 if (hours > 12)
                     hours = hours - 12;
                 dateFormat = hours.toString();
                 break;
             case 'hh':
-                var hoursDouble = date.getHours();
+                let hoursDouble = date.getHours();
                 if (hoursDouble > 12)
                     hoursDouble = hoursDouble - 12;
                 dateFormat = this.EnsureLength(hoursDouble.toString());
@@ -140,23 +134,22 @@ var DrapoFormatter = (function () {
                 break;
         }
         return (dateFormat);
-    };
-    DrapoFormatter.prototype.EnsureLength = function (data, length) {
-        if (length === void 0) { length = 2; }
+    }
+    EnsureLength(data, length = 2) {
         while (data.length < length)
             data = '0' + data;
         return (data);
-    };
-    DrapoFormatter.prototype.EnsureLengthMax = function (data, length) {
+    }
+    EnsureLengthMax(data, length) {
         if (data.length > length)
             return (data.substring(0, length));
         return (data);
-    };
-    DrapoFormatter.prototype.FormatNumber = function (value, format, culture) {
-        var formatTokens = this.Application.Parser.ParseFormat(format);
+    }
+    FormatNumber(value, format, culture) {
+        const formatTokens = this.Application.Parser.ParseFormat(format);
         if (formatTokens.length == 0)
             return (value.toString());
-        var formatTokenType = formatTokens[0];
+        const formatTokenType = formatTokens[0];
         if ((formatTokenType === 'N') || (formatTokenType === 'n'))
             return (this.FormatNumberNumeric(value, formatTokens, culture));
         if ((formatTokenType === 'P') || (formatTokenType === 'p'))
@@ -168,32 +161,32 @@ var DrapoFormatter = (function () {
         if ((formatTokenType === 'S') || (formatTokenType === 's'))
             return (this.FormatNumberSize(value, formatTokens, culture));
         return (value.toString());
-    };
-    DrapoFormatter.prototype.FormatNumberNumeric = function (value, formatTokens, culture) {
-        var decimals = this.GetFormatTokenNumber(formatTokens, 1, 2);
-        var isNegative = value < 0;
-        var valueAbsolute = Math.abs(value);
-        var valueDecimals = valueAbsolute.toFixed(decimals);
-        var valueDecimalsWithCulture = this.GetNumberFormattedWithCulture(valueDecimals, culture);
+    }
+    FormatNumberNumeric(value, formatTokens, culture) {
+        const decimals = this.GetFormatTokenNumber(formatTokens, 1, 2);
+        const isNegative = value < 0;
+        const valueAbsolute = Math.abs(value);
+        const valueDecimals = valueAbsolute.toFixed(decimals);
+        const valueDecimalsWithCulture = this.GetNumberFormattedWithCulture(valueDecimals, culture);
         return ((isNegative ? '-' : '') + valueDecimalsWithCulture);
-    };
-    DrapoFormatter.prototype.FormatNumberPercentage = function (value, formatTokens, culture) {
-        var decimals = this.GetFormatTokenNumber(formatTokens, 1, 2);
-        var isNegative = value < 0;
-        var valueAbsolute = Math.abs(value);
-        var valueDecimals = (valueAbsolute * 100).toFixed(decimals);
-        var valueDecimalsWithCulture = this.GetNumberFormattedWithCulture(valueDecimals, culture);
+    }
+    FormatNumberPercentage(value, formatTokens, culture) {
+        const decimals = this.GetFormatTokenNumber(formatTokens, 1, 2);
+        const isNegative = value < 0;
+        const valueAbsolute = Math.abs(value);
+        const valueDecimals = (valueAbsolute * 100).toFixed(decimals);
+        const valueDecimalsWithCulture = this.GetNumberFormattedWithCulture(valueDecimals, culture);
         return ((isNegative ? '-' : '') + valueDecimalsWithCulture + ' %');
-    };
-    DrapoFormatter.prototype.FormatNumberDecimal = function (value, formatTokens, culture) {
-        var decimals = this.GetFormatTokenNumber(formatTokens, 1, 1);
-        var isNegative = value < 0;
-        var valueAbsolute = Math.abs(value);
-        var valueDecimals = this.EnsureLength(valueAbsolute.toFixed(0), decimals);
-        var valueDecimalsWithCulture = this.GetNumberFormattedWithCulture(valueDecimals, culture);
+    }
+    FormatNumberDecimal(value, formatTokens, culture) {
+        const decimals = this.GetFormatTokenNumber(formatTokens, 1, 1);
+        const isNegative = value < 0;
+        const valueAbsolute = Math.abs(value);
+        const valueDecimals = this.EnsureLength(valueAbsolute.toFixed(0), decimals);
+        const valueDecimalsWithCulture = this.GetNumberFormattedWithCulture(valueDecimals, culture);
         return ((isNegative ? '-' : '') + valueDecimalsWithCulture);
-    };
-    DrapoFormatter.prototype.FormatNumberTimespan = function (value, formatTokens, culture) {
+    }
+    FormatNumberTimespan(value, formatTokens, culture) {
         if (value === 0)
             return ('');
         if (value < 0)
@@ -201,42 +194,42 @@ var DrapoFormatter = (function () {
         if (value < 1000)
             return (value.toString() + 'ms');
         if (value < (1000 * 60)) {
-            var seconds = Math.floor(value / 1000);
+            const seconds = Math.floor(value / 1000);
             return (seconds.toString() + 's');
         }
         if (value < (1000 * 60 * 60)) {
-            var minutes = Math.floor(value / (1000 * 60));
+            const minutes = Math.floor(value / (1000 * 60));
             return (minutes.toString() + 'm' + this.FormatNumberTimespan(value - (minutes * 1000 * 60), null, culture));
         }
-        var hours = Math.floor(value / (1000 * 60 * 60));
+        const hours = Math.floor(value / (1000 * 60 * 60));
         return (hours.toString() + 'h' + this.FormatNumberTimespan(value - (hours * 1000 * 60 * 60), null, culture));
-    };
-    DrapoFormatter.prototype.FormatNumberSize = function (value, formatTokens, culture) {
-        var type = 0;
-        var valueSize = value;
+    }
+    FormatNumberSize(value, formatTokens, culture) {
+        let type = 0;
+        let valueSize = value;
         while (valueSize > 1000) {
             valueSize = valueSize / 1000;
             type++;
         }
         return (valueSize.toString() + this.Application.Globalization.GetNumberSizeTypeName(type, culture));
-    };
-    DrapoFormatter.prototype.GetNumberFormattedWithCulture = function (value, culture) {
-        var delimiterDecimal = this.Application.Globalization.GetDelimiterDecimal(culture);
-        var delimiterThousandes = this.Application.Globalization.GetDelimiterThousands(culture);
+    }
+    GetNumberFormattedWithCulture(value, culture) {
+        const delimiterDecimal = this.Application.Globalization.GetDelimiterDecimal(culture);
+        const delimiterThousandes = this.Application.Globalization.GetDelimiterThousands(culture);
         if (delimiterDecimal !== '.')
             value = value.replace('.', delimiterDecimal);
-        var index = value.indexOf(delimiterDecimal);
+        let index = value.indexOf(delimiterDecimal);
         if (index === -1)
             index = value.length;
-        for (var i = index - 3; i > 0; i = i - 3)
+        for (let i = index - 3; i > 0; i = i - 3)
             value = value.substring(0, i) + delimiterThousandes + value.substring(i);
         return (value);
-    };
-    DrapoFormatter.prototype.GetFormatTokenNumber = function (formatTokens, index, valueDefault) {
+    }
+    GetFormatTokenNumber(formatTokens, index, valueDefault) {
         if (index >= formatTokens.length)
             return (valueDefault);
-        var token = formatTokens[index];
+        const token = formatTokens[index];
         return (this.Application.Parser.ParseNumber(token, valueDefault));
-    };
-    return DrapoFormatter;
-}());
+    }
+}
+//# sourceMappingURL=DrapoFormatter.js.map

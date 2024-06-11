@@ -1,61 +1,41 @@
 "use strict";
-var DrapoQueryProjection = (function () {
-    function DrapoQueryProjection() {
+class DrapoQueryProjection {
+    constructor() {
         this._source = null;
         this._column = null;
         this._alias = null;
         this._functionName = null;
         this._functionParameters = null;
     }
-    Object.defineProperty(DrapoQueryProjection.prototype, "Source", {
-        get: function () {
-            return (this._source);
-        },
-        set: function (value) {
-            this._source = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoQueryProjection.prototype, "Column", {
-        get: function () {
-            return (this._column);
-        },
-        set: function (value) {
-            this._column = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoQueryProjection.prototype, "Alias", {
-        get: function () {
-            return (this._alias);
-        },
-        set: function (value) {
-            this._alias = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoQueryProjection.prototype, "FunctionName", {
-        get: function () {
-            return (this._functionName);
-        },
-        set: function (value) {
-            this._functionName = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrapoQueryProjection.prototype, "FunctionParameters", {
-        get: function () {
-            return (this._functionParameters);
-        },
-        set: function (value) {
-            this._functionParameters = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    return DrapoQueryProjection;
-}());
+    get Source() {
+        return (this._source);
+    }
+    set Source(value) {
+        this._source = value;
+    }
+    get Column() {
+        return (this._column);
+    }
+    set Column(value) {
+        this._column = value;
+    }
+    get Alias() {
+        return (this._alias);
+    }
+    set Alias(value) {
+        this._alias = value;
+    }
+    get FunctionName() {
+        return (this._functionName);
+    }
+    set FunctionName(value) {
+        this._functionName = value;
+    }
+    get FunctionParameters() {
+        return (this._functionParameters);
+    }
+    set FunctionParameters(value) {
+        this._functionParameters = value;
+    }
+}
+//# sourceMappingURL=DrapoQueryProjection.js.map

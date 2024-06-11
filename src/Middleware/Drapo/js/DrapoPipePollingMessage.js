@@ -1,8 +1,8 @@
 "use strict";
-var DrapoPipePollingMessage = (function () {
-    function DrapoPipePollingMessage() {
+class DrapoPipePollingMessage {
+    constructor() {
         this.Key = null;
         this.Hash = null;
     }
-    return DrapoPipePollingMessage;
-}());
+}
+//# sourceMappingURL=DrapoPipePollingMessage.js.map

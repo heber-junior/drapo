@@ -118,6 +118,9 @@ class DrapoValidator {
         const validation: string = el.getAttribute(attribute);
         if (validation == null)
             return (true);
+        const executeBeforeValidation = el.getAttribute('d-validation-executebefore');
+        if (executeBeforeValidation != null)
+            await this.Application.FunctionHandler.ResolveFunctionWithoutContext(sector, el, 'Execute({{' + executeBeforeValidation + '}})');
         const isValid: boolean = await this.IsValidationExpressionValid(el, sector, validation, contextItem, event);
         return (isValid);
     }
